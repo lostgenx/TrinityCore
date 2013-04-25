@@ -676,8 +676,8 @@ public:
                     break;
 
                 case EVENT_INTRO_LK_8:
-                    if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                        pFalric->AI()->Talk(SAY_FALRIC_INTRO_2);
+                    //if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
+                    //    pFalric->AI()->Talk(SAY_FALRIC_INTRO_2);
 
                     events.ScheduleEvent(EVENT_INTRO_LK_9, 5000);
                     break;
@@ -710,6 +710,9 @@ public:
                      break;
 
                 case EVENT_INTRO_END:
+					if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
+                        pFalric->AI()->Talk(SAY_FALRIC_INTRO_2);
+
                     if (pInstance)
                     {
                         pInstance->SetData(DATA_INTRO_EVENT, DONE);
