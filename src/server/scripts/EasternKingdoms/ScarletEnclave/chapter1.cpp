@@ -906,6 +906,7 @@ class npc_scarlet_miner_cart : public CreatureScript
                 {
                     me->SetWalk(false);
 
+					// Fix for Mine Car Aggro
 					me->GetPlayer(*me, me->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
 					me->GetPlayer(*me, me->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
 
@@ -929,6 +930,7 @@ class npc_scarlet_miner_cart : public CreatureScript
                     _playerGUID = 0;
                     if (Creature* miner = ObjectAccessor::GetCreature(*me, _minerGUID))
                         miner->DespawnOrUnsummon();
+					// Fix for Mine Car Aggro
 					me->GetPlayer(*me, me->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
 					me->GetPlayer(*me, me->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
                 }
@@ -1040,6 +1042,7 @@ class npc_scarlet_miner : public CreatureScript
                         {
                             me->SetFacingToObject(car);
                             car->RemoveAura(SPELL_CART_DRAG);
+							// Fix for Mine Car Aggro
 							car->GetPlayer(*me, car->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
 							car->GetPlayer(*me, car->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
                         }
