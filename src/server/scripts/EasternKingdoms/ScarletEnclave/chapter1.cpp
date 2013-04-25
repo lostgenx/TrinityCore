@@ -371,7 +371,7 @@ public:
             creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
             creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_UNK_15);
 
-            sCreatureTextMgr->SendChat(creature, SAY_DUEL, 0, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
+            sCreatureTextMgr->SendChat(creature, SAY_EVENT_ATTACK, 0, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
 
             player->CastSpell(creature, SPELL_DUEL, false);
             player->CastSpell(player, SPELL_DUEL_FLAG, true);
@@ -881,6 +881,7 @@ class npc_scarlet_miner_cart : public CreatureScript
             npc_scarlet_miner_cartAI(Creature* creature) : PassiveAI(creature), _minerGUID(0), _playerGUID(0)
             {
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+				me->setFaction(2089);
                 me->SetDisplayId(me->GetCreatureTemplate()->Modelid1); // Modelid2 is a horse.
             }
 
@@ -905,6 +906,9 @@ class npc_scarlet_miner_cart : public CreatureScript
                 {
                     me->SetWalk(false);
 
+					me->GetPlayer(*me, me->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+					me->GetPlayer(*me, me->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
+
                     // Not 100% correct, but movement is smooth. Sometimes miner walks faster
                     // than normal, this speed is fast enough to keep up at those times.
                     me->SetSpeed(MOVE_RUN, 1.25f);
@@ -925,6 +929,8 @@ class npc_scarlet_miner_cart : public CreatureScript
                     _playerGUID = 0;
                     if (Creature* miner = ObjectAccessor::GetCreature(*me, _minerGUID))
                         miner->DespawnOrUnsummon();
+					me->GetPlayer(*me, me->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+					me->GetPlayer(*me, me->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
                 }
             }
 
@@ -1034,6 +1040,8 @@ class npc_scarlet_miner : public CreatureScript
                         {
                             me->SetFacingToObject(car);
                             car->RemoveAura(SPELL_CART_DRAG);
+							car->GetPlayer(*me, car->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+							car->GetPlayer(*me, car->GetCreatorGUID())->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
                         }
                         Talk(SAY_SCARLET_MINER_1);
                         break;

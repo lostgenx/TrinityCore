@@ -743,7 +743,7 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
 
         bool IsInvisibleDueToDespawn() const;
         bool CanAlwaysSee(WorldObject const* obj) const;
-    private:
+    public:
         void ForcedDespawn(uint32 timeMSToDespawn = 0);
 
         //WaypointMovementGenerator vars

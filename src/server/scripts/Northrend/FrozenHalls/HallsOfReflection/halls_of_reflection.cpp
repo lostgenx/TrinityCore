@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -25,123 +25,188 @@
 
 #define MAX_ENCOUNTER_TIME                    6 * 60 * 1000
 
+enum Texts
+{
+	SAY_TRASH_DEATH	= 0,
+};
+
 enum Yells
 {
+    // Part one, Alliance
     SAY_JAINA_INTRO_1 = 0,
     SAY_JAINA_INTRO_2 = 1,
     SAY_JAINA_INTRO_3 = 2,
     SAY_JAINA_INTRO_4 = 3,
+    SAY_UTHER_INTRO_A2_1 = 0,
     SAY_JAINA_INTRO_5 = 4,
+    SAY_UTHER_INTRO_A2_2 = 1,
     SAY_JAINA_INTRO_6 = 5,
+    SAY_UTHER_INTRO_A2_3 = 2,
     SAY_JAINA_INTRO_7 = 6,
+    SAY_UTHER_INTRO_A2_4 = 3,
     SAY_JAINA_INTRO_8 = 7,
+    SAY_UTHER_INTRO_A2_5 = 4,
     SAY_JAINA_INTRO_9 = 8,
+    SAY_UTHER_INTRO_A2_6 = 5,
+    SAY_UTHER_INTRO_A2_7 = 6,
     SAY_JAINA_INTRO_10 = 9,
+    SAY_UTHER_INTRO_A2_8 = 7,
     SAY_JAINA_INTRO_11 = 10,
-    SAY_JAINA_INTRO_END = 11,
+    SAY_UTHER_INTRO_A2_9 = 8,
 
+    // Part one, Horde
     SAY_SYLVANAS_INTRO_1 = 0,
     SAY_SYLVANAS_INTRO_2 = 1,
     SAY_SYLVANAS_INTRO_3 = 2,
-    SAY_SYLVANAS_INTRO_4 = 3,
-    SAY_SYLVANAS_INTRO_5 = 4,
-    SAY_SYLVANAS_INTRO_6 = 5,
-    SAY_SYLVANAS_INTRO_7 = 6,
-    SAY_SYLVANAS_INTRO_8 = 7,
-    SAY_SYLVANAS_INTRO_END = 8,
-
-    SAY_UTHER_INTRO_A2_1 = 0,
-    SAY_UTHER_INTRO_A2_2 = 1,
-    SAY_UTHER_INTRO_A2_3 = 2,
-    SAY_UTHER_INTRO_A2_4 = 3,
-    SAY_UTHER_INTRO_A2_5 = 4,
-    SAY_UTHER_INTRO_A2_6 = 5,
-    SAY_UTHER_INTRO_A2_7 = 6,
-    SAY_UTHER_INTRO_A2_8 = 7,
-    SAY_UTHER_INTRO_A2_9 = 8,
     SAY_UTHER_INTRO_H2_1 = 9,
+    SAY_SYLVANAS_INTRO_4 = 3,
     SAY_UTHER_INTRO_H2_2 = 10,
+    SAY_SYLVANAS_INTRO_5 = 4,
     SAY_UTHER_INTRO_H2_3 = 11,
+    SAY_SYLVANAS_INTRO_6 = 5,
     SAY_UTHER_INTRO_H2_4 = 12,
+    SAY_SYLVANAS_INTRO_7 = 6,
     SAY_UTHER_INTRO_H2_5 = 13,
     SAY_UTHER_INTRO_H2_6 = 14,
+    SAY_SYLVANAS_INTRO_8 = 7,
     SAY_UTHER_INTRO_H2_7 = 15,
 
     SAY_LK_INTRO_1 = 0,
     SAY_LK_INTRO_2 = 1,
     SAY_LK_INTRO_3 = 2,
-
     SAY_FALRIC_INTRO_1 = 5,
+    SAY_MARWYN_INTRO_1 = 5,
     SAY_FALRIC_INTRO_2 = 6,
 
-    SAY_MARWYN_INTRO_1 = 4,
+    SAY_JAINA_INTRO_END = 11,
+    SAY_SYLVANAS_INTRO_END = 8,
+    SAY_LK_JAINA_INTRO_END = 3,
+    SAY_LK_SYLVANAS_INTRO_END = 4,
 
-    SAY_FROSTSWORN_AGGRO = 0,
-	SAY_FROSTSWORN_DEATH = 1,
+    /*INTRO - Pre Escape*/
+    SAY_LICH_KING_AGGRO_A = 0,
+    SAY_LICH_KING_AGGRO_H = 1,
+    SAY_JAINA_AGGRO = 0,
+    SAY_SYLVANA_AGGRO = 0,
 
-    SAY_LK_JAINA_INTRO_END                        = 2,
-    SAY_LK_SYLVANAS_INTRO_END                     = 3
+    /*ESCAPE*/
+    SAY_JAINA_WALL_01 = 1,
+    SAY_SYLVANA_WALL_01 = 1,
+    SAY_LICH_KING_WALL_02 = 2,
+    SAY_JAINA_WALL_02 = 2,
+    SAY_SYLVANA_WALL_02 = 2,
+    SAY_LICH_KING_WALL_03 = 3,
+    SAY_JAINA_WALL_03 = 3,
+    SAY_SYLVANA_WALL_03 = 3,
+    SAY_JAINA_WALL_04 = 4,
+    SAY_SYLVANA_WALL_04 = 4,
+    SAY_LICH_KING_WALL_04 = 4,
+    SAY_JAINA_ESCAPE_01 = 5,
+    SAY_SYLVANA_ESCAPE_01 = 5,
+    SAY_JAINA_ESCAPE_02 = 6,
+    SAY_SYLVANA_ESCAPE_02 = 6,
+    SAY_JAINA_TRAP = 7,
+    SAY_SYLVANA_TRAP = 7,
+    SAY_ALLIANCE_FIRE = 0,
+    SAY_HORDE_FIRE = 0,
+    SAY_JAINA_FINAL_1 = 1,
+    SAY_SYLVANA_FINAL_1 = 1,
+    SAY_JAINA_FINAL_2 = 8,
+    SAY_SYLVANA_FINAL_2 = 8,
+    SAY_JAINA_FINAL_3 = 9,
 };
 
 enum Events
 {
-    EVENT_NONE,
+    EVENT_START_PREINTRO = 1,
+    EVENT_PREINTRO_1 = 2,
+    EVENT_PREINTRO_2 = 3,
 
-    EVENT_START_PREINTRO,
-    EVENT_PREINTRO_1,
-    EVENT_PREINTRO_2,
+    EVENT_START_INTRO = 4,
+    EVENT_SKIP_INTRO = 5,
 
-    EVENT_START_INTRO,
-    EVENT_SKIP_INTRO,
+    EVENT_INTRO_A2_1 = 6,
+    EVENT_INTRO_A2_2 = 7,
+    EVENT_INTRO_A2_3 = 8,
+    EVENT_INTRO_A2_4 = 9,
+    EVENT_INTRO_A2_5 = 10,
+    EVENT_INTRO_A2_6 = 11,
+    EVENT_INTRO_A2_7 = 12,
+    EVENT_INTRO_A2_8 = 13,
+    EVENT_INTRO_A2_9 = 14,
+    EVENT_INTRO_A2_10 = 15,
+    EVENT_INTRO_A2_11 = 16,
+    EVENT_INTRO_A2_12 = 17,
+    EVENT_INTRO_A2_13 = 18,
+    EVENT_INTRO_A2_14 = 19,
+    EVENT_INTRO_A2_15 = 20,
+    EVENT_INTRO_A2_16 = 21,
+    EVENT_INTRO_A2_17 = 22,
+    EVENT_INTRO_A2_18 = 23,
+    EVENT_INTRO_A2_19 = 24,
 
-    EVENT_INTRO_A2_1,
-    EVENT_INTRO_A2_2,
-    EVENT_INTRO_A2_3,
-    EVENT_INTRO_A2_4,
-    EVENT_INTRO_A2_5,
-    EVENT_INTRO_A2_6,
-    EVENT_INTRO_A2_7,
-    EVENT_INTRO_A2_8,
-    EVENT_INTRO_A2_9,
-    EVENT_INTRO_A2_10,
-    EVENT_INTRO_A2_11,
-    EVENT_INTRO_A2_12,
-    EVENT_INTRO_A2_13,
-    EVENT_INTRO_A2_14,
-    EVENT_INTRO_A2_15,
-    EVENT_INTRO_A2_16,
-    EVENT_INTRO_A2_17,
-    EVENT_INTRO_A2_18,
-    EVENT_INTRO_A2_19,
+    EVENT_INTRO_H2_1 = 25,
+    EVENT_INTRO_H2_2 = 26,
+    EVENT_INTRO_H2_3 = 27,
+    EVENT_INTRO_H2_3_1 = 28,
+    EVENT_INTRO_H2_4 = 29,
+    EVENT_INTRO_H2_5 = 30,
+    EVENT_INTRO_H2_6 = 31,
+    EVENT_INTRO_H2_7 = 32,
+    EVENT_INTRO_H2_8 = 33,
+    EVENT_INTRO_H2_9 = 34,
+    EVENT_INTRO_H2_10 = 35,
+    EVENT_INTRO_H2_11 = 36,
+    EVENT_INTRO_H2_12 = 37,
+    EVENT_INTRO_H2_13 = 38,
+    EVENT_INTRO_H2_14 = 39,
+    EVENT_INTRO_H2_15 = 40,
 
-    EVENT_INTRO_H2_1,
-    EVENT_INTRO_H2_2,
-    EVENT_INTRO_H2_3,
-    EVENT_INTRO_H2_4,
-    EVENT_INTRO_H2_5,
-    EVENT_INTRO_H2_6,
-    EVENT_INTRO_H2_7,
-    EVENT_INTRO_H2_8,
-    EVENT_INTRO_H2_9,
-    EVENT_INTRO_H2_10,
-    EVENT_INTRO_H2_11,
-    EVENT_INTRO_H2_12,
-    EVENT_INTRO_H2_13,
-    EVENT_INTRO_H2_14,
-    EVENT_INTRO_H2_15,
+    EVENT_INTRO_LK_1 = 41,
+    EVENT_INTRO_LK_2 = 42,
+    EVENT_INTRO_LK_3 = 43,
+    EVENT_INTRO_LK_4 = 44,
+    EVENT_INTRO_LK_5 = 45,
+    EVENT_INTRO_LK_6 = 46,
+    EVENT_INTRO_LK_7 = 47,
+    EVENT_INTRO_LK_8 = 48,
+    EVENT_INTRO_LK_9 = 49,
+    EVENT_INTRO_LK_10 = 50,
 
-    EVENT_INTRO_LK_1,
-    EVENT_INTRO_LK_2,
-    EVENT_INTRO_LK_3,
-    EVENT_INTRO_LK_4,
-    EVENT_INTRO_LK_5,
-    EVENT_INTRO_LK_6,
-    EVENT_INTRO_LK_7,
-    EVENT_INTRO_LK_8,
-    EVENT_INTRO_LK_9,
-    EVENT_INTRO_LK_10,
+    EVENT_INTRO_END = 51,
 
-    EVENT_INTRO_END,
+    // Trash Events
+    EVENT_ACTIVATE_TRASH = 52,
+
+    // Ghostly Priest
+    EVENT_SHADOW_WORD_PAIN = 53,
+    EVENT_CIRCLE_OF_DESTRUCTION = 54,
+    EVENT_COWER_IN_FEAR = 55,
+    EVENT_DARK_MENDING = 56,
+
+    // Phantom Mage
+    EVENT_FIREBALL = 57,
+    EVENT_FLAMESTRIKE = 58,
+    EVENT_FROSTBOLT = 59,
+    EVENT_CHAINS_OF_ICE = 60,
+    EVENT_HALLUCINATION = 61,
+
+    // Shadowy Mercenary
+    EVENT_SHADOW_STEP = 62,
+    EVENT_DEADLY_POISON = 63,
+    EVENT_ENVENOMED_DAGGER_THROW = 64,
+    EVENT_KIDNEY_SHOT = 65,
+
+    // Spectral Footman
+    EVENT_SPECTRAL_STRIKE = 66,
+    EVENT_SHIELD_BASH = 67,
+    EVENT_TORTURED_ENRAGE = 68,
+
+    // Tortured Rifleman
+    EVENT_SHOOT = 69,
+    EVENT_CURSED_ARROW = 70,
+    EVENT_FROST_TRAP = 71,
+    EVENT_ICE_SHOT = 72,
 };
 
 enum eEnum
@@ -155,15 +220,13 @@ enum eEnum
     QUEST_WRATH_OF_THE_LICH_KING_H2               = 24802,
 };
 
-enum Spells
+enum Phases
 {
-    SPELL_CAST_VISUAL                  = 65633, //Jaina/Sylavana lo lanzan para invocar a uther
-    SPELL_BOSS_SPAWN_AURA              = 72712, //Falric and Marwyn
-    SPELL_UTHER_DESPAWN                = 70693,
-    SPELL_TAKE_FROSTMOURNE             = 72729,
-    SPELL_FROSTMOURNE_DESPAWN          = 72726,
-    SPELL_FROSTMOURNE_VISUAL           = 73220,
-    SPELL_FROSTMOURNE_SOUNDS           = 70667,
+    PHASE_INTRO = 1,
+    PHASE_ONE = 2,
+
+    PHASE_INTRO_MASK = 1 << PHASE_INTRO,
+    PHASE_ONE_MASK = 1 << PHASE_ONE,
 };
 
 const Position HallsofReflectionLocs[]=
@@ -342,7 +405,7 @@ public:
                     break;
                 case EVENT_INTRO_A2_5:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_1);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_1);
                     events.ScheduleEvent(EVENT_INTRO_A2_6, 3000);
                     break;
                 case EVENT_INTRO_A2_6:
@@ -351,7 +414,7 @@ public:
                     break;
                 case EVENT_INTRO_A2_7:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_2);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_2);
                     events.ScheduleEvent(EVENT_INTRO_A2_8, 6500);
                     break;
                 case EVENT_INTRO_A2_8:
@@ -360,7 +423,7 @@ public:
                     break;
                 case EVENT_INTRO_A2_9:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_3);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_3);
                     events.ScheduleEvent(EVENT_INTRO_A2_10, 9000);
                     break;
                 case EVENT_INTRO_A2_10:
@@ -369,7 +432,7 @@ public:
                     break;
                 case EVENT_INTRO_A2_11:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_4);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_4);
                     events.ScheduleEvent(EVENT_INTRO_A2_12, 11000);
                     break;
                 case EVENT_INTRO_A2_12:
@@ -378,7 +441,7 @@ public:
                     break;
                 case EVENT_INTRO_A2_13:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_5);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_5);
                     events.ScheduleEvent(EVENT_INTRO_A2_14, 12500);
                     break;
                 case EVENT_INTRO_A2_14:
@@ -387,12 +450,12 @@ public:
                     break;
                 case EVENT_INTRO_A2_15:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_6);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_6);
                     events.ScheduleEvent(EVENT_INTRO_A2_16, 22000);
                     break;
                 case EVENT_INTRO_A2_16:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_A2_7);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_7);
                     events.ScheduleEvent(EVENT_INTRO_A2_17, 4000);
                     break;
                 case EVENT_INTRO_A2_17:
@@ -403,7 +466,7 @@ public:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
                     {
                         pUther->HandleEmoteCommand(EMOTE_ONESHOT_NO);
-                        Talk(SAY_UTHER_INTRO_A2_8);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_A2_8);
                     }
                     events.ScheduleEvent(EVENT_INTRO_A2_19, 11000);
                     break;
@@ -443,7 +506,7 @@ public:
                     break;
                 case EVENT_INTRO_H2_5:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_H2_1);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_1);
                     events.ScheduleEvent(EVENT_INTRO_H2_6, 13000);
                     break;
                 case EVENT_INTRO_H2_6:
@@ -452,7 +515,7 @@ public:
                     break;
                 case EVENT_INTRO_H2_7:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_H2_2);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_2);
                     events.ScheduleEvent(EVENT_INTRO_H2_8, 8000);
                     break;
                 case EVENT_INTRO_H2_8:
@@ -461,7 +524,7 @@ public:
                     break;
                 case EVENT_INTRO_H2_9:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_H2_3);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_3);
                     events.ScheduleEvent(EVENT_INTRO_H2_10, 21000);
                     break;
                 case EVENT_INTRO_H2_10:
@@ -470,7 +533,7 @@ public:
                     break;
                 case EVENT_INTRO_H2_11:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_H2_4);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_4);
                     events.ScheduleEvent(EVENT_INTRO_H2_12, 20500);
                     break;
                 case EVENT_INTRO_H2_12:
@@ -481,13 +544,13 @@ public:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
                     {
                         pUther->HandleEmoteCommand(EMOTE_ONESHOT_NO);
-                        Talk(SAY_UTHER_INTRO_H2_5);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_5);
                     }
                     events.ScheduleEvent(EVENT_INTRO_H2_14, 13000);
                     break;
                 case EVENT_INTRO_H2_14:
                     if (Creature* pUther = me->GetCreature(*me, uiUther))
-                        Talk(SAY_UTHER_INTRO_H2_6);
+                        pUther->AI()->Talk(SAY_UTHER_INTRO_H2_6);
                     events.ScheduleEvent(EVENT_INTRO_H2_15, 9000);
                     break;
                 case EVENT_INTRO_H2_15:
@@ -516,9 +579,9 @@ public:
                     {
                         pUther->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_COWER);                        
                         if (pInstance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
-                            Talk(SAY_UTHER_INTRO_A2_9);
+                            pUther->AI()->Talk(SAY_UTHER_INTRO_A2_9);
                         else
-                            Talk(SAY_UTHER_INTRO_H2_7);
+                            pUther->AI()->Talk(SAY_UTHER_INTRO_H2_7);
                     }
 
                     events.ScheduleEvent(EVENT_INTRO_LK_2, 11000);
@@ -526,7 +589,7 @@ public:
 
                 case EVENT_INTRO_LK_2:
                      if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
-                         Talk(SAY_LK_INTRO_1);
+                         pLichKing->AI()->Talk(SAY_LK_INTRO_1);
                     if(GameObject* pGate = pInstance->instance->GetGameObject(pInstance->GetData64(DATA_FROSTWORN_DOOR)))
                         pGate->SetGoState(GO_STATE_READY);
                      events.ScheduleEvent(EVENT_INTRO_LK_3, 2000);
@@ -545,7 +608,7 @@ public:
 
                 case EVENT_INTRO_LK_4:
                       if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
-                          Talk(SAY_LK_INTRO_2);
+                          pLichKing->AI()->Talk(SAY_LK_INTRO_2);
                      // He steps forward and removes the runeblade from the heap of skulls.
                       if (GameObject *pFrostmourne = me->FindNearestGameObject(GO_FROSTMOURNE, 11.0f))
                          pFrostmourne->SetPhaseMask(0,true);
@@ -567,37 +630,39 @@ public:
                     {
                         pFalric->CastSpell(pFalric, SPELL_BOSS_SPAWN_AURA, true);
                         pFalric->SetVisible(true);
+						pFalric->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
                         pFalric->GetMotionMaster()->MovePoint(0, 5283.309f, 2031.173f, 709.319f);
 						pFalric->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						pFalric->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-						pFalric->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+						//pFalric->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     }
                     if (Creature* pMarwyn = me->GetCreature(*me, pInstance->GetData64(DATA_MARWYN)))
                     {
                         pMarwyn->CastSpell(pMarwyn, SPELL_BOSS_SPAWN_AURA, true);
                         pMarwyn->SetVisible(true);
+						pMarwyn->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
                         pMarwyn->GetMotionMaster()->MovePoint(0, 5335.585f, 1981.439f, 709.319f);
 						pMarwyn->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						pMarwyn->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-						pMarwyn->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+						//pMarwyn->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     }
 
                     if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
-                        Talk(SAY_LK_INTRO_3);
+						pLichKing->AI()->Talk(SAY_LK_INTRO_3);
 
                     events.ScheduleEvent(EVENT_INTRO_LK_6, 8000);
                     break;
 
                 case EVENT_INTRO_LK_6:
                     if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                        Talk(SAY_FALRIC_INTRO_1);
+                        pFalric->AI()->Talk(SAY_FALRIC_INTRO_1);
 
                     events.ScheduleEvent(EVENT_INTRO_LK_7, 2000);
                     break;
 
                 case EVENT_INTRO_LK_7:
                     if (Creature* pMarwyn = me->GetCreature(*me, pInstance->GetData64(DATA_MARWYN)))
-                        Talk(SAY_MARWYN_INTRO_1);
+                        pMarwyn->AI()->Talk(SAY_MARWYN_INTRO_1);
 
                     if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
                     {
@@ -607,12 +672,12 @@ public:
                         pLichKing->GetMotionMaster()->MovePoint(0, LichKingMoveAwayPos);
                     }
 
-                    events.ScheduleEvent(EVENT_INTRO_LK_8, 2000);
+                    events.ScheduleEvent(EVENT_INTRO_LK_8, 4000);
                     break;
 
                 case EVENT_INTRO_LK_8:
                     if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                        Talk(SAY_FALRIC_INTRO_2);
+                        pFalric->AI()->Talk(SAY_FALRIC_INTRO_2);
 
                     events.ScheduleEvent(EVENT_INTRO_LK_9, 5000);
                     break;
@@ -637,18 +702,18 @@ public:
                 case EVENT_INTRO_LK_10:
                      if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
                          if (pInstance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
-                            Talk(SAY_LK_JAINA_INTRO_END);
+                            pLichKing->AI()->Talk(SAY_LK_JAINA_INTRO_END);
                          else
-                             Talk(SAY_LK_SYLVANAS_INTRO_END);
+                             pLichKing->AI()->Talk(SAY_LK_SYLVANAS_INTRO_END);
 
-                     events.ScheduleEvent(EVENT_INTRO_END, 7000);
+                     events.ScheduleEvent(EVENT_INTRO_END, 10000);
                      break;
 
                 case EVENT_INTRO_END:
                     if (pInstance)
                     {
                         pInstance->SetData(DATA_INTRO_EVENT, DONE);
-                        pInstance->SetData(DATA_WAVE_COUNT, SPECIAL);   // start first wave
+                        pInstance->SetData(DATA_WAVE_STATE, SPECIAL);   // start first wave
                     }
 
                     if(GameObject* pGate = pInstance->instance->GetGameObject(pInstance->GetData64(DATA_FROSTWORN_DOOR)))
@@ -687,75 +752,40 @@ public:
 enum TrashSpells
 {
     // Ghostly Priest
-    SPELL_SHADOW_WORD_PAIN                        = 72318,
-    SPELL_CIRCLE_OF_DESTRUCTION                   = 72320,
-    SPELL_COWER_IN_FEAR                           = 72321,
-    SPELL_DARK_MENDING                            = 72322,
+    SPELL_SHADOW_WORD_PAIN = 72318,
+    SPELL_CIRCLE_OF_DESTRUCTION = 72320,
+    SPELL_COWER_IN_FEAR = 72321,
+    SPELL_DARK_MENDING = 72322,
 
     // Phantom Mage
-    SPELL_FIREBALL                                = 72163,
-    SPELL_FLAMESTRIKE                             = 72169,
-    SPELL_FROSTBOLT                               = 72166,
-    SPELL_CHAINS_OF_ICE                           = 72121,
-    SPELL_HALLUCINATION                           = 72342,
+    SPELL_FIREBALL = 72163,
+    SPELL_FLAMESTRIKE = 72169,
+    SPELL_FROSTBOLT = 72166,
+    SPELL_CHAINS_OF_ICE = 72121,
+    SPELL_HALLUCINATION = 72342,
 
     // Phantom Hallucination (same as phantom mage + HALLUCINATION_2 when dies)
-    SPELL_HALLUCINATION_2                         = 72344,
+    SPELL_HALLUCINATION_2 = 72344,
 
     // Shadowy Mercenary
-    SPELL_SHADOW_STEP                             = 72326,
-    SPELL_DEADLY_POISON                           = 72329,
-    SPELL_ENVENOMED_DAGGER_THROW                  = 72333,
-    SPELL_KIDNEY_SHOT                             = 72335,
+    SPELL_SHADOW_STEP = 72326,
+    SPELL_DEADLY_POISON = 72329,
+    SPELL_ENVENOMED_DAGGER_THROW = 72333,
+    SPELL_KIDNEY_SHOT = 72335,
 
     // Spectral Footman
-    SPELL_SPECTRAL_STRIKE                         = 72198,
-    SPELL_SHIELD_BASH                             = 72194,
-    SPELL_TORTURED_ENRAGE                         = 72203,
+    SPELL_SPECTRAL_STRIKE = 72198,
+    SPELL_SHIELD_BASH = 72194,
+    SPELL_TORTURED_ENRAGE = 72203,
 
     // Tortured Rifleman
-    SPELL_SHOOT                                   = 72208,
-    SPELL_CURSED_ARROW                            = 72222,
-    SPELL_FROST_TRAP                              = 72215,
-    SPELL_ICE_SHOT                                = 72268,
+    SPELL_SHOOT = 72208,
+    SPELL_CURSED_ARROW = 72222,
+    SPELL_FROST_TRAP = 72215,
+    SPELL_ICE_SHOT = 72268,
 
     // Quel'Delar Event
-    SPELL_QUELDELAR_AURA                          = 70013,
-};
-
-enum TrashEvents
-{
-    EVENT_TRASH_NONE,
-
-    // Ghostly Priest
-    EVENT_SHADOW_WORD_PAIN,
-    EVENT_CIRCLE_OF_DESTRUCTION,
-    EVENT_COWER_IN_FEAR,
-    EVENT_DARK_MENDING,
-
-    // Phantom Mage
-    EVENT_FIREBALL,
-    EVENT_FLAMESTRIKE,
-    EVENT_FROSTBOLT,
-    EVENT_CHAINS_OF_ICE,
-    EVENT_HALLUCINATION,
-
-    // Shadowy Mercenary
-    EVENT_SHADOW_STEP,
-    EVENT_DEADLY_POISON,
-    EVENT_ENVENOMED_DAGGER_THROW,
-    EVENT_KIDNEY_SHOT,
-
-    // Spectral Footman
-    EVENT_SPECTRAL_STRIKE,
-    EVENT_SHIELD_BASH,
-    EVENT_TORTURED_ENRAGE,
-
-    // Tortured Rifleman
-    EVENT_SHOOT,
-    EVENT_CURSED_ARROW,
-    EVENT_FROST_TRAP,
-    EVENT_ICE_SHOT,
+    SPELL_QUELDELAR_AURA = 70013,
 };
 
 class npc_ghostly_priest : public CreatureScript
@@ -763,17 +793,19 @@ class npc_ghostly_priest : public CreatureScript
 public:
     npc_ghostly_priest() : CreatureScript("npc_ghostly_priest") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_ghostly_priestAI(pCreature);
+        return new npc_ghostly_priestAI(creature);
     }
 
     struct npc_ghostly_priestAI: public ScriptedAI
     {
-        npc_ghostly_priestAI(Creature *c) : ScriptedAI(c)
+        npc_ghostly_priestAI(Creature* c) : ScriptedAI(c)
         {
+            instance = me->GetInstanceScript();
         }
 
+        InstanceScript* instance;
         EventMap events;
 
         void Reset()
@@ -781,17 +813,38 @@ public:
             events.Reset();
         }
 
+        void JustReachedHome()
+        {
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
         void EnterCombat(Unit* /*who*/)
         {
-            events.ScheduleEvent(EVENT_SHADOW_WORD_PAIN, 8000); // TODO: adjust timers
-            events.ScheduleEvent(EVENT_CIRCLE_OF_DESTRUCTION, 12000);
-            //events.ScheduleEvent(EVENT_COWER_IN_FEAR, 10000);
-            events.ScheduleEvent(EVENT_DARK_MENDING, 20000);
+            events.ScheduleEvent(EVENT_SHADOW_WORD_PAIN, 8000, 0, PHASE_ONE); // TODO: adjust timers
+            events.ScheduleEvent(EVENT_CIRCLE_OF_DESTRUCTION, 12000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_COWER_IN_FEAR, 20000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_DARK_MENDING, 20000, 0, PHASE_ONE);
         }
 
-        void UpdateAI(const uint32 diff)
+        void JustDied(Unit* /*killer*/)
         {
-            if (!UpdateVictim())
+            if (roll_chance_i(5))
+                Talk(SAY_TRASH_DEATH);
+        }
+
+        void DoAction(const int32 actionId)
+        {
+            switch (actionId)
+            {
+                case ACTION_TRASH_ACTIVATE:
+                    events.SetPhase(PHASE_INTRO);
+                    events.ScheduleEvent(EVENT_ACTIVATE_TRASH, 5000, 0, PHASE_INTRO);
+                    break;
+            }
+        }
+
+        void UpdateAI(uint32 diff)
+        {
+            if (!UpdateVictim() && !(events.GetPhaseMask() & PHASE_INTRO_MASK))
                 return;
 
             events.Update(diff);
@@ -801,34 +854,51 @@ public:
 
             while (uint32 eventId = events.ExecuteEvent())
             {
-                switch(eventId)
+                switch (eventId)
                 {
+                    case EVENT_ACTIVATE_TRASH:
+                     events.Reset();
+                        events.SetPhase(PHASE_ONE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_SILENCED | UNIT_FLAG_PACIFIED | UNIT_FLAG_DISABLE_MOVE);
+						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SILENCED);
+                        me->SetReactState(REACT_AGGRESSIVE);
+						if (Unit* unit = me->SelectNearestTarget())
+							AttackStart(unit);
+
+                        me->AI()->DoAction(ACTION_ENTER_COMBAT);
+
+						events.ScheduleEvent(EVENT_SHADOW_WORD_PAIN, 8000, 0, PHASE_ONE); // TODO: adjust timers
+						events.ScheduleEvent(EVENT_CIRCLE_OF_DESTRUCTION, 12000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_COWER_IN_FEAR, 20000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_DARK_MENDING, 20000, 0, PHASE_ONE);
+
+                        return;
                     case EVENT_SHADOW_WORD_PAIN:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_SHADOW_WORD_PAIN);
-                        events.ScheduleEvent(EVENT_SHADOW_WORD_PAIN, 8000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_SHADOW_WORD_PAIN);
+                        events.ScheduleEvent(EVENT_SHADOW_WORD_PAIN, 8000, 0, PHASE_ONE);
                         return;
                     case EVENT_CIRCLE_OF_DESTRUCTION:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_CIRCLE_OF_DESTRUCTION);
-                        events.ScheduleEvent(EVENT_CIRCLE_OF_DESTRUCTION, 12000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_CIRCLE_OF_DESTRUCTION);
+                        events.ScheduleEvent(EVENT_CIRCLE_OF_DESTRUCTION, 12000, 0, PHASE_ONE);
                         return;
-                    /*case EVENT_COWER_IN_FEAR:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_COWER_IN_FEAR);
-                        events.ScheduleEvent(EVENT_COWER_IN_FEAR, 10000);
-                        return;*/
+                    case EVENT_COWER_IN_FEAR:
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_COWER_IN_FEAR);
+                        events.ScheduleEvent(EVENT_COWER_IN_FEAR, 20000, 0, PHASE_ONE);
+                        return;
                     case EVENT_DARK_MENDING:
                         // find an ally with missing HP
-                        if (Unit *pTarget = DoSelectLowestHpFriendly(40, DUNGEON_MODE(30000, 50000)))
+                        if (Unit* target = DoSelectLowestHpFriendly(40, DUNGEON_MODE(30000, 50000)))
                         {
-                            DoCast(pTarget, SPELL_DARK_MENDING);
-                            events.ScheduleEvent(EVENT_DARK_MENDING, 20000);
+                            DoCast(target, SPELL_DARK_MENDING);
+                            events.ScheduleEvent(EVENT_DARK_MENDING, 20000, 0, PHASE_ONE);
                         }
                         else
                         {
                             // no friendly unit with missing hp. re-check in just 5 sec.
-                            events.ScheduleEvent(EVENT_DARK_MENDING, 5000);
+                            events.ScheduleEvent(EVENT_DARK_MENDING, 5000, 0, PHASE_ONE);
                         }
                         return;
                 }
@@ -845,36 +915,60 @@ class npc_phantom_mage : public CreatureScript
 public:
     npc_phantom_mage() : CreatureScript("npc_phantom_mage") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_phantom_mageAI(pCreature);
+        return new npc_phantom_mageAI(creature);
     }
 
     struct npc_phantom_mageAI: public ScriptedAI
     {
-        npc_phantom_mageAI(Creature *c) : ScriptedAI(c)
+        npc_phantom_mageAI(Creature* c) : ScriptedAI(c)
         {
+            instance = me->GetInstanceScript();
         }
 
+        InstanceScript* instance;
         EventMap events;
 
         void Reset()
         {
             events.Reset();
         }
+        
+        void JustReachedHome()
+        {
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
+
+        void DoAction(const int32 actionId)
+        {
+            switch (actionId)
+            {
+                case ACTION_TRASH_ACTIVATE:
+                    events.SetPhase(PHASE_INTRO);
+                    events.ScheduleEvent(EVENT_ACTIVATE_TRASH, 5000, 0, PHASE_INTRO);
+                    break;
+            }
+        }
+
+        void JustDied(Unit* /*killer*/)
+        {
+            if (roll_chance_i(5))
+                Talk(SAY_TRASH_DEATH);
+        }
 
         void EnterCombat(Unit* /*who*/)
         {
-            events.ScheduleEvent(EVENT_FIREBALL, 3000); // TODO: adjust timers
-            events.ScheduleEvent(EVENT_FLAMESTRIKE, 6000);
-            events.ScheduleEvent(EVENT_FROSTBOLT, 9000);
-            events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 12000);
-            events.ScheduleEvent(EVENT_HALLUCINATION, 40000);
+            events.ScheduleEvent(EVENT_FIREBALL, 3000, 0, PHASE_ONE); // TODO: adjust timers
+            events.ScheduleEvent(EVENT_FLAMESTRIKE, 15000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_FROSTBOLT, 9000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 12000, 0, PHASE_ONE);
+            //events.ScheduleEvent(EVENT_HALLUCINATION, 40000, 0, PHASE_ONE); // Casts at wrong time
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
-            if (!UpdateVictim())
+            if (!UpdateVictim() && !(events.GetPhaseMask() & PHASE_INTRO_MASK))
                 return;
 
             events.Update(diff);
@@ -884,26 +978,43 @@ public:
 
             while (uint32 eventId = events.ExecuteEvent())
             {
-                switch(eventId)
+                switch (eventId)
                 {
+                    case EVENT_ACTIVATE_TRASH:
+						events.Reset();
+                        events.SetPhase(PHASE_ONE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_SILENCED | UNIT_FLAG_PACIFIED | UNIT_FLAG_DISABLE_MOVE);
+						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SILENCED);
+                        me->SetReactState(REACT_AGGRESSIVE);
+						if (Unit* unit = me->SelectNearestTarget())
+							AttackStart(unit);
+
+						me->AI()->DoAction(ACTION_ENTER_COMBAT);
+
+						events.ScheduleEvent(EVENT_FIREBALL, 3000, 0, PHASE_ONE); // TODO: adjust timers
+						events.ScheduleEvent(EVENT_FLAMESTRIKE, 15000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_FROSTBOLT, 9000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 12000, 0, PHASE_ONE);
+
+                        return;
                     case EVENT_FIREBALL:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_FIREBALL);
-                        events.ScheduleEvent(EVENT_FIREBALL, 15000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_FIREBALL);
+                        events.ScheduleEvent(EVENT_FIREBALL, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_FLAMESTRIKE:
                         DoCast(SPELL_FLAMESTRIKE);
-                        events.ScheduleEvent(EVENT_FLAMESTRIKE, 15000);
+                        events.ScheduleEvent(EVENT_FLAMESTRIKE, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_FROSTBOLT:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_FROSTBOLT);
-                        events.ScheduleEvent(EVENT_FROSTBOLT, 15000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_FROSTBOLT);
+                        events.ScheduleEvent(EVENT_FROSTBOLT, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_CHAINS_OF_ICE:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_CHAINS_OF_ICE);
-                        events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 15000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_CHAINS_OF_ICE);
+                        events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_HALLUCINATION:
                         DoCast(SPELL_HALLUCINATION);
@@ -922,18 +1033,18 @@ class npc_phantom_hallucination : public CreatureScript
 public:
     npc_phantom_hallucination() : CreatureScript("npc_phantom_hallucination") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_phantom_hallucinationAI(pCreature);
+        return new npc_phantom_hallucinationAI(creature);
     }
 
     struct npc_phantom_hallucinationAI : public npc_phantom_mage::npc_phantom_mageAI
     {
-        npc_phantom_hallucinationAI(Creature *c) : npc_phantom_mage::npc_phantom_mageAI(c)
+        npc_phantom_hallucinationAI(Creature* c) : npc_phantom_mage::npc_phantom_mageAI(c)
         {
         }
 
-        void JustDied(Unit* /*pWho*/)
+        void JustDied(Unit* /*who*/)
         {
             DoCast(SPELL_HALLUCINATION_2);
         }
@@ -946,17 +1057,19 @@ class npc_shadowy_mercenary : public CreatureScript
 public:
     npc_shadowy_mercenary() : CreatureScript("npc_shadowy_mercenary") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_shadowy_mercenaryAI(pCreature);
+        return new npc_shadowy_mercenaryAI(creature);
     }
 
     struct npc_shadowy_mercenaryAI: public ScriptedAI
     {
-        npc_shadowy_mercenaryAI(Creature *c) : ScriptedAI(c)
+        npc_shadowy_mercenaryAI(Creature* c) : ScriptedAI(c)
         {
+            instance = me->GetInstanceScript();
         }
 
+        InstanceScript* instance;
         EventMap events;
 
         void Reset()
@@ -964,17 +1077,39 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustReachedHome()
         {
-            events.ScheduleEvent(EVENT_SHADOW_STEP, 8000); // TODO: adjust timers
-            events.ScheduleEvent(EVENT_DEADLY_POISON, 5000);
-            events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 10000);
-            events.ScheduleEvent(EVENT_KIDNEY_SHOT, 12000);
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
+        
+        void DoAction(const int32 actionId)
+        {
+            switch (actionId)
+            {
+                case ACTION_TRASH_ACTIVATE:
+                    events.SetPhase(PHASE_INTRO);
+                    events.ScheduleEvent(EVENT_ACTIVATE_TRASH, 5000, 0, PHASE_INTRO);
+                    break;
+            }
         }
 
-        void UpdateAI(const uint32 diff)
+        void JustDied(Unit* /*killer*/)
         {
-            if (!UpdateVictim())
+            if (roll_chance_i(5))
+                Talk(SAY_TRASH_DEATH);
+        }
+
+        void EnterCombat(Unit* /*who*/)
+        {
+            events.ScheduleEvent(EVENT_SHADOW_STEP, 8000, 0, PHASE_ONE); // TODO: adjust timers
+            events.ScheduleEvent(EVENT_DEADLY_POISON, 5000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_KIDNEY_SHOT, 24000, 0, PHASE_ONE);
+        }
+
+        void UpdateAI(uint32 diff)
+        {
+            if (!UpdateVictim() && !(events.GetPhaseMask() & PHASE_INTRO_MASK))
                 return;
 
             events.Update(diff);
@@ -984,30 +1119,49 @@ public:
 
             while (uint32 eventId = events.ExecuteEvent())
             {
-                switch(eventId)
+                switch (eventId)
                 {
+                    case EVENT_ACTIVATE_TRASH:
+                        events.Reset();
+                        events.SetPhase(PHASE_ONE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_SILENCED | UNIT_FLAG_PACIFIED | UNIT_FLAG_DISABLE_MOVE);
+						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SILENCED);
+                        me->SetReactState(REACT_AGGRESSIVE);
+						if (Unit* unit = me->SelectNearestTarget())
+                            AttackStart(unit);
+
+                        me->AI()->DoAction(ACTION_ENTER_COMBAT);
+
+						events.ScheduleEvent(EVENT_SHADOW_STEP, 8000, 0, PHASE_ONE); // TODO: adjust timers
+						events.ScheduleEvent(EVENT_DEADLY_POISON, 5000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_KIDNEY_SHOT, 24000, 0, PHASE_ONE);
+
+                        return;
                     case EVENT_SHADOW_STEP:
                         DoCast(SPELL_SHADOW_STEP);
-                        events.ScheduleEvent(EVENT_SHADOW_STEP, 8000);
+                        events.ScheduleEvent(EVENT_SHADOW_STEP, 8000, 0, PHASE_ONE);
                         return;
                     case EVENT_DEADLY_POISON:
                         DoCast(me->getVictim(), SPELL_DEADLY_POISON);
-                        events.ScheduleEvent(EVENT_DEADLY_POISON, 10000);
+                        events.ScheduleEvent(EVENT_DEADLY_POISON, 10000, 0, PHASE_ONE);
                         return;
                     case EVENT_ENVENOMED_DAGGER_THROW:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_ENVENOMED_DAGGER_THROW);
-                        events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 10000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_ENVENOMED_DAGGER_THROW);
+                        events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_KIDNEY_SHOT:
                         DoCast(me->getVictim(), SPELL_KIDNEY_SHOT);
-                        events.ScheduleEvent(EVENT_KIDNEY_SHOT, 10000);
+                        events.ScheduleEvent(EVENT_KIDNEY_SHOT, 20000, 0, PHASE_ONE);
                         return;
                 }
             }
 
             DoMeleeAttackIfReady();
         }
+
+
     };
 
 };
@@ -1017,34 +1171,58 @@ class npc_spectral_footman : public CreatureScript
 public:
     npc_spectral_footman() : CreatureScript("npc_spectral_footman") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_spectral_footmanAI(pCreature);
+        return new npc_spectral_footmanAI(creature);
     }
 
     struct npc_spectral_footmanAI: public ScriptedAI
     {
-        npc_spectral_footmanAI(Creature *c) : ScriptedAI(c)
+        npc_spectral_footmanAI(Creature* c) : ScriptedAI(c)
         {
+            instance = me->GetInstanceScript();
         }
 
+        InstanceScript* instance;
         EventMap events;
 
         void Reset()
         {
             events.Reset();
         }
+        
+        void JustReachedHome()
+        {
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
+
+        void DoAction(const int32 actionId)
+        {
+            switch (actionId)
+            {
+                case ACTION_TRASH_ACTIVATE:
+                    events.SetPhase(PHASE_INTRO);
+                    events.ScheduleEvent(EVENT_ACTIVATE_TRASH, 5000, 0, PHASE_INTRO);
+                    break;
+            }
+        }
+
+        void JustDied(Unit* /*killer*/)
+        {
+            if (roll_chance_i(5))
+                Talk(SAY_TRASH_DEATH);
+        }
 
         void EnterCombat(Unit* /*who*/)
         {
-            events.ScheduleEvent(EVENT_SPECTRAL_STRIKE, 5000); // TODO: adjust timers
-            events.ScheduleEvent(EVENT_SHIELD_BASH, 10000);
-            events.ScheduleEvent(EVENT_TORTURED_ENRAGE, 15000);
+            events.ScheduleEvent(EVENT_SPECTRAL_STRIKE, 5000, 0, PHASE_ONE); // TODO: adjust timers
+            events.ScheduleEvent(EVENT_SHIELD_BASH, 10000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_TORTURED_ENRAGE, 15000, 0, PHASE_ONE);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
-            if (!UpdateVictim())
+            if (!UpdateVictim() && !(events.GetPhaseMask() & PHASE_INTRO_MASK))
                 return;
 
             events.Update(diff);
@@ -1054,19 +1232,35 @@ public:
 
             while (uint32 eventId = events.ExecuteEvent())
             {
-                switch(eventId)
+                switch (eventId)
                 {
+                    case EVENT_ACTIVATE_TRASH:
+                        events.Reset();
+                        events.SetPhase(PHASE_ONE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_SILENCED | UNIT_FLAG_PACIFIED | UNIT_FLAG_DISABLE_MOVE);
+						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SILENCED);
+                        me->SetReactState(REACT_AGGRESSIVE);
+						if (Unit* unit = me->SelectNearestTarget())
+                           AttackStart(unit);
+
+                        me->AI()->DoAction(ACTION_ENTER_COMBAT);
+
+						events.ScheduleEvent(EVENT_SPECTRAL_STRIKE, 5000, 0, PHASE_ONE); // TODO: adjust timers
+						events.ScheduleEvent(EVENT_SHIELD_BASH, 10000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_TORTURED_ENRAGE, 15000, 0, PHASE_ONE);
+
+                        return;
                     case EVENT_SPECTRAL_STRIKE:
                         DoCast(me->getVictim(), SPELL_SPECTRAL_STRIKE);
-                        events.ScheduleEvent(EVENT_SPECTRAL_STRIKE, 5000);
+                        events.ScheduleEvent(EVENT_SPECTRAL_STRIKE, 5000, 0, PHASE_ONE);
                         return;
                     case EVENT_SHIELD_BASH:
                         DoCast(me->getVictim(), SPELL_SHIELD_BASH);
-                        events.ScheduleEvent(EVENT_SHIELD_BASH, 5000);
+                        events.ScheduleEvent(EVENT_SHIELD_BASH, 5000, 0, PHASE_ONE);
                         return;
                     case EVENT_TORTURED_ENRAGE:
                         DoCast(SPELL_TORTURED_ENRAGE);
-                        events.ScheduleEvent(EVENT_TORTURED_ENRAGE, 15000);
+                        events.ScheduleEvent(EVENT_TORTURED_ENRAGE, 15000, 0, PHASE_ONE);
                         return;
                 }
             }
@@ -1082,17 +1276,19 @@ class npc_tortured_rifleman : public CreatureScript
 public:
     npc_tortured_rifleman() : CreatureScript("npc_tortured_rifleman") { }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_tortured_riflemanAI(pCreature);
+        return new npc_tortured_riflemanAI(creature);
     }
 
-    struct npc_tortured_riflemanAI  : public ScriptedAI
+    struct npc_tortured_riflemanAI : public ScriptedAI
     {
-        npc_tortured_riflemanAI(Creature *c) : ScriptedAI(c)
+        npc_tortured_riflemanAI(Creature* c) : ScriptedAI(c)
         {
+            instance = me->GetInstanceScript();
         }
 
+        InstanceScript* instance;
         EventMap events;
 
         void Reset()
@@ -1100,17 +1296,39 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustReachedHome()
         {
-            events.ScheduleEvent(EVENT_SHOOT, 2000); // TODO: adjust timers
-            events.ScheduleEvent(EVENT_CURSED_ARROW, 10000);
-            events.ScheduleEvent(EVENT_FROST_TRAP, 1000);
-            events.ScheduleEvent(EVENT_ICE_SHOT, 15000);
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
+        
+        void DoAction(const int32 actionId)
+        {
+            switch (actionId)
+            {
+                case ACTION_TRASH_ACTIVATE:
+                    events.SetPhase(PHASE_INTRO);
+                    events.ScheduleEvent(EVENT_ACTIVATE_TRASH, 5000, 0, PHASE_INTRO);
+                    break;
+            }
         }
 
-        void UpdateAI(const uint32 diff)
+        void JustDied(Unit* /*killer*/)
         {
-            if (!UpdateVictim())
+            if (roll_chance_i(5))
+                Talk(SAY_TRASH_DEATH);
+        }
+
+        void EnterCombat(Unit* /*who*/)
+        {
+            events.ScheduleEvent(EVENT_SHOOT, 2000, 0, PHASE_ONE); // TODO: adjust timers
+            events.ScheduleEvent(EVENT_CURSED_ARROW, 10000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_FROST_TRAP, 1000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_ICE_SHOT, 15000, 0, PHASE_ONE);
+        }
+
+        void UpdateAI(uint32 diff)
+        {
+            if (!UpdateVictim() && !(events.GetPhaseMask() & PHASE_INTRO_MASK))
                 return;
 
             events.Update(diff);
@@ -1120,26 +1338,43 @@ public:
 
             while (uint32 eventId = events.ExecuteEvent())
             {
-                switch(eventId)
+                switch (eventId)
                 {
+                    case EVENT_ACTIVATE_TRASH:
+                        events.Reset();
+                        events.SetPhase(PHASE_ONE);
+                        me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_SILENCED | UNIT_FLAG_PACIFIED | UNIT_FLAG_DISABLE_MOVE);
+						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SILENCED);
+                        me->SetReactState(REACT_AGGRESSIVE);
+						if (Unit* unit = me->SelectNearestTarget())
+                            AttackStart(unit);
+
+                        me->AI()->DoAction(ACTION_ENTER_COMBAT);
+
+						events.ScheduleEvent(EVENT_SHOOT, 2000, 0, PHASE_ONE); // TODO: adjust timers
+						events.ScheduleEvent(EVENT_CURSED_ARROW, 10000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_FROST_TRAP, 1000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_ICE_SHOT, 15000, 0, PHASE_ONE);
+
+                        break;
                     case EVENT_SHOOT:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_SHOOT);
-                        events.ScheduleEvent(EVENT_SHOOT, 2000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_SHOOT);
+                        events.ScheduleEvent(EVENT_SHOOT, 2000, 0, PHASE_ONE);
                         return;
                     case EVENT_CURSED_ARROW:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_CURSED_ARROW);
-                        events.ScheduleEvent(EVENT_CURSED_ARROW, 10000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_CURSED_ARROW);
+                        events.ScheduleEvent(EVENT_CURSED_ARROW, 10000, 0, PHASE_ONE);
                         return;
                     case EVENT_FROST_TRAP:
                         DoCast(SPELL_FROST_TRAP);
-                        events.ScheduleEvent(EVENT_FROST_TRAP, 30000);
+                        events.ScheduleEvent(EVENT_FROST_TRAP, 30000, 0, PHASE_ONE);
                         return;
                     case EVENT_ICE_SHOT:
-                        if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(pTarget, SPELL_ICE_SHOT);
-                        events.ScheduleEvent(EVENT_ICE_SHOT, 15000);
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+                            DoCast(target, SPELL_ICE_SHOT);
+                        events.ScheduleEvent(EVENT_ICE_SHOT, 15000, 0, PHASE_ONE);
                         return;
                 }
             }
@@ -1152,21 +1387,21 @@ public:
 
 enum GENERAL_EVENT
 {
-    SAY_AGGRO                    = 0,
-    SAY_DEATH                    = 1,
+    SAY_GEN_AGGRO = 0,
+    SAY_GEN_DEATH = 1,
 
-    SPELL_SHIELD_THROWN          = 69222,
-    H_SPELL_SHIELD_THROWN        = 73076,
-    SPELL_SPIKE                  = 69184,
-    H_SPELL_SPIKE                = 70399,
-    SPELL_CLONE_NAME             = 57507,
-    SPELL_CLONE_MODEL            = 45204,
+    SPELL_SHIELD_THROWN = 69222,
+    H_SPELL_SHIELD_THROWN = 73076,
+    SPELL_SPIKE = 69184,
+    H_SPELL_SPIKE = 70399,
+    SPELL_CLONE_NAME = 57507,
+    SPELL_CLONE_MODEL = 45204,
 
     // Reflection'Spells
-    SPELL_BALEFUL_STRIKE         = 69933,
-    SPELL_SPIRIT_BURST           = 69900,
-    H_SPELL_BALEFUL_STRIKE       = 70400,
-    H_SPELL_SPIRIT_BURST         = 73046,
+    SPELL_BALEFUL_STRIKE = 69933,
+    SPELL_SPIRIT_BURST = 69900,
+    H_SPELL_BALEFUL_STRIKE = 70400,
+    H_SPELL_SPIRIT_BURST = 73046,
 };
 
 class npc_frostworn_general : public CreatureScript
@@ -1176,13 +1411,13 @@ public:
 
     struct npc_frostworn_generalAI : public ScriptedAI
     {
-        npc_frostworn_generalAI(Creature *pCreature) : ScriptedAI(pCreature)
+        npc_frostworn_generalAI(Creature *creature) : ScriptedAI(creature)
         {
-            pInstance = (InstanceScript*)pCreature->GetInstanceScript();
+            instance = (InstanceScript*)creature->GetInstanceScript();
             Reset();
         }
 
-        InstanceScript* pInstance;
+        InstanceScript* instance;
 
         uint32 uiShieldTimer;
         uint32 uiSpikeTimer;
@@ -1190,51 +1425,50 @@ public:
 
         void Reset()
         {
-            if (!pInstance)
+            if (!instance)
                 return;
             uiShieldTimer = 5000;
             uiSpikeTimer = 14000;
             uiCloneTimer = 22000;
-            pInstance->SetData(DATA_FROSWORN_EVENT, NOT_STARTED);
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+            instance->SetData(DATA_FROSWORN_EVENT, NOT_STARTED);
         }
 
-        void JustDied(Unit* pKiller)
+        void JustDied(Unit* /*killer*/)
         {
-            if (!pInstance)
+            if (!instance)
                 return;
-            Talk(SAY_DEATH);
-            pInstance->SetData(DATA_FROSWORN_EVENT, DONE);
+            Talk(SAY_GEN_DEATH);
+            instance->SetData(DATA_FROSWORN_EVENT, DONE);
         }
 
-        void MoveInLineOfSight(Unit* pWho)
+        void MoveInLineOfSight(Unit* who)
         {
-            if (!pInstance)
+            if (!instance)
                 return;
 
             if (me->getVictim())
                 return;
 
-            if (pWho->GetTypeId() != TYPEID_PLAYER
-                || pInstance->GetData(DATA_MARWYN_EVENT) != DONE
-                || !me->IsWithinDistInMap(pWho, 20.0f)
+            if (who->GetTypeId() != TYPEID_PLAYER
+                || instance->GetData(DATA_MARWYN_EVENT) != DONE
+                || !me->IsWithinDistInMap(who, 20.0f)
                 ) return;
 
-            if (Player* pPlayer = (Player*)pWho)
-                if (pPlayer->isGameMaster())
+            if (Player* player = (Player*)who)
+                if (player->isGameMaster())
                     return;
+			
+			me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
 
-            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-
-            AttackStart(pWho);
+            AttackStart(who);
         }
 
-        void EnterCombat(Unit* pVictim)
+        void EnterCombat(Unit * /*victim*/)
         {
-            if (!pInstance)
+            if (!instance)
                 return;
-            Talk(SAY_AGGRO);
-            pInstance->SetData(DATA_FROSWORN_EVENT, IN_PROGRESS);
+            Talk(SAY_GEN_AGGRO);
+            instance->SetData(DATA_FROSWORN_EVENT, IN_PROGRESS);
         }
 
         void UpdateAI(const uint32 uiDiff)
@@ -1244,8 +1478,8 @@ public:
 
             if(uiShieldTimer < uiDiff)
             {
-                if(Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                   DoCast(pTarget, SPELL_SHIELD_THROWN);
+                if(Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                   DoCast(target, SPELL_SHIELD_THROWN);
                 uiShieldTimer = urand(8000, 12000);
             }
             else
@@ -1253,8 +1487,8 @@ public:
 
             if (uiSpikeTimer < uiDiff)
             {
-                if(Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                    DoCast(pTarget, SPELL_SPIKE);
+                if(Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                    DoCast(target, SPELL_SPIKE);
                 uiSpikeTimer = urand(15000, 20000);
             }
             else
@@ -1288,9 +1522,9 @@ public:
 
         }
     };
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_frostworn_generalAI(pCreature);
+        return new npc_frostworn_generalAI(creature);
     }
 };
 
@@ -1301,24 +1535,24 @@ public:
 
     struct npc_spiritual_reflectionAI : public ScriptedAI
     {
-        npc_spiritual_reflectionAI(Creature *pCreature) : ScriptedAI(pCreature)
+        npc_spiritual_reflectionAI(Creature *creature) : ScriptedAI(creature)
         {
             Reset();
         }
 
-        InstanceScript* pInstance;    
+        InstanceScript* instance;
         uint32 uiStrikeTimer;
 
         void Reset()
         {
-            uiStrikeTimer = urand(1000,3000);    
+            uiStrikeTimer = urand(1000,3000);
         }
 
-        void JustDied(Unit* pKiller)
+        void JustDied(Unit* /*killer*/)
         {
-            DoCast(pKiller, SPELL_SPIRIT_BURST);            
+            DoCastAOE(SPELL_SPIRIT_BURST, true);
         }
-        
+
         void UpdateAI(const uint32 uiDiff)
         {
             if(!UpdateVictim())
@@ -1326,8 +1560,8 @@ public:
 
             if(uiStrikeTimer < uiDiff)
             {
-                if(Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                   DoCast(pTarget, SPELL_BALEFUL_STRIKE);
+                if(Unit *target = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                   DoCast(target, SPELL_BALEFUL_STRIKE);
                 uiStrikeTimer = urand(3000, 8000);
             }
             else
@@ -1336,51 +1570,14 @@ public:
             DoMeleeAttackIfReady();
         }
     };
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_spiritual_reflectionAI(pCreature);
+        return new npc_spiritual_reflectionAI(creature);
     }
 };
 
 enum Defs
 {
-    /*INTRO - Pre Escape*/
-    SAY_LICH_KING_AGGRO_A              = 0,
-    SAY_LICH_KING_AGGRO_H              = 1,
-    SAY_JAINA_AGGRO                    = 0,
-    SAY_SYLVANA_AGGRO                  = 0,
-
-    /*ESCAPE*/
-	SAY_LICH_KING_WALL_02              = 3,
-    SAY_LICH_KING_WALL_03              = 4,
-    SAY_LICH_KING_WALL_04              = 5,
-
-    SAY_JAINA_WALL_01                  = 1,
-    SAY_SYLVANA_WALL_01                = 1,
-    SAY_JAINA_WALL_02                  = 2,
-    SAY_SYLVANA_WALL_02                = 2,
-    SAY_JAINA_WALL_03                  = 3,
-    SAY_JAINA_WALL_04                  = 4,
-    SAY_SYLVANA_WALL_03                = 3,
-    SAY_SYLVANA_WALL_04                = 4,
-    SAY_JAINA_ESCAPE_01                = 5,
-    SAY_JAINA_ESCAPE_02                = 6,
-    SAY_SYLVANA_ESCAPE_01              = 5,
-    SAY_SYLVANA_ESCAPE_02              = 6,
-    SAY_JAINA_TRAP                     = 7,
-    SAY_SYLVANA_TRAP                   = 7,
-    SAY_MATHEAS_JAINA                  = -1594505,
-    SAY_JAINA_FIRE                     = -1594526,
-    SAY_SYLVANA_FIRE                   = -1594522,
-    SAY_SYLVANA_FINAL_1                = 8,
-    SAY_SYLVANA_FINAL_2                = 9,
-    SAY_JAINA_FINAL_1                  = 8,
-    SAY_JAINA_FINAL_2                  = 9,
-    SAY_JAINA_FINAL_3                  = 8,
-    SAY_LICH_KING_END_01               = -1594506,
-    SAY_LICH_KING_END_02               = -1594507,
-    SAY_LICH_KING_END_03               = -1594508,
-
     /*SPELLS AND VISUAL EFFECTS*/
     SPELL_WINTER                       = 69780,
     SPELL_FURY_OF_FROSTMOURNE          = 70063,
@@ -1409,23 +1606,23 @@ class npc_jaina_and_sylvana_hor_part2 : public CreatureScript
 public:
     npc_jaina_and_sylvana_hor_part2() : CreatureScript("npc_jaina_and_sylvana_hor_part2") { }
 
-    bool OnGossipSelect(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
+    bool OnGossipSelect(Player * plr, Creature * creature, uint32 /*sender*/, uint32 action)
     {
-        InstanceScript* m_pInstance = (InstanceScript*)pCreature->GetInstanceScript();
-        switch (uiAction)
+        InstanceScript * instance = (InstanceScript*)creature->GetInstanceScript();
+        switch (action)
         {
             case GOSSIP_ACTION_INFO_DEF+1:
-                pPlayer->CLOSE_GOSSIP_MENU();
-                ((npc_jaina_and_sylvana_hor_part2AI*)pCreature->AI())->Start(false,true);
-                pCreature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER);
-                pCreature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
-                pCreature->SetUInt64Value(UNIT_FIELD_TARGET, 0);
-                pCreature->setActive(true);
+                plr->CLOSE_GOSSIP_MENU();
+                CAST_AI(npc_jaina_and_sylvana_hor_part2AI, creature->AI())->Start(false,true);
+                creature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER);
+                creature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+                creature->SetUInt64Value(UNIT_FIELD_TARGET, 0);
+                creature->setActive(true);
 
-                if(m_pInstance)
+                if(instance)
                 {
-                    m_pInstance->SetData64(DATA_ESCAPE_LIDER, pCreature->GetGUID());
-                    m_pInstance->SetData(DATA_LICHKING_EVENT, IN_PROGRESS);
+                    instance->SetData64(DATA_ESCAPE_LIDER, creature->GetGUID());
+                    instance->SetData(DATA_LICHKING_EVENT, IN_PROGRESS);
                 }
                 return true;
             default:
@@ -1433,9 +1630,9 @@ public:
         }
     }
 
-    bool OnGossipHello(Player* pPlayer, Creature* pCreature)
+    bool OnGossipHello(Player* player, Creature* creature)
     {
-        InstanceScript*   m_pInstance = (InstanceScript*)pCreature->GetInstanceScript();
+        InstanceScript* m_pInstance = (InstanceScript*)creature->GetInstanceScript();
 
         if(!m_pInstance)
             return false;
@@ -1443,26 +1640,26 @@ public:
         if(m_pInstance->GetData(DATA_LICHKING_EVENT) == DONE)
             return false;
 
-        if(pCreature->isQuestGiver())
-           pPlayer->PrepareQuestMenu( pCreature->GetGUID());
+        if(creature->isQuestGiver())
+           player->PrepareQuestMenu( creature->GetGUID());
 
-        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "We are ready!", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "We are ready!", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
-        pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetGUID());
+        player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
 
         return true;
     }
 
-    CreatureAI* GetAI(Creature* pCreature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
-        return new npc_jaina_and_sylvana_hor_part2AI(pCreature);
+        return new npc_jaina_and_sylvana_hor_part2AI(creature);
     }
 
     struct npc_jaina_and_sylvana_hor_part2AI : public npc_escortAI
     {
-        npc_jaina_and_sylvana_hor_part2AI(Creature *pCreature) : npc_escortAI(pCreature)
+        npc_jaina_and_sylvana_hor_part2AI(Creature *creature) : npc_escortAI(creature)
         {
-            m_pInstance = (InstanceScript*)pCreature->GetInstanceScript();
+            m_pInstance = (InstanceScript*)creature->GetInstanceScript();
             Reset();
         }
 
@@ -1525,7 +1722,7 @@ public:
 
         }
 
-        void JustDied(Unit* pKiller)
+        void JustDied(Unit* /*killer*/)
         {
             if(!m_pInstance)
                 return;
@@ -1567,7 +1764,7 @@ public:
                     {
                         if(pWallTarget->isAlive())
                         {
-                            pWallTarget->ForcedDespawn();
+                            pWallTarget->DespawnOrUnsummon();
                             m_uipWallTargetGUID = 0;
                         }
                     }
@@ -1601,7 +1798,7 @@ public:
                     {
                         if(pWallTarget->isAlive())
                         {
-                            pWallTarget->ForcedDespawn();
+                            pWallTarget->DespawnOrUnsummon();
                             m_uipWallTargetGUID = 0;
                         }
                     }
@@ -1635,7 +1832,7 @@ public:
                     {
                         if(pWallTarget->isAlive())
                         {
-                            pWallTarget->ForcedDespawn();
+                            pWallTarget->DespawnOrUnsummon();
                             m_uipWallTargetGUID = 0;
                         }
                     }
@@ -1668,7 +1865,7 @@ public:
                     {
                         if(pWallTarget->isAlive())
                         {
-                            pWallTarget->ForcedDespawn();
+                            pWallTarget->DespawnOrUnsummon();
                             m_uipWallTargetGUID = 0;
                         }
                     }
@@ -1689,26 +1886,26 @@ public:
             if(who->GetTypeId() != TYPEID_PLAYER)
                 return;
 
-            Player* pPlayer = (Player *)who;
+            Player* player = (Player *)who;
 
-            if(pPlayer->GetTeam() == ALLIANCE && me->GetEntry() == NPC_SYLVANA_OUTRO)
+            if(player->GetTeam() == ALLIANCE && me->GetEntry() == NPC_SYLVANA_OUTRO)
                 return;
 
-            if(pPlayer->GetTeam() == HORDE && me->GetEntry() == NPC_JAINA_OUTRO)
+            if(player->GetTeam() == HORDE && me->GetEntry() == NPC_JAINA_OUTRO)
                 return;
 
             if(me->IsWithinDistInMap(who, 50.0f)
                 && m_pInstance->GetData(DATA_FROSWORN_EVENT) == DONE
                 && m_pInstance->GetData(DATA_PHASE) == 3)
             {
-                pPlayer = (Player *)who;
+                player = (Player *)who;
                 Event = true;
                 me->setFaction(FACTION);
                 m_pInstance->SetData(DATA_PHASE, 4);
             }
         }
 
-        void DamageTaken(Unit* pDoneBy, uint32 &uiDamage)
+        void DamageTaken(Unit* /*doneby*/, uint32 &uiDamage)
         {
             if(!m_pInstance)
                 return;
@@ -1748,9 +1945,9 @@ public:
                     if(pLichKing)
                     {
                         if(me->GetEntry() == NPC_JAINA_OUTRO)
-                            Talk(SAY_LICH_KING_AGGRO_A);
+                            pLichKing->AI()->Talk(SAY_LICH_KING_AGGRO_A);
                         if(me->GetEntry() == NPC_SYLVANA_OUTRO)
-                            Talk(SAY_LICH_KING_AGGRO_H);
+                            pLichKing->AI()->Talk(SAY_LICH_KING_AGGRO_H);
                         pLichKing->AI()->AttackStart(me);
                         me->AI()->AttackStart(pLichKing);
                     }
@@ -1809,7 +2006,7 @@ public:
                     me->RemoveAllAuras();
 
                     if(pLichKing && !pLichKing->HasAura(SPELL_ICE_PRISON_VISUAL))
-pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL : SPELL_DARK_ARROW, pLichKing);
+                        pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL : SPELL_DARK_ARROW, pLichKing);
 
                     me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_STAND);
                     me->AttackStop();
@@ -1832,7 +2029,7 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                         pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL : SPELL_DARK_ARROW, pLichKing);
                         me->SetUInt64Value(UNIT_FIELD_TARGET, pLichKing->GetGUID());
                     }
-                    JumpNextStep(10000);
+                    JumpNextStep(5000);
                     break;
                 case 9:
                     if(pLichKing && (!pLichKing->HasAura(SPELL_ICE_PRISON_VISUAL) || !pLichKing->HasAura(SPELL_DARK_ARROW)))
@@ -1858,10 +2055,10 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                 case 11:
                     if(GameObject* pGunship = m_pInstance->instance->GetGameObject(m_pInstance->GetData64(me->GetEntry() == NPC_JAINA_OUTRO ? GO_SKYBREAKER : GO_ORGRIM_HAMMER)))
                         pGunship->SetPhaseMask(1, true);
-                    
+
                     if(Creature* pCaptain = me->SummonCreature(me->GetEntry() == NPC_JAINA_OUTRO? NPC_BARTLETT : NPC_KORM, 5251.17f, 1610.2f, 795.812f, 2.07997f))
                     {
-                        Talk(me->GetEntry() == NPC_JAINA_OUTRO ? SAY_JAINA_FIRE : SAY_SYLVANA_FIRE);
+                        pCaptain->AI()->Talk(SAY_HORDE_FIRE);
                         uiCaptain = pCaptain->GetGUID();
                     }
                     if(GameObject* pCave = m_pInstance->instance->GetGameObject(m_pInstance->GetData64(GO_CAVE)))
@@ -1896,16 +2093,23 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                     me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_STAND);
                     m_pInstance->SetData(DATA_LICHKING_EVENT, DONE);
                     if(Creature* pCaptain = me->GetCreature(*me, uiCaptain))
-                        Talk(me->GetEntry() == NPC_JAINA_OUTRO ? SAY_JAINA_FINAL_1 : SAY_SYLVANA_FINAL_1);
+                        pCaptain->AI()->Talk(SAY_JAINA_FINAL_1);
                     me->SummonGameObject(me->GetEntry() == NPC_JAINA_OUTRO ? GO_STAIRS_SKYBREAKER : GO_STAIRS_ORGRIM_HAMMER, 5247.45f, 1627.72f, 784.302f, 5.88208f, 0, 0, 0.199211f, -0.979957f, 1*DAY);
                     JumpNextStep(10000);
                     break;
                 case 14:
-                    Talk(me->GetEntry() == NPC_JAINA_OUTRO ? SAY_JAINA_FINAL_2 : SAY_SYLVANA_FINAL_2);
+                    if (m_pInstance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
+                        Talk(SAY_JAINA_FINAL_2);
+
+                    else
+                        Talk(SAY_SYLVANA_FINAL_2);
+
                     JumpNextStep(20000);
                     break;
                 case 15:
-                    Talk(me->GetEntry() == NPC_JAINA_OUTRO ? SAY_JAINA_FINAL_3 : 0);
+                    if (m_pInstance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
+                        Talk(SAY_JAINA_FINAL_3);
+
                     JumpNextStep(5000);
                     break;
                 case 16:
@@ -1943,7 +2147,7 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
             }
 
             if(m_pInstance->GetData(DATA_LICHKING_EVENT) == SPECIAL
-                && m_pInstance->GetData(DATA_PHASE) != 6)       //End Cinematic
+                && m_pInstance->GetData(DATA_PHASE) != 6) //End Cinematic
             {
                 m_pInstance->SetData(DATA_PHASE, 6);
                 Step = 10;
@@ -1985,7 +2189,7 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                         {
                             pGate->SetGoState(GO_STATE_READY);
                             if(pLichKing && pLichKing->isAlive())
-                                Talk(SAY_LICH_KING_WALL_02);
+                                pLichKing->AI()->Talk(SAY_LICH_KING_WALL_02);
                             m_uiIceWallGUID = pGate->GetGUID();
                         }
                         break;
@@ -1994,7 +2198,7 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                         {
                             pGate->SetGoState(GO_STATE_READY);
                             if(pLichKing && pLichKing->isAlive())
-                                Talk(SAY_LICH_KING_WALL_03);
+                                pLichKing->AI()->Talk(SAY_LICH_KING_WALL_03);
                             m_uiIceWallGUID = pGate->GetGUID();
                         }
                         break;
@@ -2003,7 +2207,7 @@ pLichKing->AddAura(me->GetEntry() == NPC_JAINA_OUTRO ? SPELL_ICE_PRISON_VISUAL :
                         {
                             pGate->SetGoState(GO_STATE_READY);
                             if(pLichKing && pLichKing->isAlive())
-                                Talk(SAY_LICH_KING_WALL_04);
+                                pLichKing->AI()->Talk(SAY_LICH_KING_WALL_04);
                             m_uiIceWallGUID = pGate->GetGUID();
                         }
                         break;

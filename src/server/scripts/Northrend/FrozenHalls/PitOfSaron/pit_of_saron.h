@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -18,9 +18,6 @@
 #ifndef DEF_PIT_OF_SARON_H
 #define DEF_PIT_OF_SARON_H
 
-#include "Map.h"
-#include "Creature.h"
-
 #define PoSScriptName "instance_pit_of_saron"
 #define MAX_ENCOUNTER 3
 
@@ -38,6 +35,14 @@ enum DataTypes
     DATA_JAINA_SYLVANAS_2   = 6,    // GUID of either Jaina or Sylvanas part 2, depending on team, as it's the same spawn.
     DATA_TYRANNUS_EVENT     = 7,
     DATA_TEAM_IN_INSTANCE   = 8,
+    DATA_TYRANNUS_START     = 9,
+    DATA_AREA_TRIGGER_YMIRJAR = 10,
+    DATA_AREA_TRIGGER_FALLEN = 11,
+    DATA_AREA_TRIGGER_ICE_CICLE = 12,
+    DATA_VICTUS_OR_GORKUN_FREED = 13,
+    DATA_SLAVE_OUTRO_GARFROST   = 14,
+    DATA_GEIST_AMBUSHER         = 15,
+    DATA_SINDRAGOSA             = 16,
 };
 
 enum CreatureIds
@@ -83,10 +88,18 @@ enum CreatureIds
     NPC_MARTIN_VICTUS_2                         = 37580,
     NPC_GORKUN_IRONSKULL_1                      = 37581,
     NPC_GORKUN_IRONSKULL_2                      = 37592,
+    NPC_YMIRJAR_DEATHBRINGER                    = 36892,
+    NPC_YMIRJAR_FLAMEBEARER                     = 36893,
+    NPC_YMIRJAR_WRATBRINGER                     = 36840,
+    NPC_FALLEN_WARRIOR                          = 36841,
+    NPC_WRATHBONE_COLDWRAITH                    = 36842,
+    NPC_WRATHBONE_REAVER                        = 37729,
+    NPC_WRATHBONE_SORCERER                      = 37728,
+    NPC_WRATHBONE_SKELETON                      = 36877,
+    NPC_SINDRAGOSA                              = 37755,
 
     NPC_FORGEMASTER_STALKER                     = 36495,
     NPC_EXPLODING_ORB                           = 36610,
-    NPC_YMIRJAR_DEATHBRINGER                    = 36892,
     NPC_ICY_BLAST                               = 36731
 };
 
@@ -94,17 +107,7 @@ enum GameObjectIds
 {
     GO_SARONITE_ROCK                            = 196485,
     GO_ICE_WALL                                 = 201885,
-    GO_HALLS_OF_REFLECTION_PORTCULLIS           = 201848,
+    GO_HALLS_OF_REFLECT_PORT                    = 201848, // unlocked by jaina/sylvanas at last outro
 };
-
-template<class AI>
-AI* GetPitOfSaronAI(Creature* creature)
-{
-    if (InstanceMap* instance = creature->GetMap()->ToInstanceMap())
-        if (instance->GetInstanceScript())
-            if (instance->GetScriptId() == sObjectMgr->GetScriptId(PoSScriptName))
-                return new AI(creature);
-    return NULL;
-}
 
 #endif

@@ -160,8 +160,6 @@ class ScriptRegistry
     if (!V) \
         return R;
 
-
-
 ScriptMgr::ScriptMgr()
     : _scriptCount(0), _scheduledScripts(0)
 {

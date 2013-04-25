@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -15,43 +15,39 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "SpellScript.h"
-#include "SpellAuraEffects.h"
+#include "ScriptPCH.h"
 #include "pit_of_saron.h"
 #include "Vehicle.h"
-#include "Player.h"
 
 enum Yells
 {
     //Gorkun
-    SAY_GORKUN_INTRO_2              = 0,
-    SAY_GORKUN_OUTRO_1              = 1,
-    SAY_GORKUN_OUTRO_2              = 2,
+    SAY_GORKUN_INTRO_2 = 0,
+    SAY_GORKUN_OUTRO_1 = 1,
+    SAY_GORKUN_OUTRO_2 = 2,
 
     //Tyrannus
-    SAY_AMBUSH_1                    = 3,
-    SAY_AMBUSH_2                    = 4,
-    SAY_GAUNTLET_START              = 5,
-    SAY_TYRANNUS_INTRO_1            = 6,
-    SAY_TYRANNUS_INTRO_3            = 7,
-    SAY_AGGRO                       = 8,
-    SAY_SLAY                        = 9,
-    SAY_DEATH                       = 10,
-    SAY_MARK_RIMEFANG_1             = 11,
-    SAY_MARK_RIMEFANG_2             = 12,
-    SAY_DARK_MIGHT_1                = 13,
-    SAY_DARK_MIGHT_2                = 14,
+    SAY_AMBUSH_1 = 3,
+    SAY_AMBUSH_2 = 4,
+    SAY_GAUNTLET_START = 5,
+    SAY_TYRANNUS_INTRO_1 = 6,
+    SAY_TYRANNUS_INTRO_3 = 7,
+    SAY_AGGRO = 8,
+    SAY_SLAY = 9,
+    SAY_DEATH = 10,
+    SAY_MARK_RIMEFANG_1 = 11,
+    SAY_MARK_RIMEFANG_2 = 12,
+    SAY_DARK_MIGHT_1 = 13,
+    SAY_DARK_MIGHT_2 = 14,
 
     //Jaina
-    SAY_JAYNA_OUTRO_3               = 3,
-    SAY_JAYNA_OUTRO_4               = 4,
-    SAY_JAYNA_OUTRO_5               = 5,
+    SAY_JAYNA_OUTRO_3 = 3,
+    SAY_JAYNA_OUTRO_4 = 4,
+    SAY_JAYNA_OUTRO_5 = 5,
 
     //Sylvanas
-    SAY_SYLVANAS_OUTRO_3            = 3,
-    SAY_SYLVANAS_OUTRO_4            = 4
+    SAY_SYLVANAS_OUTRO_3 = 3,
+    SAY_SYLVANAS_OUTRO_4 = 4
 };
 
 enum Spells
@@ -63,6 +59,11 @@ enum Spells
     SPELL_UNHOLY_POWER              = 69167,
     SPELL_MARK_OF_RIMEFANG          = 69275,
     SPELL_HOARFROST                 = 69246,
+
+	//cave
+    SPELL_ICICLE_FALL               = 69428,
+    SPELL_FALL_DAMAGE               = 62236,
+    SPELL_ICICLE                    = 62234,
 
     SPELL_ICY_BLAST                 = 69232,
     SPELL_ICY_BLAST_AURA            = 69238,
@@ -94,7 +95,7 @@ enum Phases
     PHASE_NONE      = 0,
     PHASE_INTRO     = 1,
     PHASE_COMBAT    = 2,
-    PHASE_OUTRO     = 3
+    PHASE_OUTRO     = 3,
 };
 
 enum Actions
@@ -107,6 +108,33 @@ enum Actions
 
 #define GUID_HOARFROST 1
 
+static const Position MoveLocations1[9] =
+{
+    {1064.217896f, 118.629662f, 628.156311f, 0.000000f},
+    {1065.733276f, 126.342400f, 628.156128f, 0.000000f},
+    {1060.914185f, 130.460403f, 628.156128f, 0.000000f},
+    {1059.328003f, 120.532974f, 628.156128f, 0.000000f},
+    {1052.488647f, 122.232979f, 628.156128f, 0.000000f},
+    {1047.673950f, 121.389717f, 628.156128f, 0.000000f},
+    {1043.781250f, 113.463493f, 628.156128f, 0.000000f},
+    {1044.634521f, 109.196129f, 628.518188f, 0.000000f},
+    {1052.443726f, 110.813431f, 628.156250f, 0.000000f},
+};
+
+static const Position MoveLocations2[9] =
+{
+    {1068.739624f, 103.664474f, 630.880005f, 0.000000f},
+    {1062.253784f, 101.495079f, 630.683533f, 0.000000f},
+    {1057.972168f, 100.040573f, 630.238525f, 0.000000f},
+    {1053.684204f, 98.358513f, 629.913330f, 0.000000f},
+    {1060.612793f, 87.334480f, 631.050354f, 0.000000f},
+    {1068.163208f, 90.051262f, 631.533752f, 0.000000f},
+    {1046.957642f, 108.734108f, 628.526245f, 0.000000f},
+    {1044.634521f, 109.196129f, 628.518188f, 0.000000f},
+    {1052.443726f, 110.813431f, 628.156250f, 0.000000f},
+};
+
+static const Position leaderPosOutro1 = {1064.217896f, 118.629662f, 628.156311f, 0.000000f};
 static const Position rimefangPos[10] =
 {
     {1017.299f, 168.9740f, 642.9259f, 0.000000f},
@@ -166,7 +194,7 @@ class boss_tyrannus : public CreatureScript
                 if (me->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE))
                     return;
 
-                if (victim && me->Attack(victim, true) && !events.IsInPhase(PHASE_INTRO))
+                if (victim && me->Attack(victim, true) && !(events.GetPhaseMask() & (1 << PHASE_INTRO)))
                     me->GetMotionMaster()->MoveChase(victim);
             }
 
@@ -199,7 +227,7 @@ class boss_tyrannus : public CreatureScript
                     rimefang->AI()->DoAction(ACTION_END_COMBAT);
             }
 
-            void DoAction(int32 actionId)
+            void DoAction(const int32 actionId)
             {
                 if (actionId == ACTION_START_INTRO)
                 {
@@ -210,10 +238,37 @@ class boss_tyrannus : public CreatureScript
                     events.ScheduleEvent(EVENT_INTRO_3, 34000, 0, PHASE_INTRO);
                     events.ScheduleEvent(EVENT_COMBAT_START, 36000, 0, PHASE_INTRO);
                     instance->SetBossState(DATA_TYRANNUS, IN_PROGRESS);
+                    
+                   if(Creature *pSlave = me->SummonCreature(NPC_GORKUN_IRONSKULL_1, 1075.489868f, 20.001131f, 632.835938f, 1.659531f, TEMPSUMMON_DEAD_DESPAWN, 10000))
+                   {
+                      pSlave->GetMotionMaster()->MovePoint(0, leaderPosOutro1);
+                      pSlave->SetHomePosition(leaderPosOutro1);
+                   }
+
+                   for(uint8 i = 0; i < 9; ++i)
+                  {
+                     if(Creature *pSlave = me->SummonCreature(NPC_FREED_SLAVE_1_HORDE, 1086.112061f, 21.060266f, 631.892273f, 1.995682f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                     {
+                          pSlave->GetMotionMaster()->MovePoint(0, MoveLocations1[i]);
+                          pSlave->SetHomePosition(MoveLocations1[i]);
+                     }
+                      ++i;
+                     if(Creature *pSlave = me->SummonCreature(NPC_FREED_SLAVE_2_HORDE, 1069.121582f, 18.495785f, 634.020203f, 1.573138f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                     {
+                          pSlave->GetMotionMaster()->MovePoint(0, MoveLocations1[i]);
+                          pSlave->SetHomePosition(MoveLocations1[i]);
+                     }
+                     ++i;
+                     if(Creature *pSlave = me->SummonCreature(NPC_FREED_SLAVE_3_HORDE, 1075.489868f, 20.001131f, 632.835938f, 1.659531f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                     {
+                          pSlave->GetMotionMaster()->MovePoint(0, MoveLocations1[i]);
+                          pSlave->SetHomePosition(MoveLocations1[i]);
+                     }
+                  }
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(const uint32 diff)
             {
                 if (!UpdateVictim() && !events.IsInPhase(PHASE_INTRO))
                     return;
@@ -225,7 +280,8 @@ class boss_tyrannus : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_INTRO_1:
-                            //Talk(SAY_GORKUN_INTRO_2, pGorkunOrVictus);
+                            if (Creature* GorkunOrVictus = me->GetCreature(*me, instance->GetData64(DATA_VICTUS_OR_GORKUN_FREED)))
+                            GorkunOrVictus->AI()->Talk(SAY_GORKUN_INTRO_2);
                             break;
                         case EVENT_INTRO_2:
                             Talk(SAY_TYRANNUS_INTRO_3);
@@ -238,13 +294,58 @@ class boss_tyrannus : public CreatureScript
                             if (Creature* rimefang = me->GetCreature(*me, instance->GetData64(DATA_RIMEFANG)))
                                 rimefang->AI()->DoAction(ACTION_START_RIMEFANG);    //set rimefang also infight
                             events.SetPhase(PHASE_COMBAT);
-                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_DISABLE_MOVE);
                             me->SetReactState(REACT_AGGRESSIVE);
                             DoCast(me, SPELL_FULL_HEAL);
                             DoZoneInCombat();
                             events.ScheduleEvent(EVENT_OVERLORD_BRAND, urand(5000, 7000));
                             events.ScheduleEvent(EVENT_FORCEFUL_SMASH, urand(14000, 16000));
                             events.ScheduleEvent(EVENT_MARK_OF_RIMEFANG, urand(25000, 27000));
+                            
+                        for(uint8 i = 0; i < 9; ++i)
+                       {
+                          if(Creature *pReaver = me->SummonCreature(NPC_WRATHBONE_REAVER, 1069.934082f, 49.015617f, 630.590210f, 1.657956f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                         { 
+                            if (pReaver->isAlive())
+                            {
+                               if (Creature* pSlave = me->FindNearestCreature(NPC_FREED_SLAVE_1_HORDE, 150.0f, true))
+                              {
+                                 pReaver->GetMotionMaster()->MovePoint(0, MoveLocations2[i]);
+                                 pReaver->SetHomePosition(MoveLocations2[i]);
+                                 pReaver->Attack(pSlave, true);
+                                 pReaver->GetMotionMaster()->MoveChase(pSlave);
+                              }
+                            }
+                         }
+                           ++i;
+                         if(Creature *pSorcerer = me->SummonCreature(NPC_WRATHBONE_SORCERER, 1069.934082f, 49.015617f, 630.590210f, 1.657956f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                         {
+                            if (pSorcerer->isAlive())
+                            {
+                               if (Creature* pSlave = me->FindNearestCreature(NPC_FREED_SLAVE_2_HORDE, 150.0f, true))
+                               {
+                                  pSorcerer->GetMotionMaster()->MovePoint(0, MoveLocations2[i]);
+                                  pSorcerer->SetHomePosition(MoveLocations2[i]);
+                                  pSorcerer->Attack(pSlave, true);
+                                  pSorcerer->GetMotionMaster()->MoveChase(pSlave);
+                               }
+                            }
+                         }
+                        ++i;
+                          if(Creature *pFallen = me->SummonCreature(NPC_FALLEN_WARRIOR, 1069.934082f, 49.015617f, 630.590210f, 1.657956f, TEMPSUMMON_DEAD_DESPAWN, 30000))
+                          {
+                              if (pFallen->isAlive())
+                              {
+                                 if (Creature* pSlave = me->FindNearestCreature(NPC_FREED_SLAVE_3_HORDE, 150.0f, true))
+                                 {
+                                     pFallen->GetMotionMaster()->MovePoint(0, MoveLocations2[i]);
+                                     pFallen->SetHomePosition(MoveLocations2[i]);
+                                     pFallen->Attack(pSlave, true);
+                                    pFallen->GetMotionMaster()->MoveChase(pSlave);
+                                 }
+                              }
+                          }
+                        }
                             break;
                         case EVENT_OVERLORD_BRAND:
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 0.0f, true))
@@ -279,7 +380,7 @@ class boss_tyrannus : public CreatureScript
 
         CreatureAI* GetAI(Creature* creature) const
         {
-            return GetPitOfSaronAI<boss_tyrannusAI>(creature);
+            return new boss_tyrannusAI(creature);
         }
 };
 
@@ -311,7 +412,7 @@ class boss_rimefang : public CreatureScript
                 _vehicle->InstallAllAccessories(false);
             }
 
-            void DoAction(int32 actionId)
+            void DoAction(const int32 actionId)
             {
                 if (actionId == ACTION_START_RIMEFANG)
                 {
@@ -333,9 +434,9 @@ class boss_rimefang : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(const uint32 diff)
             {
-                if (!UpdateVictim() && !_events.IsInPhase(PHASE_COMBAT))
+                if (!UpdateVictim() && !(_events.GetPhaseMask() & (1 << PHASE_COMBAT)))
                     return;
 
                 _events.Update(diff);
@@ -385,32 +486,33 @@ class boss_rimefang : public CreatureScript
 class player_overlord_brandAI : public PlayerAI
 {
     public:
-        player_overlord_brandAI(Player* player) : PlayerAI(player), _tyrannus(0)
+        player_overlord_brandAI(Player* player) : PlayerAI(player)
         {
+            tyrannus = NULL;
         }
 
         void SetGUID(uint64 guid, int32 /*type*/)
         {
-            _tyrannus = guid;
+            tyrannus = ObjectAccessor::GetCreature(*me, guid);
+            if (!tyrannus)
+                me->IsAIEnabled = false;
         }
 
         void DamageDealt(Unit* /*victim*/, uint32& damage, DamageEffectType /*damageType*/)
         {
-            if (Creature* tyrannus = ObjectAccessor::GetCreature(*me, _tyrannus))
-                if (tyrannus->getVictim())
-                    me->CastCustomSpell(SPELL_OVERLORD_BRAND_DAMAGE, SPELLVALUE_BASE_POINT0, damage, tyrannus->getVictim(), true, NULL, NULL, tyrannus->GetGUID());
+            if (tyrannus->getVictim())
+                me->CastCustomSpell(SPELL_OVERLORD_BRAND_DAMAGE, SPELLVALUE_BASE_POINT0, damage, tyrannus->getVictim(), true, NULL, NULL, tyrannus->GetGUID());
         }
 
         void HealDone(Unit* /*target*/, uint32& addHealth)
         {
-            if (Creature* tyrannus = ObjectAccessor::GetCreature(*me, _tyrannus))
-                me->CastCustomSpell(SPELL_OVERLORD_BRAND_HEAL, SPELLVALUE_BASE_POINT0, int32(addHealth*5.5f), tyrannus, true, NULL, NULL, tyrannus->GetGUID());
+            me->CastCustomSpell(SPELL_OVERLORD_BRAND_HEAL, SPELLVALUE_BASE_POINT0, int32(addHealth*5.5f), tyrannus, true, NULL, NULL, tyrannus->GetGUID());
         }
 
-        void UpdateAI(uint32 /*diff*/) { }
+        void UpdateAI(const uint32 /*diff*/) { }
 
     private:
-        uint64 _tyrannus;
+        Creature* tyrannus;
 };
 
 class spell_tyrannus_overlord_brand : public SpellScriptLoader
@@ -422,20 +524,16 @@ class spell_tyrannus_overlord_brand : public SpellScriptLoader
         {
             PrepareAuraScript(spell_tyrannus_overlord_brand_AuraScript);
 
-            bool Load()
-            {
-                return GetCaster() && GetCaster()->GetEntry() == NPC_TYRANNUS;
-            }
-
             void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 if (GetTarget()->GetTypeId() != TYPEID_PLAYER)
                     return;
 
                 oldAI = GetTarget()->GetAI();
-                oldAIState = GetTarget()->IsAIEnabled;
                 GetTarget()->SetAI(new player_overlord_brandAI(GetTarget()->ToPlayer()));
                 GetTarget()->GetAI()->SetGUID(GetCasterGUID());
+                oldAIState = GetTarget()->IsAIEnabled;
+                GetTarget()->IsAIEnabled = true;
             }
 
             void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
@@ -443,10 +541,9 @@ class spell_tyrannus_overlord_brand : public SpellScriptLoader
                 if (GetTarget()->GetTypeId() != TYPEID_PLAYER)
                     return;
 
-                GetTarget()->IsAIEnabled = oldAIState;
-                UnitAI* thisAI = GetTarget()->GetAI();
+                delete GetTarget()->GetAI();
                 GetTarget()->SetAI(oldAI);
-                delete thisAI;
+                GetTarget()->IsAIEnabled = oldAIState;
             }
 
             void Register()
@@ -519,6 +616,56 @@ class at_tyrannus_event_starter : public AreaTriggerScript
         }
 };
 
+class npc_tyrannus_icicle : public CreatureScript
+{
+   public:
+       npc_tyrannus_icicle() : CreatureScript("npc_tyrannus_icicle") { }
+
+       CreatureAI* GetAI(Creature* pCreature) const
+       {
+           return new npc_tyrannus_icicleAI(pCreature);
+       }
+
+       struct npc_tyrannus_icicleAI : public ScriptedAI
+       {
+           npc_tyrannus_icicleAI(Creature *c) : ScriptedAI(c)
+           {
+               pInstance = c->GetInstanceScript();
+               me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_PACIFIED);
+               me->SetReactState(REACT_PASSIVE);
+           }
+
+           void Reset()
+           {
+               IcicleTimer = urand(8000, 14000);
+               me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_PACIFIED);
+               me->SetReactState(REACT_PASSIVE);
+           }
+
+           void UpdateAI(const uint32 diff)
+           {
+               if(pInstance->GetData(DATA_TYRANNUS_EVENT) == NOT_STARTED)
+               {
+                   if (IcicleTimer <= uint32(diff))
+                   {
+                       DoCast(me, SPELL_ICICLE);
+					   DoCast(me, SPELL_ICICLE_FALL);
+					   DoCast(me, SPELL_FALL_DAMAGE);
+                       IcicleTimer = urand(8000, 50000);
+                   } else IcicleTimer -= diff;
+               }
+
+               //Return since we have no target
+               if (!UpdateVictim())
+                   return;
+           }
+       private:
+           InstanceScript* pInstance;
+           uint32 IcicleTimer;
+    };
+
+};
+
 void AddSC_boss_tyrannus()
 {
     new boss_tyrannus();
@@ -526,4 +673,5 @@ void AddSC_boss_tyrannus()
     new spell_tyrannus_overlord_brand();
     new spell_tyrannus_mark_of_rimefang();
     new at_tyrannus_event_starter();
+	new npc_tyrannus_icicle();
 }

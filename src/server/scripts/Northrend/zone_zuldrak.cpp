@@ -253,6 +253,7 @@ enum eGurgthock
     QUEST_AMPHITHEATER_ANGUISH_FROM_BEYOND        = 12934,
 
     NPC_ORINOKO_TUSKBREAKER                       = 30020,
+    NPC_VLADOF_THE_BUTCHER						  = 30022,
     NPC_KORRAK_BLOODRAGER                         = 30023,
     NPC_YGGDRAS                                   = 30014,
     NPC_STINKBEARD                                = 30017,

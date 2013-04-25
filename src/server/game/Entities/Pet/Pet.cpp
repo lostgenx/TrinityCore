@@ -866,21 +866,32 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
 
     //scale
     CreatureFamilyEntry const* cFamily = sCreatureFamilyStore.LookupEntry(cinfo->family);
-    if (cFamily && cFamily->minScale > 0.0f && petType == HUNTER_PET)
+    //if (cFamily && cFamily->minScale > 0.0f && petType == HUNTER_PET)
+	if (cFamily && petType == HUNTER_PET)
     {
-        float scale;
-        if (getLevel() >= cFamily->maxScaleLevel)
-        {
-    		if (cinfo->type_flags & CREATURE_TYPEFLAGS_EXOTIC)
-				scale = 1.0f;
+        //float scale;
+        //if (getLevel() >= cFamily->maxScaleLevel)
+		float scale, minscale, maxscale, maxlevel;
+		minscale = 0.8f;
+		maxscale = 1.2f;
+		if (getLevel() > 70)
+		{
+			if (cinfo->type_flags & CREATURE_TYPEFLAGS_EXOTIC)
+				if (getLevel() > 80)
+					maxlevel = 80; //GM
+				else
+					maxlevel = getLevel();
 			else
-				scale = cFamily->maxScale;
+				//scale = cFamily->maxScale;
+				maxlevel = 70;
 		}
-        else if (getLevel() <= cFamily->minScaleLevel)
-            scale = cFamily->minScale;
+       // else if (getLevel() <= cFamily->minScaleLevel)
+       //     scale = cFamily->minScale;
         else
-            scale = cFamily->minScale + float(getLevel() - cFamily->minScaleLevel) / cFamily->maxScaleLevel * (cFamily->maxScale - cFamily->minScale);
+       //     scale = cFamily->minScale + float(getLevel() - cFamily->minScaleLevel) / cFamily->maxScaleLevel * (cFamily->maxScale - cFamily->minScale);
+			maxlevel = getLevel();
 
+		scale = minscale + (maxlevel * ((maxscale - minscale) / 80));
         SetObjectScale(scale);
     }
 
@@ -892,7 +903,10 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
     PetLevelInfo const* pInfo = sObjectMgr->GetPetLevelInfo(creature_ID, petlevel);
     if (pInfo)                                      // exist in DB
     {
-        SetCreateHealth(pInfo->health);
+        if (petType == HUNTER_PET)
+            SetCreateHealth(pInfo->health + float((m_owner->GetStat(STAT_STAMINA)) * 0.45 ) * 10.5);
+        else
+            SetCreateHealth(pInfo->health); 
         if (petType != HUNTER_PET) //hunter pet use focus
             SetCreateMana(pInfo->mana);
 

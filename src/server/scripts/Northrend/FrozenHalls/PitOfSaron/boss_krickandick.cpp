@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -15,13 +15,9 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "SpellScript.h"
-#include "SpellAuraEffects.h"
+#include "ScriptPCH.h"
 #include "pit_of_saron.h"
 #include "Vehicle.h"
-#include "Player.h"
 
 enum Spells
 {
@@ -48,30 +44,30 @@ enum Spells
 enum Yells
 {
     // Krick
-    SAY_KRICK_AGGRO                             = 0,
-    SAY_KRICK_SLAY                              = 1,
-    SAY_KRICK_BARRAGE_1                         = 2,
-    SAY_KRICK_BARRAGE_2                         = 3,
-    SAY_KRICK_POISON_NOVA                       = 4,
-    SAY_KRICK_CHASE                             = 5,
-    SAY_KRICK_OUTRO_1                           = 6,
-    SAY_KRICK_OUTRO_3                           = 7,
-    SAY_KRICK_OUTRO_5                           = 8,
-    SAY_KRICK_OUTRO_8                           = 9,
+    SAY_KRICK_AGGRO = 0,
+    SAY_KRICK_SLAY = 1,
+    SAY_KRICK_BARRAGE_1 = 2,
+    SAY_KRICK_BARRAGE_2 = 3,
+    SAY_KRICK_POISON_NOVA = 4,
+    SAY_KRICK_CHASE = 5,
+    SAY_KRICK_OUTRO_1 = 6,
+    SAY_KRICK_OUTRO_3 = 7,
+    SAY_KRICK_OUTRO_5 = 8,
+    SAY_KRICK_OUTRO_8 = 9,
 
     // Ick
-    SAY_ICK_POISON_NOVA                         = 0,
-    SAY_ICK_CHASE_1                             = 1,
+    SAY_ICK_POISON_NOVA = 0,
+    SAY_ICK_CHASE_1 = 1,
 
     // OUTRO
-    SAY_JAYNA_OUTRO_2                           = 0,
-    SAY_JAYNA_OUTRO_4                           = 1,
-    SAY_JAYNA_OUTRO_10                          = 2,
-    SAY_SYLVANAS_OUTRO_2                        = 0,
-    SAY_SYLVANAS_OUTRO_4                        = 1,
-    SAY_SYLVANAS_OUTRO_10                       = 2,
-    SAY_TYRANNUS_OUTRO_7                        = 1,
-    SAY_TYRANNUS_OUTRO_9                        = 2,
+    SAY_JAYNA_OUTRO_2 = 0,
+    SAY_JAYNA_OUTRO_4 = 1,
+    SAY_JAYNA_OUTRO_10 = 2,
+    SAY_SYLVANAS_OUTRO_2 = 0,
+    SAY_SYLVANAS_OUTRO_4 = 1,
+    SAY_SYLVANAS_OUTRO_10 = 2,
+    SAY_TYRANNUS_OUTRO_7 = 1,
+    SAY_TYRANNUS_OUTRO_9 = 2
 };
 
 enum Events
@@ -203,7 +199,7 @@ class boss_ick : public CreatureScript
                 me->AddThreat(target, _tempThreat);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(const uint32 diff)
             {
                 if (!me->isInCombat())
                     return;
@@ -226,13 +222,13 @@ class boss_ick : public CreatureScript
                         case EVENT_TOXIC_WASTE:
                             if (Creature* krick = GetKrick())
                                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                                    krick->CastSpell(target, SPELL_TOXIC_WASTE);
+                                    krick->CastSpell(target, SPELL_TOXIC_WASTE, false);
                             events.ScheduleEvent(EVENT_TOXIC_WASTE, urand(7000, 10000));
                             break;
                         case EVENT_SHADOW_BOLT:
                             if (Creature* krick = GetKrick())
                                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1))
-                                    krick->CastSpell(target, SPELL_SHADOW_BOLT);
+                                    krick->CastSpell(target, SPELL_SHADOW_BOLT, false);
                             events.ScheduleEvent(EVENT_SHADOW_BOLT, 15000);
                             return;
                         case EVENT_MIGHTY_KICK:
@@ -258,7 +254,7 @@ class boss_ick : public CreatureScript
                             if (Creature* krick = GetKrick())
                                 krick->AI()->Talk(SAY_KRICK_POISON_NOVA);
 
-                            Talk(SAY_ICK_POISON_NOVA);
+							Talk(SAY_ICK_POISON_NOVA);
                             DoCast(me, SPELL_POISON_NOVA);
                             break;
                         case EVENT_PURSUIT:
@@ -322,7 +318,7 @@ class boss_krick : public CreatureScript
 
             void KilledUnit(Unit* victim)
             {
-                if (victim->GetTypeId() != TYPEID_PLAYER)
+                if (victim == me)
                     return;
 
                 Talk(SAY_KRICK_SLAY);
@@ -338,7 +334,7 @@ class boss_krick : public CreatureScript
                 }
             }
 
-            void DoAction(int32 actionId)
+            void DoAction(const int32 actionId)
             {
                 if (actionId == ACTION_OUTRO)
                 {
@@ -365,11 +361,14 @@ class boss_krick : public CreatureScript
                 _events.ScheduleEvent(EVENT_OUTRO_1, 1000);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(const uint32 diff)
             {
                 if (_phase != PHASE_OUTRO)
                     return;
-
+                
+                if(_instanceScript->GetData(DATA_TYRANNUS_START) != DONE)
+                 _instanceScript->SetData(DATA_TYRANNUS_START, DONE);
+                 
                 _events.Update(diff);
 
                 while (uint32 eventId = _events.ExecuteEvent())
@@ -448,7 +447,7 @@ class boss_krick : public CreatureScript
                             break;
                         case EVENT_OUTRO_9:
                             Talk(SAY_KRICK_OUTRO_8);
-                            /// @todo Tyrannus starts killing Krick.
+                            // TODO: Tyrannus starts killing Krick.
                             // there shall be some visual spell effect
                             if (Creature* tyrannus = ObjectAccessor::GetCreature(*me, _tyrannusGUID))
                                 tyrannus->CastSpell(me, SPELL_NECROMANTIC_POWER, true);  //not sure if it's the right spell :/
@@ -476,9 +475,17 @@ class boss_krick : public CreatureScript
                             if (Creature* jainaOrSylvanas = ObjectAccessor::GetCreature(*me, _outroNpcGUID))
                             {
                                 if (_instanceScript->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
+                                {
                                     jainaOrSylvanas->AI()->Talk(SAY_JAYNA_OUTRO_10);
+                                    jainaOrSylvanas->SetSpeed(MOVE_WALK, 0.5f, true);
+                                    jainaOrSylvanas->GetMotionMaster()->MovePoint(0, 847.737610f, -6.079165f, 509.911835f);
+                                }
                                 else
+                                {
                                     jainaOrSylvanas->AI()->Talk(SAY_SYLVANAS_OUTRO_10);
+                                    jainaOrSylvanas->SetSpeed(MOVE_WALK, 0.5f, true);
+                                    jainaOrSylvanas->GetMotionMaster()->MovePoint(0, 847.737610f, -6.079165f, 509.911835f);
+                                }
                             }
                             // End of OUTRO. for now...
                             _events.ScheduleEvent(EVENT_OUTRO_END, 3000);
@@ -631,7 +638,7 @@ class spell_krick_pursuit : public SpellScriptLoader
         {
             PrepareSpellScript(spell_krick_pursuit_SpellScript);
 
-            void HandleScriptEffect(SpellEffIndex /*effIndex*/)
+		void HandleScriptEffect(SpellEffIndex /*effIndex*/)
             {
                 if (GetCaster())
                     if (Creature* ick = GetCaster()->ToCreature())

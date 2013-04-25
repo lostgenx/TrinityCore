@@ -23,15 +23,16 @@
 
 enum Yells
 {
-    SAY_AGGRO               = 0,
-    SAY_PHASE2              = 1,
-    SAY_PHASE3              = 2,
-    SAY_DEATH               = 3,
-    SAY_SLAY                = 4,
-    SAY_THROW_SARONITE      = 5,
-    SAY_CAST_DEEP_FREEZE    = 6,
+    SAY_AGGRO				= 1,
+    SAY_SLAY_1				= 2,
+    SAY_SLAY_2				= 3,
+    SAY_DEATH				= 4,
+    SAY_PHASE2				= 5,
+    SAY_PHASE3				= 6,
+	SAY_THROW_SARONITE		= 7,
+	SAY_CAST_DEEP_FREEZE	= 8,
 
-    SAY_TYRANNUS_DEATH      = 0
+    SAY_TYRANNUS_DEATH  = 0,
 };
 
 enum Spells
@@ -117,7 +118,7 @@ enum Events
             void KilledUnit(Unit* victim)
             {
                 if (victim->GetTypeId() == TYPEID_PLAYER)
-                    Talk(SAY_SLAY);
+                    Talk(RAND(SAY_SLAY_1, SAY_SLAY_2));
             }
 
             void JustDied(Unit* /*killer*/)
@@ -179,6 +180,10 @@ enum Events
                     if (Aura* aura = target->GetAura(SPELL_PERMAFROST_HELPER))
                         _permafrostStack = std::max<uint32>(_permafrostStack, aura->GetStackAmount());
                 }
+				else if (spell->Id == SPELL_FORGE_BLADE)
+					SetEquipmentSlots(false, EQUIP_ID_SWORD);
+				else if (spell->Id == SPELL_FORGE_MACE)
+					SetEquipmentSlots(false, EQUIP_ID_MACE);
             }
 
             uint32 GetData(uint32 /*type*/) const

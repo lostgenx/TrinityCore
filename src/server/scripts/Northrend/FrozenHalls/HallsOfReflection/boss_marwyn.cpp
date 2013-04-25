@@ -1,19 +1,19 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -21,18 +21,19 @@
 
 enum Yells
 {
-    SAY_AGGRO                                     = 0,
-    SAY_SLAY                                      = 1,
-    SAY_DEATH                                     = 2,
-    SAY_CORRUPTED_FLESH                           = 3
+    SAY_AGGRO = 0,
+    SAY_SLAY = 1,
+    SAY_CORRUPTED_FLESH_1 = 2,
+    SAY_WELL_OF_CORRUPTION = 3,
+    SAY_DEATH = 4,
 };
 
 enum Spells
 {
-    SPELL_OBLITERATE                              = 72360,
-    SPELL_WELL_OF_CORRUPTION                      = 72362,
-    SPELL_CORRUPTED_FLESH                         = 72363,
-    SPELL_SHARED_SUFFERING                        = 72368,
+    SPELL_OBLITERATE = 72360,
+    SPELL_WELL_OF_CORRUPTION = 72362,
+    SPELL_CORRUPTED_FLESH = 72363,
+    SPELL_SHARED_SUFFERING = 72368,
 };
 
 enum Events
@@ -65,6 +66,11 @@ public:
             if (instance)
                 instance->SetData(DATA_MARWYN_EVENT, NOT_STARTED);
         }
+        
+        void JustReachedHome()
+        {
+            instance->SetData(DATA_WAVE_STATE, FAIL);
+        }
 
         void EnterCombat(Unit* /*who*/)
         {
@@ -72,10 +78,10 @@ public:
             if (instance)
                 instance->SetData(DATA_MARWYN_EVENT, IN_PROGRESS);
 
-            events.ScheduleEvent(EVENT_OBLITERATE, 30000);          /// @todo Check timer
+            events.ScheduleEvent(EVENT_OBLITERATE, 30000); /// @todo Check timer
             events.ScheduleEvent(EVENT_WELL_OF_CORRUPTION, 13000);
             events.ScheduleEvent(EVENT_CORRUPTED_FLESH, 20000);
-            events.ScheduleEvent(EVENT_SHARED_SUFFERING, 20000);    /// @todo Check timer
+            events.ScheduleEvent(EVENT_SHARED_SUFFERING, 20000); // I don't believe this spell is working properly atm, it will 1 shot a player when it ends
         }
 
         void JustDied(Unit* /*killer*/)
@@ -83,7 +89,10 @@ public:
             Talk(SAY_DEATH);
 
             if (instance)
+            {
                 instance->SetData(DATA_MARWYN_EVENT, DONE);
+                instance->SetData(DATA_WAVE_STATE, DONE);
+            }
         }
 
         void KilledUnit(Unit* /*victim*/)
@@ -109,11 +118,12 @@ public:
                     events.ScheduleEvent(EVENT_OBLITERATE, 30000);
                     break;
                 case EVENT_WELL_OF_CORRUPTION:
+                    Talk(SAY_WELL_OF_CORRUPTION);
                     DoCast(SPELL_WELL_OF_CORRUPTION);
                     events.ScheduleEvent(EVENT_WELL_OF_CORRUPTION, 13000);
                     break;
                 case EVENT_CORRUPTED_FLESH:
-                    Talk(SAY_CORRUPTED_FLESH);
+                    Talk(SAY_CORRUPTED_FLESH_1);
                     DoCast(SPELL_CORRUPTED_FLESH);
                     events.ScheduleEvent(EVENT_CORRUPTED_FLESH, 20000);
                     break;
