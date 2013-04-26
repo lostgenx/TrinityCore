@@ -294,7 +294,7 @@ class boss_tyrannus : public CreatureScript
                             if (Creature* rimefang = me->GetCreature(*me, instance->GetData64(DATA_RIMEFANG)))
                                 rimefang->AI()->DoAction(ACTION_START_RIMEFANG);    //set rimefang also infight
                             events.SetPhase(PHASE_COMBAT);
-                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_DISABLE_MOVE);
+                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                             me->SetReactState(REACT_AGGRESSIVE);
                             DoCast(me, SPELL_FULL_HEAL);
                             DoZoneInCombat();
