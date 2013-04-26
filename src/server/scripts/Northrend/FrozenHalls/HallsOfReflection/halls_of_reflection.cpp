@@ -589,7 +589,10 @@ public:
 
                 case EVENT_INTRO_LK_2:
                      if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
+					 {
                          pLichKing->AI()->Talk(SAY_LK_INTRO_1);
+						 pLichKing->HandleEmoteCommand(EMOTE_STATE_ROAR);
+					 }
                     if(GameObject* pGate = pInstance->instance->GetGameObject(pInstance->GetData64(DATA_FROSTWORN_DOOR)))
                         pGate->SetGoState(GO_STATE_READY);
                      events.ScheduleEvent(EVENT_INTRO_LK_3, 2000);
@@ -602,13 +605,17 @@ public:
                          pUther->CastSpell(pUther, SPELL_UTHER_DESPAWN, true);
                          pUther->DisappearAndDie();
                          uiUther = 0;
+						 me->RemoveAllAuras();
                      }
                      events.ScheduleEvent(EVENT_INTRO_LK_4, 5000);
                      break;
 
                 case EVENT_INTRO_LK_4:
                       if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
+					  {
                           pLichKing->AI()->Talk(SAY_LK_INTRO_2);
+						  pLichKing->HandleEmoteCommand(EMOTE_STATE_POINT);
+					  }
                      // He steps forward and removes the runeblade from the heap of skulls.
                       if (GameObject *pFrostmourne = me->FindNearestGameObject(GO_FROSTMOURNE, 11.0f))
                          pFrostmourne->SetPhaseMask(0,true);
@@ -621,7 +628,7 @@ public:
 
                       me->RemoveAllAuras();
 
-                    events.ScheduleEvent(EVENT_INTRO_LK_5, 10000);
+                    events.ScheduleEvent(EVENT_INTRO_LK_5, 11000);
                     break;
 
                 case EVENT_INTRO_LK_5:
