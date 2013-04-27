@@ -33,180 +33,185 @@ enum Texts
 enum Yells
 {
     // Part one, Alliance
-    SAY_JAINA_INTRO_1 = 0,
-    SAY_JAINA_INTRO_2 = 1,
-    SAY_JAINA_INTRO_3 = 2,
-    SAY_JAINA_INTRO_4 = 3,
-    SAY_UTHER_INTRO_A2_1 = 0,
-    SAY_JAINA_INTRO_5 = 4,
-    SAY_UTHER_INTRO_A2_2 = 1,
-    SAY_JAINA_INTRO_6 = 5,
-    SAY_UTHER_INTRO_A2_3 = 2,
-    SAY_JAINA_INTRO_7 = 6,
-    SAY_UTHER_INTRO_A2_4 = 3,
-    SAY_JAINA_INTRO_8 = 7,
-    SAY_UTHER_INTRO_A2_5 = 4,
-    SAY_JAINA_INTRO_9 = 8,
-    SAY_UTHER_INTRO_A2_6 = 5,
-    SAY_UTHER_INTRO_A2_7 = 6,
-    SAY_JAINA_INTRO_10 = 9,
-    SAY_UTHER_INTRO_A2_8 = 7,
-    SAY_JAINA_INTRO_11 = 10,
-    SAY_UTHER_INTRO_A2_9 = 8,
+    SAY_JAINA_INTRO_1			= 0,
+    SAY_JAINA_INTRO_2			= 1,
+    SAY_JAINA_INTRO_3			= 2,
+    SAY_JAINA_INTRO_4			= 3,
+    SAY_UTHER_INTRO_A2_1		= 0,
+    SAY_JAINA_INTRO_5			= 4,
+    SAY_UTHER_INTRO_A2_2		= 1,
+    SAY_JAINA_INTRO_6			= 5,
+    SAY_UTHER_INTRO_A2_3		= 2,
+    SAY_JAINA_INTRO_7			= 6,
+    SAY_UTHER_INTRO_A2_4		= 3,
+    SAY_JAINA_INTRO_8			= 7,
+    SAY_UTHER_INTRO_A2_5		= 4,
+    SAY_JAINA_INTRO_9			= 8,
+    SAY_UTHER_INTRO_A2_6		= 5,
+    SAY_UTHER_INTRO_A2_7		= 6,
+    SAY_JAINA_INTRO_10			= 9,
+    SAY_UTHER_INTRO_A2_8		= 7,
+    SAY_JAINA_INTRO_11			= 10,
+    SAY_UTHER_INTRO_A2_9		= 8,
 
     // Part one, Horde
-    SAY_SYLVANAS_INTRO_1 = 0,
-    SAY_SYLVANAS_INTRO_2 = 1,
-    SAY_SYLVANAS_INTRO_3 = 2,
-    SAY_UTHER_INTRO_H2_1 = 9,
-    SAY_SYLVANAS_INTRO_4 = 3,
-    SAY_UTHER_INTRO_H2_2 = 10,
-    SAY_SYLVANAS_INTRO_5 = 4,
-    SAY_UTHER_INTRO_H2_3 = 11,
-    SAY_SYLVANAS_INTRO_6 = 5,
-    SAY_UTHER_INTRO_H2_4 = 12,
-    SAY_SYLVANAS_INTRO_7 = 6,
-    SAY_UTHER_INTRO_H2_5 = 13,
-    SAY_UTHER_INTRO_H2_6 = 14,
-    SAY_SYLVANAS_INTRO_8 = 7,
-    SAY_UTHER_INTRO_H2_7 = 15,
+    SAY_SYLVANAS_INTRO_1		= 0,
+    SAY_SYLVANAS_INTRO_2		= 1,
+    SAY_SYLVANAS_INTRO_3		= 2,
+    SAY_UTHER_INTRO_H2_1		= 9,
+    SAY_SYLVANAS_INTRO_4		= 3,
+    SAY_UTHER_INTRO_H2_2		= 10,
+    SAY_SYLVANAS_INTRO_5		= 4,
+    SAY_UTHER_INTRO_H2_3		= 11,
+    SAY_SYLVANAS_INTRO_6		= 5,
+    SAY_UTHER_INTRO_H2_4		= 12,
+    SAY_SYLVANAS_INTRO_7		= 6,
+    SAY_UTHER_INTRO_H2_5		= 13,
+    SAY_UTHER_INTRO_H2_6		= 14,
+    SAY_SYLVANAS_INTRO_8		= 7,
+    SAY_UTHER_INTRO_H2_7		= 15,
 
-    SAY_LK_INTRO_1 = 0,
-    SAY_LK_INTRO_2 = 1,
-    SAY_LK_INTRO_3 = 2,
-    SAY_FALRIC_INTRO_1 = 5,
-    SAY_MARWYN_INTRO_1 = 5,
-    SAY_FALRIC_INTRO_2 = 6,
+    SAY_LK_INTRO_1				= 0,
+    SAY_LK_INTRO_2				= 1,
+    SAY_LK_INTRO_3				= 2,
+    SAY_FALRIC_INTRO_1			= 5,
+    SAY_MARWYN_INTRO_1			= 5,
+    SAY_FALRIC_INTRO_2			= 6,
 
-    SAY_JAINA_INTRO_END = 11,
-    SAY_SYLVANAS_INTRO_END = 8,
-    SAY_LK_JAINA_INTRO_END = 3,
-    SAY_LK_SYLVANAS_INTRO_END = 4,
+    SAY_JAINA_INTRO_END			= 11,
+    SAY_SYLVANAS_INTRO_END		= 8,
+    SAY_LK_JAINA_INTRO_END		= 3,
+    SAY_LK_SYLVANAS_INTRO_END	= 4,
 
     /*INTRO - Pre Escape*/
-    SAY_LICH_KING_AGGRO_A = 0,
-    SAY_LICH_KING_AGGRO_H = 1,
-    SAY_JAINA_AGGRO = 0,
-    SAY_SYLVANA_AGGRO = 0,
+    SAY_LICH_KING_AGGRO_A		= 0,
+    SAY_LICH_KING_AGGRO_H		= 1,
+    SAY_JAINA_AGGRO				= 0,
+    SAY_SYLVANA_AGGRO			= 0,
 
     /*ESCAPE*/
-    SAY_JAINA_WALL_01 = 1,
-    SAY_SYLVANA_WALL_01 = 1,
-    SAY_LICH_KING_WALL_02 = 2,
-    SAY_JAINA_WALL_02 = 2,
-    SAY_SYLVANA_WALL_02 = 2,
-    SAY_LICH_KING_WALL_03 = 3,
-    SAY_JAINA_WALL_03 = 3,
-    SAY_SYLVANA_WALL_03 = 3,
-    SAY_JAINA_WALL_04 = 4,
-    SAY_SYLVANA_WALL_04 = 4,
-    SAY_LICH_KING_WALL_04 = 4,
-    SAY_JAINA_ESCAPE_01 = 5,
-    SAY_SYLVANA_ESCAPE_01 = 5,
-    SAY_JAINA_ESCAPE_02 = 6,
-    SAY_SYLVANA_ESCAPE_02 = 6,
-    SAY_JAINA_TRAP = 7,
-    SAY_SYLVANA_TRAP = 7,
-    SAY_ALLIANCE_FIRE = 0,
-    SAY_HORDE_FIRE = 0,
-    SAY_JAINA_FINAL_1 = 1,
-    SAY_SYLVANA_FINAL_1 = 1,
-    SAY_JAINA_FINAL_2 = 8,
-    SAY_SYLVANA_FINAL_2 = 8,
-    SAY_JAINA_FINAL_3 = 9,
+    SAY_JAINA_WALL_01			= 1,
+    SAY_SYLVANA_WALL_01			= 1,
+    SAY_LICH_KING_WALL_02		= 2,
+    SAY_JAINA_WALL_02			= 2,
+    SAY_SYLVANA_WALL_02			= 2,
+    SAY_LICH_KING_WALL_03		= 3,
+    SAY_JAINA_WALL_04			= 3,
+    SAY_SYLVANA_WALL_04			= 3,
+    SAY_JAINA_WALL_03			= 4,
+    SAY_SYLVANA_WALL_03			= 4,
+    SAY_LICH_KING_WALL_04		= 4,
+    SAY_JAINA_ESCAPE_01			= 5,
+    SAY_SYLVANA_ESCAPE_01		= 5,
+    SAY_JAINA_ESCAPE_02			= 6,
+    SAY_SYLVANA_ESCAPE_02		= 6,
+    SAY_JAINA_TRAP				= 7,
+    SAY_SYLVANA_TRAP			= 7,
+    SAY_ALLIANCE_FIRE			= 0,
+    SAY_HORDE_FIRE				= 0,
+    SAY_JAINA_FINAL_1			= 1,
+    SAY_SYLVANA_FINAL_1			= 1,
+    SAY_JAINA_FINAL_2			= 8,
+    SAY_SYLVANA_FINAL_2			= 8,
+    SAY_JAINA_FINAL_3			= 9,
 };
 
 enum Events
 {
-    EVENT_START_PREINTRO = 1,
-    EVENT_PREINTRO_1 = 2,
-    EVENT_PREINTRO_2 = 3,
+	// Pre-Intro
+    EVENT_START_PREINTRO		= 1,
+    EVENT_PREINTRO_1			= 2,
+    EVENT_PREINTRO_2			= 3,
 
-    EVENT_START_INTRO = 4,
-    EVENT_SKIP_INTRO = 5,
+    EVENT_START_INTRO			= 4,
+    EVENT_SKIP_INTRO			= 5,
 
-    EVENT_INTRO_A2_1 = 6,
-    EVENT_INTRO_A2_2 = 7,
-    EVENT_INTRO_A2_3 = 8,
-    EVENT_INTRO_A2_4 = 9,
-    EVENT_INTRO_A2_5 = 10,
-    EVENT_INTRO_A2_6 = 11,
-    EVENT_INTRO_A2_7 = 12,
-    EVENT_INTRO_A2_8 = 13,
-    EVENT_INTRO_A2_9 = 14,
-    EVENT_INTRO_A2_10 = 15,
-    EVENT_INTRO_A2_11 = 16,
-    EVENT_INTRO_A2_12 = 17,
-    EVENT_INTRO_A2_13 = 18,
-    EVENT_INTRO_A2_14 = 19,
-    EVENT_INTRO_A2_15 = 20,
-    EVENT_INTRO_A2_16 = 21,
-    EVENT_INTRO_A2_17 = 22,
-    EVENT_INTRO_A2_18 = 23,
-    EVENT_INTRO_A2_19 = 24,
+	// Intro, Alliance
+    EVENT_INTRO_A2_1			= 6,
+    EVENT_INTRO_A2_2			= 7,
+    EVENT_INTRO_A2_3			= 8,
+    EVENT_INTRO_A2_4			= 9,
+    EVENT_INTRO_A2_5			= 10,
+    EVENT_INTRO_A2_6			= 11,
+    EVENT_INTRO_A2_7			= 12,
+    EVENT_INTRO_A2_8			= 13,
+    EVENT_INTRO_A2_9			= 14,
+    EVENT_INTRO_A2_10			= 15,
+    EVENT_INTRO_A2_11			= 16,
+    EVENT_INTRO_A2_12			= 17,
+    EVENT_INTRO_A2_13			= 18,
+    EVENT_INTRO_A2_14			= 19,
+    EVENT_INTRO_A2_15			= 20,
+    EVENT_INTRO_A2_16			= 21,
+    EVENT_INTRO_A2_17			= 22,
+    EVENT_INTRO_A2_18			= 23,
+    EVENT_INTRO_A2_19			= 24,
 
-    EVENT_INTRO_H2_1 = 25,
-    EVENT_INTRO_H2_2 = 26,
-    EVENT_INTRO_H2_3 = 27,
-    EVENT_INTRO_H2_3_1 = 28,
-    EVENT_INTRO_H2_4 = 29,
-    EVENT_INTRO_H2_5 = 30,
-    EVENT_INTRO_H2_6 = 31,
-    EVENT_INTRO_H2_7 = 32,
-    EVENT_INTRO_H2_8 = 33,
-    EVENT_INTRO_H2_9 = 34,
-    EVENT_INTRO_H2_10 = 35,
-    EVENT_INTRO_H2_11 = 36,
-    EVENT_INTRO_H2_12 = 37,
-    EVENT_INTRO_H2_13 = 38,
-    EVENT_INTRO_H2_14 = 39,
-    EVENT_INTRO_H2_15 = 40,
+	// Intro, Horde
+    EVENT_INTRO_H2_1			= 25,
+    EVENT_INTRO_H2_2			= 26,
+    EVENT_INTRO_H2_3			= 27,
+    EVENT_INTRO_H2_3_1			= 28,
+    EVENT_INTRO_H2_4			= 29,
+    EVENT_INTRO_H2_5			= 30,
+    EVENT_INTRO_H2_6			= 31,
+    EVENT_INTRO_H2_7			= 32,
+    EVENT_INTRO_H2_8			= 33,
+    EVENT_INTRO_H2_9			= 34,
+    EVENT_INTRO_H2_10			= 35,
+    EVENT_INTRO_H2_11			= 36,
+    EVENT_INTRO_H2_12			= 37,
+    EVENT_INTRO_H2_13			= 38,
+    EVENT_INTRO_H2_14			= 39,
+    EVENT_INTRO_H2_15			= 40,
 
-    EVENT_INTRO_LK_1 = 41,
-    EVENT_INTRO_LK_2 = 42,
-    EVENT_INTRO_LK_3 = 43,
-    EVENT_INTRO_LK_4 = 44,
-    EVENT_INTRO_LK_5 = 45,
-    EVENT_INTRO_LK_6 = 46,
-    EVENT_INTRO_LK_7 = 47,
-    EVENT_INTRO_LK_8 = 48,
-    EVENT_INTRO_LK_9 = 49,
-    EVENT_INTRO_LK_10 = 50,
+	// Intro, Lich King (Global)
+    EVENT_INTRO_LK_1			= 41,
+    EVENT_INTRO_LK_2			= 42,
+    EVENT_INTRO_LK_3			= 43,
+	EVENT_INTRO_LK_4_1			= 44,
+    EVENT_INTRO_LK_4			= 45,
+    EVENT_INTRO_LK_5			= 46,
+    EVENT_INTRO_LK_6			= 47,
+    EVENT_INTRO_LK_7			= 48,
+    EVENT_INTRO_LK_8			= 49,
+    EVENT_INTRO_LK_9			= 50,
+    EVENT_INTRO_LK_10			= 51,
 
-    EVENT_INTRO_END = 51,
+    EVENT_INTRO_END				= 52,
 
     // Trash Events
-    EVENT_ACTIVATE_TRASH = 52,
+    EVENT_ACTIVATE_TRASH		= 53,
 
     // Ghostly Priest
-    EVENT_SHADOW_WORD_PAIN = 53,
-    EVENT_CIRCLE_OF_DESTRUCTION = 54,
-    EVENT_COWER_IN_FEAR = 55,
-    EVENT_DARK_MENDING = 56,
+    EVENT_SHADOW_WORD_PAIN		= 54,
+    EVENT_CIRCLE_OF_DESTRUCTION = 55,
+    EVENT_COWER_IN_FEAR			= 56,
+    EVENT_DARK_MENDING			= 57,
 
     // Phantom Mage
-    EVENT_FIREBALL = 57,
-    EVENT_FLAMESTRIKE = 58,
-    EVENT_FROSTBOLT = 59,
-    EVENT_CHAINS_OF_ICE = 60,
-    EVENT_HALLUCINATION = 61,
+    EVENT_FIREBALL				= 58,
+    EVENT_FLAMESTRIKE			= 59,
+    EVENT_FROSTBOLT				= 60,
+    EVENT_CHAINS_OF_ICE			= 61,
+    EVENT_HALLUCINATION			= 62,
 
     // Shadowy Mercenary
-    EVENT_SHADOW_STEP = 62,
-    EVENT_DEADLY_POISON = 63,
-    EVENT_ENVENOMED_DAGGER_THROW = 64,
-    EVENT_KIDNEY_SHOT = 65,
+    EVENT_SHADOW_STEP			= 63,
+    EVENT_DEADLY_POISON			= 64,
+    EVENT_DAGGER_THROW			= 65,
+    EVENT_KIDNEY_SHOT			= 66,
 
     // Spectral Footman
-    EVENT_SPECTRAL_STRIKE = 66,
-    EVENT_SHIELD_BASH = 67,
-    EVENT_TORTURED_ENRAGE = 68,
+    EVENT_SPECTRAL_STRIKE		= 67,
+    EVENT_SHIELD_BASH			= 68,
+    EVENT_TORTURED_ENRAGE		= 69,
 
     // Tortured Rifleman
-    EVENT_SHOOT = 69,
-    EVENT_CURSED_ARROW = 70,
-    EVENT_FROST_TRAP = 71,
-    EVENT_ICE_SHOT = 72,
+    EVENT_SHOOT					= 70,
+    EVENT_CURSED_ARROW			= 71,
+    EVENT_FROST_TRAP			= 72,
+    EVENT_ICE_SHOT				= 73,
 };
 
 enum eEnum
@@ -222,11 +227,11 @@ enum eEnum
 
 enum Phases
 {
-    PHASE_INTRO = 1,
-    PHASE_ONE = 2,
+    PHASE_INTRO			= 1,
+    PHASE_ONE			= 2,
 
-    PHASE_INTRO_MASK = 1 << PHASE_INTRO,
-    PHASE_ONE_MASK = 1 << PHASE_ONE,
+    PHASE_INTRO_MASK	= 1 << PHASE_INTRO,
+    PHASE_ONE_MASK		= 1 << PHASE_ONE,
 };
 
 const Position HallsofReflectionLocs[]=
@@ -283,8 +288,6 @@ public:
         QuestStatus status2 = pPlayer->GetQuestStatus(QUEST_DELIVRANCE_FROM_THE_PIT_A2);
         if (status == QUEST_STATUS_COMPLETE || status == QUEST_STATUS_REWARDED || status2 == QUEST_STATUS_COMPLETE || status2 == QUEST_STATUS_REWARDED)
             pPlayer->ADD_GOSSIP_ITEM( 0, "Can you remove the sword?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
-		//	if (pPlayer->isGameMaster())
-		//		pPlayer->ADD_GOSSIP_ITEM( 0, "Let's skip this long ass intro.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
 
         // once last quest is completed, she offers this shortcut of the starting event
         status = pPlayer->GetQuestStatus(QUEST_WRATH_OF_THE_LICH_KING_H2);
@@ -607,15 +610,21 @@ public:
                          uiUther = 0;
 						 me->RemoveAllAuras();
                      }
-                     events.ScheduleEvent(EVENT_INTRO_LK_4, 5000);
+                     events.ScheduleEvent(EVENT_INTRO_LK_4_1, 5000);
                      break;
 
+				case EVENT_INTRO_LK_4_1:
+					{
+						if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
+						{
+							pLichKing->AI()->Talk(SAY_LK_INTRO_2);
+							pLichKing->HandleEmoteCommand(EMOTE_STATE_POINT);
+						}
+						events.ScheduleEvent(EVENT_INTRO_LK_4, 11000);
+						break;
+					}
+
                 case EVENT_INTRO_LK_4:
-                      if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
-					  {
-                          pLichKing->AI()->Talk(SAY_LK_INTRO_2);
-						  pLichKing->HandleEmoteCommand(EMOTE_STATE_POINT);
-					  }
                      // He steps forward and removes the runeblade from the heap of skulls.
                       if (GameObject *pFrostmourne = me->FindNearestGameObject(GO_FROSTMOURNE, 11.0f))
                          pFrostmourne->SetPhaseMask(0,true);
@@ -628,7 +637,7 @@ public:
 
                       me->RemoveAllAuras();
 
-                    events.ScheduleEvent(EVENT_INTRO_LK_5, 11000);
+                    events.ScheduleEvent(EVENT_INTRO_LK_5, 5000);
                     break;
 
                 case EVENT_INTRO_LK_5:
@@ -641,7 +650,6 @@ public:
                         pFalric->GetMotionMaster()->MovePoint(0, 5283.309f, 2031.173f, 709.319f);
 						pFalric->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						pFalric->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-						//pFalric->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     }
                     if (Creature* pMarwyn = me->GetCreature(*me, pInstance->GetData64(DATA_MARWYN)))
                     {
@@ -651,7 +659,6 @@ public:
                         pMarwyn->GetMotionMaster()->MovePoint(0, 5335.585f, 1981.439f, 709.319f);
 						pMarwyn->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						pMarwyn->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-						//pMarwyn->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     }
 
                     if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
@@ -679,14 +686,7 @@ public:
                         pLichKing->GetMotionMaster()->MovePoint(0, LichKingMoveAwayPos);
                     }
 
-                    events.ScheduleEvent(EVENT_INTRO_LK_8, 4000);
-                    break;
-
-                case EVENT_INTRO_LK_8:
-                    //if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                    //    pFalric->AI()->Talk(SAY_FALRIC_INTRO_2);
-
-                    events.ScheduleEvent(EVENT_INTRO_LK_9, 5000);
+                    events.ScheduleEvent(EVENT_INTRO_LK_9, 9000);
                     break;
 
                 case EVENT_INTRO_LK_9:
@@ -751,7 +751,7 @@ public:
                     me->RemoveUnitMovementFlag(MOVEMENTFLAG_WALKING);
                     me->GetMotionMaster()->MovePoint(0, MoveThronePos);
 
-                    events.ScheduleEvent(EVENT_INTRO_LK_4, 20000);
+                    events.ScheduleEvent(EVENT_INTRO_LK_4_1, 20000);
                     break;
             }
         }
@@ -762,40 +762,40 @@ public:
 enum TrashSpells
 {
     // Ghostly Priest
-    SPELL_SHADOW_WORD_PAIN = 72318,
-    SPELL_CIRCLE_OF_DESTRUCTION = 72320,
-    SPELL_COWER_IN_FEAR = 72321,
-    SPELL_DARK_MENDING = 72322,
+    SPELL_SHADOW_WORD_PAIN			= 72318,
+    SPELL_CIRCLE_OF_DESTRUCTION		= 72320,
+    SPELL_COWER_IN_FEAR				= 72321,
+    SPELL_DARK_MENDING				= 72322,
 
     // Phantom Mage
-    SPELL_FIREBALL = 72163,
-    SPELL_FLAMESTRIKE = 72169,
-    SPELL_FROSTBOLT = 72166,
-    SPELL_CHAINS_OF_ICE = 72121,
-    SPELL_HALLUCINATION = 72342,
+    SPELL_FIREBALL					= 72163,
+    SPELL_FLAMESTRIKE				= 72169,
+    SPELL_FROSTBOLT					= 72166,
+    SPELL_CHAINS_OF_ICE				= 72121,
+    SPELL_HALLUCINATION				= 72342,
 
     // Phantom Hallucination (same as phantom mage + HALLUCINATION_2 when dies)
-    SPELL_HALLUCINATION_2 = 72344,
+    SPELL_HALLUCINATION_2			= 72344,
 
     // Shadowy Mercenary
-    SPELL_SHADOW_STEP = 72326,
-    SPELL_DEADLY_POISON = 72329,
-    SPELL_ENVENOMED_DAGGER_THROW = 72333,
-    SPELL_KIDNEY_SHOT = 72335,
+    SPELL_SHADOW_STEP				= 72326,
+    SPELL_DEADLY_POISON				= 72329,
+    SPELL_DAGGER_THROW				= 72333,
+    SPELL_KIDNEY_SHOT				= 72335,
 
     // Spectral Footman
-    SPELL_SPECTRAL_STRIKE = 72198,
-    SPELL_SHIELD_BASH = 72194,
-    SPELL_TORTURED_ENRAGE = 72203,
+    SPELL_SPECTRAL_STRIKE			= 72198,
+    SPELL_SHIELD_BASH				= 72194,
+    SPELL_TORTURED_ENRAGE			= 72203,
 
     // Tortured Rifleman
-    SPELL_SHOOT = 72208,
-    SPELL_CURSED_ARROW = 72222,
-    SPELL_FROST_TRAP = 72215,
-    SPELL_ICE_SHOT = 72268,
+    SPELL_SHOOT						= 72208,
+    SPELL_CURSED_ARROW				= 72222,
+    SPELL_FROST_TRAP				= 72215,
+    SPELL_ICE_SHOT					= 72268,
 
     // Quel'Delar Event
-    SPELL_QUELDELAR_AURA = 70013,
+    SPELL_QUELDELAR_AURA			= 70013,
 };
 
 class npc_ghostly_priest : public CreatureScript
@@ -973,7 +973,7 @@ public:
             events.ScheduleEvent(EVENT_FLAMESTRIKE, 15000, 0, PHASE_ONE);
             events.ScheduleEvent(EVENT_FROSTBOLT, 9000, 0, PHASE_ONE);
             events.ScheduleEvent(EVENT_CHAINS_OF_ICE, 12000, 0, PHASE_ONE);
-            //events.ScheduleEvent(EVENT_HALLUCINATION, 40000, 0, PHASE_ONE); // Casts at wrong time
+            //events.ScheduleEvent(EVENT_HALLUCINATION, 40000, 0, PHASE_ONE); // Disabled until I can figure out why this casts pre-maturely.
         }
 
         void UpdateAI(uint32 diff)
@@ -1113,7 +1113,7 @@ public:
         {
             events.ScheduleEvent(EVENT_SHADOW_STEP, 8000, 0, PHASE_ONE); // TODO: adjust timers
             events.ScheduleEvent(EVENT_DEADLY_POISON, 5000, 0, PHASE_ONE);
-            events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
+            events.ScheduleEvent(EVENT_DAGGER_THROW, 15000, 0, PHASE_ONE);
             events.ScheduleEvent(EVENT_KIDNEY_SHOT, 24000, 0, PHASE_ONE);
         }
 
@@ -1144,7 +1144,7 @@ public:
 
 						events.ScheduleEvent(EVENT_SHADOW_STEP, 8000, 0, PHASE_ONE); // TODO: adjust timers
 						events.ScheduleEvent(EVENT_DEADLY_POISON, 5000, 0, PHASE_ONE);
-						events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
+						events.ScheduleEvent(EVENT_DAGGER_THROW, 15000, 0, PHASE_ONE);
 						events.ScheduleEvent(EVENT_KIDNEY_SHOT, 24000, 0, PHASE_ONE);
 
                         return;
@@ -1156,10 +1156,10 @@ public:
                         DoCast(me->getVictim(), SPELL_DEADLY_POISON);
                         events.ScheduleEvent(EVENT_DEADLY_POISON, 10000, 0, PHASE_ONE);
                         return;
-                    case EVENT_ENVENOMED_DAGGER_THROW:
+                    case EVENT_DAGGER_THROW:
                         if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
-                            DoCast(target, SPELL_ENVENOMED_DAGGER_THROW);
-                        events.ScheduleEvent(EVENT_ENVENOMED_DAGGER_THROW, 15000, 0, PHASE_ONE);
+                            DoCast(target, SPELL_DAGGER_THROW);
+                        events.ScheduleEvent(EVENT_DAGGER_THROW, 15000, 0, PHASE_ONE);
                         return;
                     case EVENT_KIDNEY_SHOT:
                         DoCast(me->getVictim(), SPELL_KIDNEY_SHOT);

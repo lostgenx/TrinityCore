@@ -23,6 +23,7 @@
 1- Marwyn
 2- Frostworn General
 3- The Lich King
+4= The Escape
 */
 
 enum eEnum
@@ -319,18 +320,6 @@ public:
         {
             switch(type)
             {
-                /*case DATA_WAVE_COUNT:
-                    uiWaveCount = data;
-                    if (data == SPECIAL)
-                    {
-                        CloseDoor(uiFrontDoor);
-                        events.ScheduleEvent(EVENT_NEXT_WAVE, 10000);
-                    }
-                    if (uiWaveCount && data == NOT_STARTED)
-                    {
-                        DoWipe();
-                    }
-                    break;*/
 				case DATA_WAVE_STATE:
                     uiWaveState = data;
                     
