@@ -35,6 +35,7 @@ enum Spells
     //Soulguard Watchman
     SPELL_SHROUD_OF_RUNES                       = 69056,
     SPELL_UNHOLY_RAGE                           = 69053,
+	SPELL_SLOW									= 31589,
 
     //Soulguard Reaper
     SPELL_FROST_NOVA                            = 69060,
@@ -92,6 +93,7 @@ enum Events
     //Soulguard Watchman
     EVENT_SHROUD_OF_RUNES,
     EVENT_UNHOLY_RAGE,
+	EVENT_SLOW,
 
     //Soulguard Reaper
     EVENT_FROST_NOVA,
@@ -539,17 +541,30 @@ public:
         mob_soulguard_watchmanAI(Creature *c) : ScriptedAI(c) { }
 
         EventMap events;
+		bool _ragecasted;
+		bool _slowcasted;
 
         void Reset()
         {
             events.Reset();
+			_ragecasted = false;
         }
 
         void EnterCombat(Unit* /*who*/)
         {
-            events.ScheduleEvent(EVENT_SHROUD_OF_RUNES, 1000);
-            events.ScheduleEvent(EVENT_UNHOLY_RAGE, 1000);
+            events.ScheduleEvent(EVENT_SHROUD_OF_RUNES, 5000);
+			events.ScheduleEvent(EVENT_SLOW, 7000); // TODO: Adjust timer
         }
+
+		void DamageTaken(Unit* /*attacker*/, uint32& /*uiDamage*/)
+		{
+			if (!_ragecasted && !HealthAbovePct(50))
+			{
+				DoCast(me, SPELL_UNHOLY_RAGE);
+				_ragecasted = true;
+				return;
+			}
+		}
 
         void UpdateAI(const uint32 diff)
         {
@@ -570,10 +585,10 @@ public:
                         DoCast(me, SPELL_SHROUD_OF_RUNES);
                         events.RescheduleEvent(EVENT_SHROUD_OF_RUNES, 5000);
                         return;
-                    case EVENT_UNHOLY_RAGE:
-                        DoCast(me, SPELL_UNHOLY_RAGE);
-                        events.RescheduleEvent(EVENT_UNHOLY_RAGE, 99999);
-                        return;
+					case EVENT_SLOW:
+						if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 0, true))
+							DoCast(pTarget, SPELL_SLOW);
+						events.RescheduleEvent(EVENT_SLOW, 5000);
                 }
             }
             DoMeleeAttackIfReady();
