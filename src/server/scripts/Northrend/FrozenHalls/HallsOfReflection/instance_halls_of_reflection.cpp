@@ -715,11 +715,11 @@ public:
         {
             if (GetData(DATA_MARWYN_EVENT) != DONE) {
 
-                uiWaveCount = 0;
-                WaveAlive = 0;
-                m_bIsCall = false;
-                WaveAdvanced = false;
-                m_uiCheckSummon = 0;
+                uiWaveCount			= 0;
+                WaveAlive			= 0;
+                m_bIsCall			= false;
+                WaveAdvanced		= false;
+                m_uiCheckSummon		= 0;
                 events.Reset();
                 DoUpdateWorldState(WORLD_STATE_HOR, 1);
                 DoUpdateWorldState(WORLD_STATE_HOR_WAVE_COUNT, uiWaveCount);
@@ -806,7 +806,7 @@ public:
                     }
                     break;
             }
-            events.ScheduleEvent(EVENT_NEXT_WAVE, 60000);
+            events.ScheduleEvent(EVENT_NEXT_WAVE, 120000);
         }
 
         void Update(uint32 diff)
