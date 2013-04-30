@@ -5000,10 +5000,13 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
         }
         default:
             sLog->outError(LOG_FILTER_PLAYER, "Player::DeleteFromDB: Unsupported delete method: %u.", charDelete_method);
+			return;
     }
 
     if (updateRealmChars)
         sWorld->UpdateRealmCharCount(accountId);
+
+	sWorld->DeleteCharacterNameData(GUID_LOPART(guid));
 }
 
 /**
@@ -16910,7 +16913,9 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
     PreparedQueryResult result = holder->GetPreparedResult(PLAYER_LOGIN_QUERY_LOAD_FROM);
     if (!result)
     {
-        sLog->outError(LOG_FILTER_PLAYER, "Player (GUID: %u) not found in table `characters`, can't load. ", guid);
+        std::string name = "<unknown>";
+        sObjectMgr->GetPlayerNameByGUID(guid, name);
+        sLog->outError(LOG_FILTER_PLAYER, "Player %s (GUID: %u) not found in table `characters`, can't load. ", name.c_str(), guid);
         return false;
     }
 

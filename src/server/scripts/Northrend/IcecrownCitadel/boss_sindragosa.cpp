@@ -224,6 +224,8 @@ class boss_sindragosa : public CreatureScript
                 _mysticBuffetStack = 0;
                 _isInAirPhase = false;
                 _isThirdPhase = false;
+				me->SetCanFly(true);
+				me->SetDisableGravity(true);
 
                 if (!_summoned)
                 {
@@ -377,6 +379,8 @@ class boss_sindragosa : public CreatureScript
                     summon->CastSpell(summon, SPELL_FROST_BOMB_VISUAL, true);
                     summon->CastSpell(summon, SPELL_BIRTH_NO_VISUAL, true);
                     summon->m_Events.AddEvent(new FrostBombExplosion(summon, me->GetGUID()), summon->m_Events.CalculateTime(5500));
+					me->SetCanFly(true);
+					me->SetDisableGravity(true);
                 }
             }
 

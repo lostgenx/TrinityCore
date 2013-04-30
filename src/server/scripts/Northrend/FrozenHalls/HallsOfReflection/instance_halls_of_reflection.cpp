@@ -806,7 +806,7 @@ public:
                     }
                     break;
             }
-            events.ScheduleEvent(EVENT_NEXT_WAVE, 120000);
+            events.ScheduleEvent(EVENT_NEXT_WAVE, 120000); // Should be enough time...
         }
 
         void Update(uint32 diff)
