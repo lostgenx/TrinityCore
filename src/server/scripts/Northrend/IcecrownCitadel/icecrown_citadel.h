@@ -87,35 +87,40 @@ enum DataTypes
     DATA_VALITHRIA_DREAMWALKER      = 10,
     DATA_SINDRAGOSA                 = 11,
     DATA_THE_LICH_KING              = 12,
+	DATA_SINDRAGOSA_GAUNTLET        = 13,
 
     // Additional data
-    DATA_SAURFANG_EVENT_NPC         = 13,
-    DATA_BONED_ACHIEVEMENT          = 14,
-    DATA_OOZE_DANCE_ACHIEVEMENT     = 15,
-    DATA_PUTRICIDE_TABLE            = 16,
-    DATA_NAUSEA_ACHIEVEMENT         = 17,
-    DATA_ORB_WHISPERER_ACHIEVEMENT  = 18,
-    DATA_PRINCE_KELESETH_GUID       = 19,
-    DATA_PRINCE_TALDARAM_GUID       = 20,
-    DATA_PRINCE_VALANAR_GUID        = 21,
-    DATA_BLOOD_PRINCES_CONTROL      = 22,
-    DATA_SINDRAGOSA_FROSTWYRMS      = 23,
-    DATA_SPINESTALKER               = 24,
-    DATA_RIMEFANG                   = 25,
-    DATA_COLDFLAME_JETS             = 26,
-    DATA_TEAM_IN_INSTANCE           = 27,
-    DATA_BLOOD_QUICKENING_STATE     = 28,
-    DATA_HEROIC_ATTEMPTS            = 29,
-    DATA_CROK_SCOURGEBANE           = 30,
-    DATA_CAPTAIN_ARNATH             = 31,
-    DATA_CAPTAIN_BRANDON            = 32,
-    DATA_CAPTAIN_GRONDEL            = 33,
-    DATA_CAPTAIN_RUPERT             = 34,
-    DATA_VALITHRIA_TRIGGER          = 35,
-    DATA_VALITHRIA_LICH_KING        = 36,
-    DATA_HIGHLORD_TIRION_FORDRING   = 37,
-    DATA_ARTHAS_PLATFORM            = 38,
-    DATA_TERENAS_MENETHIL           = 39,
+    DATA_SAURFANG_EVENT_NPC         = 14,
+    DATA_BONED_ACHIEVEMENT          = 15,
+    DATA_OOZE_DANCE_ACHIEVEMENT     = 16,
+    DATA_PUTRICIDE_TABLE            = 17,
+    DATA_NAUSEA_ACHIEVEMENT         = 18,
+    DATA_ORB_WHISPERER_ACHIEVEMENT  = 19,
+    DATA_PRINCE_KELESETH_GUID       = 20,
+    DATA_PRINCE_TALDARAM_GUID       = 21,
+    DATA_PRINCE_VALANAR_GUID        = 22,
+    DATA_BLOOD_PRINCES_CONTROL      = 23,
+    DATA_SINDRAGOSA_FROSTWYRMS      = 24,
+    DATA_SPINESTALKER               = 25,
+    DATA_RIMEFANG                   = 26,
+    DATA_COLDFLAME_JETS             = 27,
+    DATA_TEAM_IN_INSTANCE           = 28,
+    DATA_BLOOD_QUICKENING_STATE     = 29,
+    DATA_HEROIC_ATTEMPTS            = 30,
+    DATA_CROK_SCOURGEBANE           = 31,
+    DATA_CAPTAIN_ARNATH             = 32,
+    DATA_CAPTAIN_BRANDON            = 33,
+    DATA_CAPTAIN_GRONDEL            = 34,
+    DATA_CAPTAIN_RUPERT             = 35,
+    DATA_VALITHRIA_TRIGGER          = 36,
+    DATA_VALITHRIA_LICH_KING        = 37,
+    DATA_HIGHLORD_TIRION_FORDRING   = 38,
+    DATA_ARTHAS_PLATFORM            = 39,
+    DATA_TERENAS_MENETHIL           = 40,
+
+	DATA_FIRST_SQUAD_STATE			= 41,
+	DATA_SECOND_SQUAD_STATE			= 42,
+	DATA_SPIRE_FROSTWYRM_STATE		= 43,
 };
 
 enum CreaturesIds
@@ -169,6 +174,11 @@ enum CreaturesIds
     NPC_REANIMATED_ADHERENT                     = 38010,
     NPC_VENGEFUL_SHADE                          = 38222,
 
+	// Rampart of Skulls
+	NPC_SPIRE_FROSTWYRM							= 37230,
+	NPC_KORKRON_INVOKER							= 37033,
+	NPC_SKYBREAKER_SORCERER						= 37026,
+
     // Deathbringer Saurfang
     NPC_DEATHBRINGER_SAURFANG                   = 37813,
     NPC_BLOOD_BEAST                             = 38508,
@@ -217,23 +227,23 @@ enum CreaturesIds
     // Blood-Queen Lana'thel
     NPC_BLOOD_QUEEN_LANA_THEL                   = 37955,
 
-    // Frostwing Halls gauntlet event
-    NPC_CROK_SCOURGEBANE                        = 37129,
-    NPC_CAPTAIN_ARNATH                          = 37122,
-    NPC_CAPTAIN_BRANDON                         = 37123,
-    NPC_CAPTAIN_GRONDEL                         = 37124,
-    NPC_CAPTAIN_RUPERT                          = 37125,
-    NPC_CAPTAIN_ARNATH_UNDEAD                   = 37491,
-    NPC_CAPTAIN_BRANDON_UNDEAD                  = 37493,
-    NPC_CAPTAIN_GRONDEL_UNDEAD                  = 37494,
-    NPC_CAPTAIN_RUPERT_UNDEAD                   = 37495,
-    NPC_YMIRJAR_BATTLE_MAIDEN                   = 37132,
-    NPC_YMIRJAR_DEATHBRINGER                    = 38125,
-    NPC_YMIRJAR_FROSTBINDER                     = 37127,
-    NPC_YMIRJAR_HUNTRESS                        = 37134,
-    NPC_YMIRJAR_WARLORD                         = 37133,
-    NPC_SISTER_SVALNA                           = 37126,
-    NPC_IMPALING_SPEAR                          = 38248,
+	// Frostwing Halls gauntlet event
+    NPC_CROK_SCOURGEBANE						= 37129,
+    NPC_CAPTAIN_ARNATH							= 37122,
+    NPC_CAPTAIN_BRANDON							= 37123,
+    NPC_CAPTAIN_GRONDEL							= 37124,
+    NPC_CAPTAIN_RUPERT							= 37125,
+    NPC_CAPTAIN_ARNATH_UNDEAD					= 37491,
+    NPC_CAPTAIN_BRANDON_UNDEAD					= 37493,
+    NPC_CAPTAIN_GRONDEL_UNDEAD					= 37494,
+    NPC_CAPTAIN_RUPERT_UNDEAD					= 37495,
+    NPC_YMIRJAR_BATTLE_MAIDEN					= 37132,
+    NPC_YMIRJAR_DEATHBRINGER					= 38125,
+    NPC_YMIRJAR_FROSTBINDER						= 37127,
+    NPC_YMIRJAR_HUNTRESS						= 37134,
+    NPC_YMIRJAR_WARLORD							= 37133,
+    NPC_SISTER_SVALNA							= 37126,
+    NPC_IMPALING_SPEAR							= 38248,
 
     // Valithria Dreamwalker
     NPC_VALITHRIA_DREAMWALKER                   = 36789,
@@ -282,6 +292,14 @@ enum CreaturesIds
     NPC_SPIRIT_BOMB                             = 39189,
     NPC_FROSTMOURNE_TRIGGER                     = 38584,
 
+	// Sindragosas Ward
+    NPC_SINDRAGOSAS_WARD						= 37503,
+    NPC_NERUBAR_WEBWEAVER						= 37502,
+    NPC_NERUBAR_CHAMPION						= 37501,
+    NPC_NERUBAR_BROODLING						= 37232,
+    NPC_FROSTWARDEN_WARRIOR						= 37228,
+    NPC_FROSTWARDEN_SORCERESS					= 37229,
+
     // Generic
     NPC_INVISIBLE_STALKER                       = 30298,
 };
@@ -302,6 +320,16 @@ enum GameObjectsIds
     // Lady Deathwhisper
     GO_ORATORY_OF_THE_DAMNED_ENTRANCE       = 201563,
     GO_LADY_DEATHWHISPER_ELEVATOR           = 202220,
+
+// Gunship Battle
+    GO_CAPITAN_CHEST_A_10N					= 201872,
+    GO_CAPITAN_CHEST_A_10H					= 201874,
+    GO_CAPITAN_CHEST_A_25N					= 201873,
+    GO_CAPITAN_CHEST_A_25H					= 201875,
+    GO_CAPITAN_CHEST_H_10N					= 202177,
+    GO_CAPITAN_CHEST_H_10H					= 202180,
+    GO_CAPITAN_CHEST_H_25N					= 202178,
+    GO_CAPITAN_CHEST_H_25H					= 202179,
 
     // Deathbringer Saurfang
     GO_SAURFANG_S_DOOR                      = 201825,

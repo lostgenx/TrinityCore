@@ -214,6 +214,10 @@ class instance_icecrown_citadel : public InstanceMapScript
                         if (TeamInInstance == ALLIANCE)
                             creature->UpdateEntry(NPC_KING_VARIAN_WRYNN, ALLIANCE);
                         break;
+					case NPC_ROTTING_FROST_GIANT_10:
+                    case NPC_ROTTING_FROST_GIANT_25:
+                        RottingFrostGiantGUID = creature->GetGUID();
+                        break; 
                     case NPC_DEATHBRINGER_SAURFANG:
                         DeathbringerSaurfangGUID = creature->GetGUID();
                         break;
@@ -446,6 +450,18 @@ class instance_icecrown_citadel : public InstanceMapScript
                             go->SetGoState(GO_STATE_READY);
                         }
                         break;
+					case GO_CAPITAN_CHEST_A_10N:
+                    case GO_CAPITAN_CHEST_A_10H:
+                    case GO_CAPITAN_CHEST_A_25N:
+                    case GO_CAPITAN_CHEST_A_25H:
+                    case GO_CAPITAN_CHEST_H_10N:
+                    case GO_CAPITAN_CHEST_H_10H:
+                    case GO_CAPITAN_CHEST_H_25N:
+                    case GO_CAPITAN_CHEST_H_25H:
+                        if (Creature* rotting = instance->GetCreature(RottingFrostGiantGUID))
+                            go->SetLootRecipient(rotting->GetLootRecipient());
+							go->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED | GO_FLAG_NOT_SELECTABLE | GO_FLAG_NODESPAWN);
+                        break; 
                     case GO_SAURFANG_S_DOOR:
                         DeathbringerSaurfangDoorGUID = go->GetGUID();
                         AddDoor(go, true);
@@ -1261,6 +1277,7 @@ class instance_icecrown_citadel : public InstanceMapScript
         protected:
             EventMap Events;
             uint64 LadyDeathwisperElevatorGUID;
+			uint64 RottingFrostGiantGUID;
             uint64 DeathbringerSaurfangGUID;
             uint64 DeathbringerSaurfangDoorGUID;
             uint64 DeathbringerSaurfangEventGUID;   // Muradin Bronzebeard or High Overlord Saurfang
