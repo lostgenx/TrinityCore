@@ -5006,7 +5006,7 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
     if (updateRealmChars)
         sWorld->UpdateRealmCharCount(accountId);
 
-	sWorld->DeleteCharacterNameData(GUID_LOPART(guid));
+	sWorld->DeleteCharacterNameData(guid);
 }
 
 /**
@@ -7026,11 +7026,9 @@ void Player::RewardReputation(Unit* victim, float rate)
 
         Map const* map = GetMap();
         if (map && map->IsNonRaidDungeon())
-        {
-            if (AccessRequirement const* accessRequirement = sObjectMgr->GetAccessRequirement(map->GetId(), map->GetDifficulty()))
-                if (accessRequirement->levelMin == 80)
+			if (LFGDungeonEntry const* dungeon = GetLFGDungeon(map->GetId(), map->GetDifficulty()))
+				if (dungeon->reclevel == 80)
                     ChampioningFaction = GetChampioningFaction();
-        }
     }
 
     uint32 team = GetTeam();
@@ -22293,7 +22291,8 @@ void Player::UpdateVisibilityForPlayer()
 {
     // updates visibility of all objects around point of view for current player
     Trinity::VisibleNotifier notifier(*this);
-    m_seer->VisitNearbyObject(GetSightRange(), notifier);
+    //m_seer->VisitNearbyObject(GetSightRange(), notifier);
+	m_seer->VisitNearbyObject(MAX_VISIBILITY_DISTANCE, notifier);
     notifier.SendToSelf();   // send gathered data
 }
 
