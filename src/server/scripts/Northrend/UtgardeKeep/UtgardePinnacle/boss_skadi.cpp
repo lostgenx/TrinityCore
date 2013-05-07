@@ -217,6 +217,7 @@ public:
 				if (!me->IsMounted())
 				{
 					me->SetCanFly(false);
+					me->SetDisableGravity(false);
 					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
 
 					if (Creature* grauf = me->GetMap()->GetCreature(instance->GetData64(DATA_MOB_GRAUF)))
@@ -242,6 +243,7 @@ public:
         {
 			me->Dismount();
 			me->SetCanFly(false);
+			me->SetDisableGravity(false);
 			me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
 			me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
 
@@ -328,6 +330,7 @@ public:
                     Phase = SKADI;
 
                     me->SetCanFly(false);
+					me->SetDisableGravity(false);
                     me->Dismount();
 
 					me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
@@ -341,6 +344,7 @@ public:
                     }
 					
 					me->SetCanFly(false);
+					me->SetDisableGravity(false);
 					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
                     me->GetMotionMaster()->MoveJump(Location[4].GetPositionX(), Location[4].GetPositionY(), Location[4].GetPositionZ(), 5.0f, 10.0f);
 					me->SetHealth(me->GetMaxHealth());
@@ -383,6 +387,7 @@ public:
                     {
                         me->Mount(DATA_MOUNT);
                         me->SetCanFly(true);
+						me->SetDisableGravity(true);
                         m_uiMountTimer = 0;
                     } else m_uiMountTimer -= diff;
 
