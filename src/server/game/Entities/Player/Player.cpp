@@ -4677,7 +4677,7 @@ TrainerSpellState Player::GetTrainerSpellState(TrainerSpell const* trainer_spell
 /**
  * Deletes a character from the database
  *
- * The way, how the characters will be deleted is decided based on the config option.
+ * The way characters will be deleted is decided based on the config option. 
  *
  * @see Player::DeleteOldCharacters
  *
@@ -4688,19 +4688,32 @@ TrainerSpellState Player::GetTrainerSpellState(TrainerSpell const* trainer_spell
  */
 void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmChars, bool deleteFinally)
 {
-    // for not existed account avoid update realm
+    // Avoid realm-update for non-existing account
     if (accountId == 0)
         updateRealmChars = false;
 
-    uint32 charDelete_method = sWorld->getIntConfig(CONFIG_CHARDELETE_METHOD);
-    uint32 charDelete_minLvl = sWorld->getIntConfig(CONFIG_CHARDELETE_MIN_LEVEL);
-
-    // if we want to finally delete the character or the character does not meet the level requirement,
-    // we set it to mode CHAR_DELETE_REMOVE
-    if (deleteFinally || Player::GetLevelFromDB(playerguid) < charDelete_minLvl)
-        charDelete_method = CHAR_DELETE_REMOVE;
-
+    // Convert guid to low GUID for CharacterNameData, but also other methods on success
     uint32 guid = GUID_LOPART(playerguid);
+    uint32 charDelete_method = sWorld->getIntConfig(CONFIG_CHARDELETE_METHOD);
+
+    if (deleteFinally)
+        charDelete_method = CHAR_DELETE_REMOVE;
+    else if (CharacterNameData const* nameData = sWorld->GetCharacterNameData(guid)) // To avoid a query, we select loaded data. If it doesn't exist, return.
+    {
+        if (!nameData)
+        {
+            sLog->outError(LOG_FILTER_PLAYER, "Cannot find CharacterNameData entry for player %u from account %u. Could not delete character.", guid, accountId);
+            return;
+        }
+
+        // Define the required variables
+        uint32 charDelete_minLvl = sWorld->getIntConfig(nameData->m_class != CLASS_DEATH_KNIGHT ? CONFIG_CHARDELETE_MIN_LEVEL : CONFIG_CHARDELETE_HEROIC_MIN_LEVEL);
+
+        // if we want to finalize the character removal or the character does not meet the level requirement of either heroic or non-heroic settings,
+        // we set it to mode CHAR_DELETE_REMOVE
+        if (nameData->m_level < charDelete_minLvl)
+            charDelete_method = CHAR_DELETE_REMOVE;
+    }
 
     // convert corpse to bones if exist (to prevent exiting Corpse in World without DB entry)
     // bones will be deleted by corpse/bones deleting thread shortly
@@ -4742,14 +4755,14 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
                 {
                     Field* mailFields = resultMail->Fetch();
 
-                    uint32 mail_id       = mailFields[0].GetUInt32();
-                    uint8 mailType       = mailFields[1].GetUInt8();
+                    uint32 mail_id = mailFields[0].GetUInt32();
+                    uint8 mailType = mailFields[1].GetUInt8();
                     uint16 mailTemplateId= mailFields[2].GetUInt16();
-                    uint32 sender        = mailFields[3].GetUInt32();
-                    std::string subject  = mailFields[4].GetString();
-                    std::string body     = mailFields[5].GetString();
-                    uint32 money         = mailFields[6].GetUInt32();
-                    bool has_items       = mailFields[7].GetBool();
+                    uint32 sender = mailFields[3].GetUInt32();
+                    std::string subject = mailFields[4].GetString();
+                    std::string body = mailFields[5].GetString();
+                    uint32 money = mailFields[6].GetUInt32();
+                    bool has_items = mailFields[7].GetBool();
 
                     // We can return mail now
                     // So firstly delete the old one
@@ -4771,7 +4784,7 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
 
                     MailDraft draft(subject, body);
                     if (mailTemplateId)
-                        draft = MailDraft(mailTemplateId, false);    // items are already included
+                        draft = MailDraft(mailTemplateId, false); // items are already included
 
                     if (has_items)
                     {
@@ -4800,7 +4813,7 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
                                 if (!pItem->LoadFromDB(item_guidlow, MAKE_NEW_GUID(guid, 0, HIGHGUID_PLAYER), itemFields, item_template))
                                 {
                                     pItem->FSetState(ITEM_REMOVED);
-                                    pItem->SaveToDB(trans);              // it also deletes item object!
+                                    pItem->SaveToDB(trans); // it also deletes item object!
                                     continue;
                                 }
 
@@ -5000,13 +5013,13 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
         }
         default:
             sLog->outError(LOG_FILTER_PLAYER, "Player::DeleteFromDB: Unsupported delete method: %u.", charDelete_method);
-			return;
+            return;
     }
 
     if (updateRealmChars)
         sWorld->UpdateRealmCharCount(accountId);
 
-	sWorld->DeleteCharacterNameData(guid);
+    sWorld->DeleteCharacterNameData(guid);
 }
 
 /**
