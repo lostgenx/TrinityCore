@@ -329,8 +329,6 @@ public:
                 {
                     Phase = SKADI;
 
-                    me->SetCanFly(false);
-					me->SetDisableGravity(false);
                     me->Dismount();
 
 					me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
@@ -340,14 +338,14 @@ public:
                         pGrauf->GetMotionMaster()->MoveFall(0);
                         pGrauf->HandleEmoteCommand(EMOTE_ONESHOT_FLYDEATH);
 
-						Talk(SAY_DRAKE_DEATH);
+						pGrauf->AI()->Talk(SAY_DRAKE_DEATH);
                     }
-					
+
 					me->SetCanFly(false);
 					me->SetDisableGravity(false);
-					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
                     me->GetMotionMaster()->MoveJump(Location[4].GetPositionX(), Location[4].GetPositionY(), Location[4].GetPositionZ(), 5.0f, 10.0f);
 					me->SetHealth(me->GetMaxHealth());
+					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
 					me->UpdateObjectVisibility(true);
 
 					if (Unit* target = me->SelectNearestPlayer())
