@@ -135,8 +135,11 @@ void WorldSession::HandleAuctionSellItem(WorldPacket& recvData)
         recvData >> itemGUIDs[i];
         recvData >> count[i];
 
-        if (!itemGUIDs[i] || !count[i] || count[i] > 1000 )
+        if (!itemGUIDs[i] || !count[i] || count[i] > 1000)
+		{
+			recvData.rfinish();
             return;
+		}
     }
 
     recvData >> bid;
@@ -145,6 +148,13 @@ void WorldSession::HandleAuctionSellItem(WorldPacket& recvData)
 
     if (!bid || !etime)
         return;
+
+	if (bid > MAX_MONEY_AMOUNT || buyout > MAX_MONEY_AMOUNT)
+	{
+		sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: HandleAuctionSellitem - Player %s (GUID %u) attempted to sell item with higher price than max gold amount.", _player->GetName().c_str(), _player->GetGUIDLow());
+		SendAuctionCommandResult(0, AUCTION_SELL_ITEM, ERR_AUCTION_DATABASE_ERROR);
+		return;
+	}
 
     Creature* creature = GetPlayer()->GetNPCIfCanInteractWith(auctioneer, UNIT_NPC_FLAG_AUCTIONEER);
     if (!creature)
