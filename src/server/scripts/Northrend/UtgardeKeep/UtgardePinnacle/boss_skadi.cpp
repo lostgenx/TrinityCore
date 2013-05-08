@@ -210,14 +210,11 @@ public:
 
             me->SetSpeed(MOVE_FLIGHT, 3.0f);
 
-            //if ((Unit::GetCreature(*me, m_uiGraufGUID) == NULL) && !me->IsMounted())
-            //     me->SummonCreature(CREATURE_GRAUF, Location[0].GetPositionX(), Location[0].GetPositionY(), Location[0].GetPositionZ(), 3.0f);
             if (instance)
             {
 				if (!me->IsMounted())
 				{
 					me->SetCanFly(false);
-					me->SetDisableGravity(false);
 					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
 
 					if (Creature* grauf = me->GetMap()->GetCreature(instance->GetData64(DATA_MOB_GRAUF)))
@@ -243,7 +240,6 @@ public:
         {
 			me->Dismount();
 			me->SetCanFly(false);
-			me->SetDisableGravity(false);
 			me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
 			me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
 
@@ -257,11 +253,6 @@ public:
 				else
 					me->SummonCreature(CREATURE_GRAUF, Location[0].GetPositionX(), Location[0].GetPositionY(), Location[0].GetPositionZ(), 3.0f);
 			}
-            /*me->SetCanFly(false);
-            me->Dismount();
-            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-            if (!Unit::GetCreature(*me, m_uiGraufGUID))
-                me->SummonCreature(CREATURE_GRAUF, Location[0].GetPositionX(), Location[0].GetPositionY(), Location[0].GetPositionZ(), 3.0f);*/
         }
 
         void EnterCombat(Unit* /*who*/)
@@ -302,7 +293,8 @@ public:
                     summoned->setActive(true);
                     summoned->SetInCombatWithZone();
                     if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                        summoned->AI()->AttackStart(target);
+						if (summoned->IsWithinDistInMap(target, 30.0f))
+							summoned->AI()->AttackStart(target);
                     break;
                 case CREATURE_TRIGGER:
                     summoned->CastSpell((Unit*)NULL, SPELL_FREEZING_CLOUD, true);
@@ -325,12 +317,11 @@ public:
             {
                 m_uiSpellHitCount++;
 
-                if (m_uiSpellHitCount >= 3)
+                if (m_uiSpellHitCount >= 5)
                 {
                     Phase = SKADI;
 
                     me->Dismount();
-
 					me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
 
                     if (Creature* pGrauf = me->SummonCreature(CREATURE_GRAUF, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3*IN_MILLISECONDS))
@@ -342,7 +333,6 @@ public:
                     }
 
 					me->SetCanFly(false);
-					me->SetDisableGravity(false);
                     me->GetMotionMaster()->MoveJump(Location[4].GetPositionX(), Location[4].GetPositionY(), Location[4].GetPositionZ(), 5.0f, 10.0f);
 					me->SetHealth(me->GetMaxHealth());
 					me->SetUnitMovementFlags(MOVEMENTFLAG_WALKING);
@@ -384,8 +374,6 @@ public:
                     if (m_uiMountTimer && m_uiMountTimer <= diff)
                     {
                         me->Mount(DATA_MOUNT);
-                        me->SetCanFly(true);
-						me->SetDisableGravity(true);
                         m_uiMountTimer = 0;
                     } else m_uiMountTimer -= diff;
 
