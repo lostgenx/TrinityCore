@@ -19,3 +19,6 @@ UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=30810;
 -- Correct Avenging Spirit Factions
 UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=30756;
 UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=27386;
+
+-- Update InhabitType for Statis Orb
+UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=26688;
