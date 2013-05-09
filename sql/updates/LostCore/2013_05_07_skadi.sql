@@ -1,4 +1,4 @@
--- Update InhabitTypes for Utgarde Pinnacle
+-- Updates and Fixes for Utgarde Pinnacle
 
 -- Skadi and Grauf Normal
 UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=26893;
@@ -15,3 +15,7 @@ UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=29281;
 -- Svala Heroic
 UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=30809;
 UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=30810;
+
+-- Correct Avenging Spirit Factions
+UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=30756;
+UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=27386;
