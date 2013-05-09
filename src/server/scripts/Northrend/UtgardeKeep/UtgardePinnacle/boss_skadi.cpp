@@ -17,7 +17,7 @@
 
 /* Script Data Start
 SDName: Boss_Skadi
-SDAuthor: LordVanMartin, JohnHoliver
+SDAuthor: LordVanMartin, JohnHoliver, lostgenx
 SD%Complete: 90%
 SDComment: <Known Bugs>
                After Unmount() he appears to still be flying even with SetFlying(false)
