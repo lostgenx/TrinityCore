@@ -27,6 +27,7 @@ Script Data End */
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
+#include "CreatureTextMgr.h"
 #include "utgarde_pinnacle.h"
 #include "Player.h"
 #include "SpellInfo.h"
@@ -356,12 +357,20 @@ public:
                     if (!UpdateVictim())
                         return;
 
+					if (Creature* pGrauf = me->GetMap()->GetCreature(instance->GetData64(DATA_MOB_GRAUF)))
+					{
+						pGrauf->SetCanFly(true);
+						pGrauf->SetUnitMovementFlags(MOVEMENTFLAG_FLYING);
+					}
+
+					me->SetUnitMovementFlags(MOVEMENTFLAG_FLYING);
+
                     if (me->GetPositionX() >= 519)
                     {
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
                         if (!m_bSaidEmote)
                         {
-                            Talk(EMOTE_RANGE);
+							sCreatureTextMgr->SendChat(me, EMOTE_RANGE, 0, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_MAP);
                             m_bSaidEmote = true;
                         }
                     }
@@ -402,7 +411,8 @@ public:
                             case 3:
                                 me->GetMotionMaster()->MovePoint(0, Location[69].GetPositionX(), Location[69].GetPositionY(), Location[69].GetPositionZ());
                                 Talk(SAY_DRAKE_BREATH);
-                                Talk(EMOTE_BREATH);
+								if (Creature* pGrauf = me->GetMap()->GetCreature(instance->GetData64(DATA_MOB_GRAUF)))
+									sCreatureTextMgr->SendChat(pGrauf, EMOTE_BREATH, 0, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_MAP);
                                 m_uiMovementTimer = 2500;
                                 break;
                             case 4:

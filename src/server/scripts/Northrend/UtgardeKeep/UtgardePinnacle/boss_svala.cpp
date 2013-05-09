@@ -279,6 +279,8 @@ public:
                             arthas->CastSpell(me, SPELL_TRANSFORMING_CHANNEL, false);
                             pos.Relocate(me);
                             pos.m_positionZ += 8.0f;
+							me->SetCanFly(true);
+							me->SetDisableGravity(true);
                             me->GetMotionMaster()->MoveTakeoff(0, pos);
                             // spectators flee event
                             if (instance)
