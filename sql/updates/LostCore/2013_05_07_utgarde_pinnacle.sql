@@ -17,8 +17,13 @@ UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=30809;
 UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=30810;
 
 -- Correct Avenging Spirit Factions
-UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=30756;
-UPDATE `creature_template` SET `faction_A`=14 AND `faction_H`=14 WHERE `entry`=27386;
+-- Alliance
+UPDATE `creature_template` SET `faction_A`=14 WHERE `entry`=30756;
+UPDATE `creature_template` SET `faction_A`=14 WHERE `entry`=27386;
+-- Horde
+UPDATE `creature_template` SET `faction_H`=14 WHERE `entry`=30756;
+UPDATE `creature_template` SET `faction_H`=14 WHERE `entry`=27386;
+-- Apparently the AND did not want to update the faction correctly.
 
 -- Update InhabitType for Statis Orb
 UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=26688;
