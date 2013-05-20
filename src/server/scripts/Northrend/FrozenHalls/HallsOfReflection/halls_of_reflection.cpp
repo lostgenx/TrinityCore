@@ -605,7 +605,7 @@ public:
                      // The Lich King banishes Uther to the abyss.
                      if (Creature* pUther = me->GetCreature(*me, uiUther))
                      {
-                         pUther->CastSpell(pUther, SPELL_UTHER_DESPAWN, true);
+                         pUther->CastSpell(pUther, SPELL_UTHER_DESPAWN, false);
                          pUther->DisappearAndDie();
                          uiUther = 0;
 						 me->RemoveAllAuras();
