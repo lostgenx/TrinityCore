@@ -1078,7 +1078,7 @@ public:
                                 if (step == 76) Talk(SAY_PHASE310);
                                 SetHoldState(false);
                                 bStepping = false;
-                                SetRun(false);
+                                SetRun(true);
                                 JumpToNextStep(2000);
                             }
                             break;
