@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -98,6 +97,7 @@ public:
 
             creature->setFaction(250);
             creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+			creature->RemoveUnitMovementFlag(MOVEMENTFLAG_WALKING);
 
             CAST_AI(npc_escortAI, (creature->AI()))->Start(false, false, player->GetGUID());
             CAST_AI(npc_escortAI, (creature->AI()))->SetDespawnAtFar(false);
@@ -142,7 +142,9 @@ public:
             currentEvent = 0;
             eventProgress = 0;
             me->setActive(true);
-            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+			me->SetWalk(false);
+			me->SetSpeed(MOVE_WALK, 1.0f, true);
+			me->SetSpeed(MOVE_RUN, 1.0f, true);
         }
 
         uint32 eventTimer;
@@ -238,6 +240,7 @@ public:
                                 Talk(SAY_BANISH_THE_SPIRITS);
                                 DoCast(me, SPELL_SERPENTINE_CLEANSING);
                                 //CAST_AI(npc_escort::npc_escortAI, me->AI())->SetCanDefend(false);
+								me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC); // This should prevent Disciple from attacking while casting.
                                 eventTimer = 30000;
                                 me->SummonCreature(NPC_DEVIATE_VIPER, -61.5261f, 273.676f, -92.8442f, 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
                                 me->SummonCreature(NPC_DEVIATE_VIPER, -58.4658f, 280.799f, -92.8393f, 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
@@ -248,6 +251,7 @@ public:
                             {
                                 //CAST_AI(npc_escort::npc_escortAI, me->AI())->SetCanDefend(true);
                                 Talk(SAY_CAVERNS_PURIFIED);
+								me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC); // He's done. Remove the flags.
                                 instance->SetData(TYPE_NARALEX_PART2, DONE);
                                 if (me->HasAura(SPELL_SERPENTINE_CLEANSING))
                                     me->RemoveAura(SPELL_SERPENTINE_CLEANSING);
@@ -267,6 +271,7 @@ public:
                                 ++eventProgress;
                                 eventTimer = 15000;
                                 //CAST_AI(npc_escort::npc_escortAI, me->AI())->SetCanDefend(false);
+								me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC); // And again while he's waking Naralex.
                                 if (Creature* naralex = instance->instance->GetCreature(instance->GetData64(DATA_NARALEX)))
                                     DoCast(naralex, SPELL_NARALEXS_AWAKENING, true);
                                 Talk(EMOTE_AWAKENING_RITUAL);
@@ -338,10 +343,12 @@ public:
                                 {
                                     naralex->AI()->Talk(SAY_FAREWELL);
                                     naralex->AddAura(SPELL_FLIGHT_FORM, naralex);
+									naralex->SetCanFly(true);
                                 }
                                 SetRun();
                                 me->SetStandState(UNIT_STAND_STATE_STAND);
                                 me->AddAura(SPELL_FLIGHT_FORM, me);
+								me->SetCanFly(true);
                             }
                             else
                             if (eventProgress == 9)
