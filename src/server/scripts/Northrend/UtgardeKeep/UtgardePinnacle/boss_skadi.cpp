@@ -189,7 +189,7 @@ public:
         uint32 m_uiMountTimer;
         uint32 m_uiSummonTimer;
         uint8  m_uiSpellHitCount;
-        bool   m_bSaidEmote;
+		bool m_bSaidEmote;
 
         eCombatPhase Phase;
 
@@ -324,6 +324,7 @@ public:
 
                     me->Dismount();
 					me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+					me->RemoveUnitMovementFlag(MOVEMENTFLAG_CAN_FLY | MOVEMENTFLAG_FLYING);
 
                     if (Creature* pGrauf = me->SummonCreature(CREATURE_GRAUF, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3*IN_MILLISECONDS))
                     {
@@ -360,10 +361,13 @@ public:
 					if (Creature* pGrauf = me->GetMap()->GetCreature(instance->GetData64(DATA_MOB_GRAUF)))
 					{
 						pGrauf->SetCanFly(true);
-						pGrauf->SetUnitMovementFlags(MOVEMENTFLAG_FLYING);
+						pGrauf->SetUnitMovementFlags(MOVEMENTFLAG_CAN_FLY);
+						pGrauf->AddUnitMovementFlag(MOVEMENTFLAG_FLYING);
 					}
 
-					me->SetUnitMovementFlags(MOVEMENTFLAG_FLYING);
+					me->SetCanFly(true);
+					me->SetUnitMovementFlags(MOVEMENTFLAG_CAN_FLY);
+					me->AddUnitMovementFlag(MOVEMENTFLAG_FLYING);
 
                     if (me->GetPositionX() >= 519)
                     {

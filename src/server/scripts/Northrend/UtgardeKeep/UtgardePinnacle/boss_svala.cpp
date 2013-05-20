@@ -348,6 +348,9 @@ public:
                             if (GameObject* mirror = GetClosestGameObjectWithEntry(me, OBJECT_UTGARDE_MIRROR, 100.0f))
                                 mirror->SetGoState(GO_STATE_ACTIVE);
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+							me->SetCanFly(false);
+							me->SetDisableGravity(false);
+							me->SetHover(false);
                             arthas->DespawnOrUnsummon();
                             arthasGUID = 0;
                             Phase = NORMAL;
