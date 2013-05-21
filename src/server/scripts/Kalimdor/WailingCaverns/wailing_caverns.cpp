@@ -342,23 +342,26 @@ public:
                                 if (Creature* naralex = instance->instance->GetCreature(instance->GetData64(DATA_NARALEX)))
                                 {
                                     naralex->AI()->Talk(SAY_FAREWELL);
-                                    naralex->AddAura(SPELL_FLIGHT_FORM, naralex);
-									naralex->SetCanFly(true);
+                                    //naralex->AddAura(SPELL_FLIGHT_FORM, naralex);
+									//naralex->SetCanFly(true);
                                 }
                                 SetRun();
                                 me->SetStandState(UNIT_STAND_STATE_STAND);
-                                me->AddAura(SPELL_FLIGHT_FORM, me);
-								me->SetCanFly(true);
+                                //me->AddAura(SPELL_FLIGHT_FORM, me);
+								//me->SetCanFly(true);
                             }
                             else
                             if (eventProgress == 9)
                             {
-                                ++eventProgress;
+                                //++eventProgress;
                                 eventTimer = 1500;
                                 if (Creature* naralex = instance->instance->GetCreature(instance->GetData64(DATA_NARALEX)))
-                                    naralex->GetMotionMaster()->MovePoint(25, naralex->GetPositionX(), naralex->GetPositionY(), naralex->GetPositionZ());
+                                    //naralex->GetMotionMaster()->MovePoint(25, naralex->GetPositionX(), naralex->GetPositionY(), naralex->GetPositionZ());
+									naralex->SetVisible(false);
+								me->SetVisible(false);
+								instance->SetData(TYPE_NARALEX_PART3, DONE);
                             }
-                            else
+                            /*?else
                             if (eventProgress == 10)
                             {
                                 ++eventProgress;
@@ -378,7 +381,7 @@ public:
                                     naralex->SetVisible(false);
                                 me->SetVisible(false);
                                 instance->SetData(TYPE_NARALEX_PART3, DONE);
-                            }
+                            }*/
                         break;
                     }
                 }
