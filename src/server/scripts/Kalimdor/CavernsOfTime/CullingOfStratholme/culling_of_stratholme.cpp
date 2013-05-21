@@ -364,6 +364,7 @@ public:
         uint32 playerFaction;
         uint32 bossEvent;
         uint32 wave;
+		uint32 wavesCounter;
 
         uint64 utherGUID;
         uint64 jainaGUID;
@@ -398,6 +399,7 @@ public:
             epochGUID = 0;
             malganisGUID = 0;
             infiniteGUID = 0;
+			wavesCounter = 0;
 
             if (instance) {
                 instance->SetData(DATA_ARTHAS_EVENT, NOT_STARTED);
@@ -589,7 +591,7 @@ public:
              }
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(uint32 diff)
         {
             npc_escortAI::UpdateAI(diff);
 
@@ -757,7 +759,10 @@ public:
                         case 24:
                             if (Unit* pStalker = me->SummonCreature(NPC_INVIS_TARGET, 2026.469f, 1287.088f, 143.596f, 1.37f, TEMPSUMMON_TIMED_DESPAWN, 14000))
                             {
+								instance->DoUpdateWorldState(WORLDSTATE_WAVE_COUNT, 0);
                                 stalkerGUID = pStalker->GetGUID();
+								if (IsHeroic())
+									me->SummonCreature(NPC_INFINITE, 2335.47f, 1262.04f, 132.921, 1.42079f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 87000);
                                 me->SetTarget(stalkerGUID);
                             }
                             JumpToNextStep(1000);
@@ -907,6 +912,8 @@ public:
                             {
                                 SpawnWaveGroup(wave, waveGUID);
                                 wave++;
+								wavesCounter++;
+								instance->DoUpdateWorldState(WORLDSTATE_WAVE_COUNT, wavesCounter);
                             }
                             JumpToNextStep(500);
                             break;
@@ -944,6 +951,8 @@ public:
                         case 59:
                             if (instance->GetData(bossEvent) != DONE)
                             {
+								wavesCounter++;
+								instance->DoUpdateWorldState(WORLDSTATE_WAVE_COUNT, wavesCounter);
                                 uint32 uiBossID = 0;
                                 if (bossEvent == DATA_MEATHOOK_EVENT)
                                     uiBossID = NPC_MEATHOOK;
