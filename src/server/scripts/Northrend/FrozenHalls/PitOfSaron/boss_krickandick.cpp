@@ -199,7 +199,7 @@ class boss_ick : public CreatureScript
                 me->AddThreat(target, _tempThreat);
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!me->isInCombat())
                     return;
@@ -334,7 +334,7 @@ class boss_krick : public CreatureScript
                 }
             }
 
-            void DoAction(const int32 actionId)
+            void DoAction(int32 actionId)
             {
                 if (actionId == ACTION_OUTRO)
                 {
@@ -361,7 +361,7 @@ class boss_krick : public CreatureScript
                 _events.ScheduleEvent(EVENT_OUTRO_1, 1000);
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI(uint32 diff)
             {
                 if (_phase != PHASE_OUTRO)
                     return;

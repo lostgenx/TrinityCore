@@ -268,7 +268,7 @@ class boss_tyrannus : public CreatureScript
                 }
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI( uint32 diff)
             {
                 if (!UpdateVictim() && !events.IsInPhase(PHASE_INTRO))
                     return;
@@ -434,7 +434,7 @@ class boss_rimefang : public CreatureScript
                 }
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI( uint32 diff)
             {
                 if (!UpdateVictim() && !(_events.GetPhaseMask() & (1 << PHASE_COMBAT)))
                     return;
@@ -509,7 +509,7 @@ class player_overlord_brandAI : public PlayerAI
             me->CastCustomSpell(SPELL_OVERLORD_BRAND_HEAL, SPELLVALUE_BASE_POINT0, int32(addHealth*5.5f), tyrannus, true, NULL, NULL, tyrannus->GetGUID());
         }
 
-        void UpdateAI(const uint32 /*diff*/) { }
+        void UpdateAI( uint32 /*diff*/) { }
 
     private:
         Creature* tyrannus;
@@ -642,7 +642,7 @@ class npc_tyrannus_icicle : public CreatureScript
                me->SetReactState(REACT_PASSIVE);
            }
 
-           void UpdateAI(const uint32 diff)
+           void UpdateAI( uint32 diff)
            {
                if(pInstance->GetData(DATA_TYRANNUS_EVENT) == NOT_STARTED)
                {

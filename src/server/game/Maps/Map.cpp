@@ -672,6 +672,8 @@ void Map::ProcessRelocationNotifies(const uint32 diff)
 
 void Map::RemovePlayerFromMap(Player* player, bool remove)
 {
+	sScriptMgr->OnPlayerLeaveMap(this, player);
+
     player->RemoveFromWorld();
     SendRemoveTransports(player);
 
@@ -682,11 +684,7 @@ void Map::RemovePlayerFromMap(Player* player, bool remove)
         ASSERT(remove); //maybe deleted in logoutplayer when player is not in a map
 
     if (remove)
-    {
         DeleteFromWorld(player);
-
-        sScriptMgr->OnPlayerLeaveMap(this, player);
-    }
 }
 
 template<class T>
@@ -1654,7 +1652,7 @@ float Map::GetHeight(float x, float y, float z, bool checkVMap /*= true*/, float
     {
         VMAP::IVMapManager* vmgr = VMAP::VMapFactory::createOrGetVMapManager();
         if (vmgr->isHeightCalcEnabled())
-            vmapHeight = vmgr->getHeight(GetId(), x, y, z + 2.0f, maxSearchDist);   // look from a bit higher pos to find the floor
+            vmapHeight = vmgr->getHeight(GetId(), x, y, z + 2.0f, maxSearchDist); // look from a bit higher pos to find the floor
     }
 
     // mapHeight set for any above raw ground Z or <= INVALID_HEIGHT
@@ -1670,13 +1668,22 @@ float Map::GetHeight(float x, float y, float z, bool checkVMap /*= true*/, float
             if (z < mapHeight || vmapHeight > mapHeight || fabs(mapHeight-z) > fabs(vmapHeight-z))
                 return vmapHeight;
             else
-                return mapHeight;                           // better use .map surface height
+                return mapHeight; // better use .map surface height
         }
         else
-            return vmapHeight;                              // we have only vmapHeight (if have)
+            return vmapHeight; // we have only vmapHeight (if have)
+    }
+    else
+    {
+        if (!checkVMap)
+            return mapHeight; // explicitly use map data (if have)
+        else if (mapHeight > INVALID_HEIGHT && (z < mapHeight + 2 || z == MAX_HEIGHT))
+            return mapHeight; // explicitly use map data if original z < mapHeight but map found (z+2 > mapHeight)
+        else
+            return VMAP_INVALID_HEIGHT_VALUE; // we not have any height
     }
 
-    return mapHeight;                               // explicitly use map data
+    //return mapHeight; // explicitly use map data
 }
 
 inline bool IsOutdoorWMO(uint32 mogpFlags, int32 /*adtId*/, int32 /*rootId*/, int32 /*groupId*/, WMOAreaTableEntry const* wmoEntry, AreaTableEntry const* atEntry)

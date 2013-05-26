@@ -156,7 +156,7 @@ class mob_ymirjar_flamebearer : public CreatureScript
                 _events.ScheduleEvent(EVENT_TACTICAL_BLINK, 15000);
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI(uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -221,7 +221,7 @@ class mob_iceborn_protodrake : public CreatureScript
                 _vehicle->RemoveAllPassengers();
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI( uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -271,7 +271,7 @@ class mob_wrathbone_laborer : public CreatureScript
                 _events.ScheduleEvent(EVENT_SHOVELLED, 5000);
             }
 
-            void UpdateAI(const uint32 diff)
+            void UpdateAI( uint32 diff)
             {
                 if (!UpdateVictim())
                     return;
@@ -435,7 +435,7 @@ public:
             event = true;
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             if(instance->GetData(DATA_TYRANNUS_START) == IN_PROGRESS && event)
             {
@@ -1136,7 +1136,7 @@ public:
             Champions3.clear();
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             if(instance->GetBossState(DATA_TYRANNUS) == DONE)
             {

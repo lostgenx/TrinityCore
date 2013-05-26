@@ -439,7 +439,7 @@ public:
             events.ScheduleEvent(EVENT_SPITE, 8000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -495,7 +495,7 @@ public:
             events.ScheduleEvent(EVENT_WAIL_OF_SOULS, 10000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -566,7 +566,7 @@ public:
 			}
 		}
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -623,7 +623,7 @@ public:
             events.ScheduleEvent(EVENT_SHADOW_LANCE, 5000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -683,7 +683,7 @@ public:
             events.ScheduleEvent(EVENT_SHIELD_OF_BONES, 6000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -749,7 +749,7 @@ public:
             events.ScheduleEvent(EVENT_SOUL_SIPHON, 10000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -822,7 +822,7 @@ public:
             events.ScheduleEvent(EVENT_SHADOW_MEND, 35000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())
@@ -889,7 +889,7 @@ public:
             events.ScheduleEvent(EVENT_SOUL_STRIKE, 6000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             //Return since we have no target
             if (!UpdateVictim())

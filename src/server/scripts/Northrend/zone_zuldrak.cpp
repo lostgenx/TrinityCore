@@ -645,7 +645,7 @@ public:
             events.ScheduleEvent(EVENT_WHIRLWIND, 15000);
         }
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI( uint32 diff)
         {
             if (!UpdateVictim())
                 return;
