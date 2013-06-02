@@ -22,6 +22,7 @@
 #include "Player.h"
 #include "TemporarySummon.h"
 #include "SpellInfo.h"
+#include "World.h"
 
 #define MAX_ENCOUNTER 5
 
@@ -273,13 +274,16 @@ class instance_culling_of_stratholme : public InstanceMapScript
 				else
 					_eventTimer -= diff;
 
-				if (_eventTimer < _lastTimer - 60000)
+				if (sWorld->getWorldState(WORLDSTATE_TIME_GUARDIAN_SHOW) == 1)
 				{
-					_lastTimer = _eventTimer;
-					uint32 tMinutes = _eventTimer / 60000;
-					DoUpdateWorldState(WORLDSTATE_TIME_GUARDIAN, tMinutes);
+					if (_eventTimer < _lastTimer - 60000)
+					{
+						_lastTimer = _eventTimer;
+						uint32 tMinutes = _eventTimer / 60000;
+						DoUpdateWorldState(WORLDSTATE_TIME_GUARDIAN_SHOW, tMinutes);
+					}
+					return;
 				}
-				return;
 			}
 
             std::string GetSaveData()
