@@ -1,18 +1,21 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2013 Trinity <http://www.trinitycore.org/>
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * Updated by: Toba and Baeumchen (maddin)
  */
 
 #ifndef ICECROWN_CITADEL_H_
@@ -25,7 +28,7 @@
 
 #define ICCScriptName "instance_icecrown_citadel"
 
-uint32 const EncounterCount = 13;
+uint32 const EncounterCount = 14;
 uint32 const WeeklyNPCs = 9;
 uint32 const MaxHeroicAttempts = 50;
 
@@ -87,8 +90,8 @@ enum DataTypes
     DATA_VALITHRIA_DREAMWALKER      = 10,
     DATA_SINDRAGOSA                 = 11,
     DATA_THE_LICH_KING              = 12,
-	DATA_SINDRAGOSA_GAUNTLET        = 13,
-
+    DATA_SINDRAGOSA_GAUNTLET        = 13,
+ 
     // Additional data
     DATA_SAURFANG_EVENT_NPC         = 14,
     DATA_BONED_ACHIEVEMENT          = 15,
@@ -117,10 +120,26 @@ enum DataTypes
     DATA_HIGHLORD_TIRION_FORDRING   = 38,
     DATA_ARTHAS_PLATFORM            = 39,
     DATA_TERENAS_MENETHIL           = 40,
+    
+     // Gunship: Data for achievements
+    DATA_BEEN_WAITING_ACHIEVEMENT   = 49,
+    DATA_NECK_DEEP_ACHIEVEMENT      = 50,
 
-	DATA_FIRST_SQUAD_STATE			= 41,
-	DATA_SECOND_SQUAD_STATE			= 42,
-	DATA_SPIRE_FROSTWYRM_STATE		= 43,
+    // Gunship: Data for the fight
+    // The numbering is very high for safety -- custom patch!
+    DATA_FIRST_SQUAD_STATE                  = 100,
+    DATA_SECOND_SQUAD_STATE                 = 101,
+    DATA_SPIRE_FROSTWYRM_STATE              = 102,
+    DATA_GB_HIGH_OVERLORD_SAURFANG          = 103,
+    DATA_GB_MURADIN_BRONZEBEARD             = 104,
+    DATA_HIGH_OVERLORD_SAURFANG_NOT_VISUAL  = 105,
+    DATA_GB_BATTLE_MAGE                     = 106,
+    DATA_SKYBREAKER_BOSS                    = 107,
+    DATA_ORGRIMMAR_HAMMER_BOSS              = 108,
+    DATA_MURADIN_BRONZEBEARD_NOT_VISUAL     = 109,
+    DATA_MURADIN_BRONZEBEARD                = 110,
+    DATA_GUNSHIP_BATTLE                     = 111,
+    GUID_PLAYER_LOCATION                    = 112,
 };
 
 enum CreaturesIds
@@ -174,11 +193,6 @@ enum CreaturesIds
     NPC_REANIMATED_ADHERENT                     = 38010,
     NPC_VENGEFUL_SHADE                          = 38222,
 
-	// Rampart of Skulls
-	NPC_SPIRE_FROSTWYRM							= 37230,
-	NPC_KORKRON_INVOKER							= 37033,
-	NPC_SKYBREAKER_SORCERER						= 37026,
-
     // Deathbringer Saurfang
     NPC_DEATHBRINGER_SAURFANG                   = 37813,
     NPC_BLOOD_BEAST                             = 38508,
@@ -227,23 +241,23 @@ enum CreaturesIds
     // Blood-Queen Lana'thel
     NPC_BLOOD_QUEEN_LANA_THEL                   = 37955,
 
-	// Frostwing Halls gauntlet event
-    NPC_CROK_SCOURGEBANE						= 37129,
-    NPC_CAPTAIN_ARNATH							= 37122,
-    NPC_CAPTAIN_BRANDON							= 37123,
-    NPC_CAPTAIN_GRONDEL							= 37124,
-    NPC_CAPTAIN_RUPERT							= 37125,
-    NPC_CAPTAIN_ARNATH_UNDEAD					= 37491,
-    NPC_CAPTAIN_BRANDON_UNDEAD					= 37493,
-    NPC_CAPTAIN_GRONDEL_UNDEAD					= 37494,
-    NPC_CAPTAIN_RUPERT_UNDEAD					= 37495,
-    NPC_YMIRJAR_BATTLE_MAIDEN					= 37132,
-    NPC_YMIRJAR_DEATHBRINGER					= 38125,
-    NPC_YMIRJAR_FROSTBINDER						= 37127,
-    NPC_YMIRJAR_HUNTRESS						= 37134,
-    NPC_YMIRJAR_WARLORD							= 37133,
-    NPC_SISTER_SVALNA							= 37126,
-    NPC_IMPALING_SPEAR							= 38248,
+    // Frostwing Halls gauntlet event
+    NPC_CROK_SCOURGEBANE                        = 37129,
+    NPC_CAPTAIN_ARNATH                          = 37122,
+    NPC_CAPTAIN_BRANDON                         = 37123,
+    NPC_CAPTAIN_GRONDEL                         = 37124,
+    NPC_CAPTAIN_RUPERT                          = 37125,
+    NPC_CAPTAIN_ARNATH_UNDEAD                   = 37491,
+    NPC_CAPTAIN_BRANDON_UNDEAD                  = 37493,
+    NPC_CAPTAIN_GRONDEL_UNDEAD                  = 37494,
+    NPC_CAPTAIN_RUPERT_UNDEAD                   = 37495,
+    NPC_YMIRJAR_BATTLE_MAIDEN                   = 37132,
+    NPC_YMIRJAR_DEATHBRINGER                    = 38125,
+    NPC_YMIRJAR_FROSTBINDER                     = 37127,
+    NPC_YMIRJAR_HUNTRESS                        = 37134,
+    NPC_YMIRJAR_WARLORD                         = 37133,
+    NPC_SISTER_SVALNA                           = 37126,
+    NPC_IMPALING_SPEAR                          = 38248,
 
     // Valithria Dreamwalker
     NPC_VALITHRIA_DREAMWALKER                   = 36789,
@@ -290,15 +304,48 @@ enum CreaturesIds
     NPC_WORLD_TRIGGER                           = 22515,
     NPC_WORLD_TRIGGER_INFINITE_AOI              = 36171,
     NPC_SPIRIT_BOMB                             = 39189,
-    NPC_FROSTMOURNE_TRIGGER                     = 38584,
+    NPC_FROSTMOURNE_TRIGGER                     = 38584,  
 
-	// Sindragosas Ward
-    NPC_SINDRAGOSAS_WARD						= 37503,
-    NPC_NERUBAR_WEBWEAVER						= 37502,
-    NPC_NERUBAR_CHAMPION						= 37501,
-    NPC_NERUBAR_BROODLING						= 37232,
-    NPC_FROSTWARDEN_WARRIOR						= 37228,
-    NPC_FROSTWARDEN_SORCERESS					= 37229,
+	// Gunship: Ids of NPCs
+    NPC_GB_SKYBREAKER                           = 37540,
+    NPC_GB_ORGRIMS_HAMMER                       = 37215,
+    NPC_GB_HIGH_OVERLORD_SAURFANG               = 36939,
+    NPC_GB_MURADIN_BRONZEBEARD                  = 36948,
+    NPC_GB_HIHG_CAPTAIN_JUSTIN_BARTLETT         = 37182,
+    NPC_GB_HIGH_OVERLORD_SAURFANG_NOT_VISUAL    = 50004,
+    NPC_GB_MURADIN_BRONZEBEARD_NOT_VISUAL       = 50006,
+    NPC_GB_SKYBREAKER_SORCERER                  = 37026,
+    NPC_GB_SKYBREAKER_SORCERERS                 = 37116,
+    NPC_GB_KORKRON_REAVER                       = 37920,
+    NPC_GB_KORKRON_REAVERS                      = 36957,
+    NPC_GB_KORKRON_SERGANTE                     = 36960,
+    NPC_GB_SKYBREAKER_SERGANTE                  = 36961,
+    NPC_GB_KORKRON_BATTLE_MAGE                  = 37117,
+    NPC_GB_SKYBREAKER_MARINE                    = 36950,
+    NPC_GB_KORKRON_ROCKETEER                    = 36982,
+    NPC_GB_SKYBREAKER_MORTAR_SOLDIER            = 36978,
+    NPC_GB_KORKRON_AXETHROWER                   = 36968,
+    NPC_GB_SKYBREAKER_RIFLEMAN                  = 36969,
+    NPC_GB_SKYBREAKER_DECKHAND                  = 36970,
+    NPC_GB_ZAFOD_BOOMBOX                        = 37184,
+    NPC_GB_ALLIANCE_CANON                       = 36838,
+    NPC_GB_HORDE_CANON                          = 36839,
+    NPC_GB_INVISIBLE_STALKER                    = 32780,
+    NPC_GB_PORTAL                               = 37227,
+    NPC_GB_GUNSHIP_HULL                         = 37547,
+
+    // Gunship: Ids missing from trash
+    NPC_KORKRON_INVOKER                         = 37033,
+    NPC_SPIRE_FROSTWYRM                         = 37230,
+    NPC_SKYBREAKER_SORCERER                     = 37026,
+
+    // Sindragosas Ward
+    NPC_SINDRAGOSAS_WARD                        = 37503,
+    NPC_NERUBAR_WEBWEAVER                       = 37502,
+    NPC_NERUBAR_CHAMPION                        = 37501,
+    NPC_NERUBAR_BROODLING                       = 37232,
+    NPC_FROSTWARDEN_WARRIOR                     = 37228,
+    NPC_FROSTWARDEN_SORCERESS                   = 37229,
 
     // Generic
     NPC_INVISIBLE_STALKER                       = 30298,
@@ -320,16 +367,6 @@ enum GameObjectsIds
     // Lady Deathwhisper
     GO_ORATORY_OF_THE_DAMNED_ENTRANCE       = 201563,
     GO_LADY_DEATHWHISPER_ELEVATOR           = 202220,
-
-// Gunship Battle
-    GO_CAPITAN_CHEST_A_10N					= 201872,
-    GO_CAPITAN_CHEST_A_10H					= 201874,
-    GO_CAPITAN_CHEST_A_25N					= 201873,
-    GO_CAPITAN_CHEST_A_25H					= 201875,
-    GO_CAPITAN_CHEST_H_10N					= 202177,
-    GO_CAPITAN_CHEST_H_10H					= 202180,
-    GO_CAPITAN_CHEST_H_25N					= 202178,
-    GO_CAPITAN_CHEST_H_25H					= 202179,
 
     // Deathbringer Saurfang
     GO_SAURFANG_S_DOOR                      = 201825,
@@ -395,6 +432,21 @@ enum GameObjectsIds
     GO_FROZEN_LAVAMAN                       = 202436,
     GO_LAVAMAN_PILLARS_CHAINED              = 202437,
     GO_LAVAMAN_PILLARS_UNCHAINED            = 202438,
+
+   //Gunship: Ids of GameObjects
+    GO_ORGRIM_S_HAMMER_HORDE_ICC            = 201812,
+    GO_ORGRIM_S_HAMMER_ALLIANCE_ICC         = 201581,
+    GO_THE_SKYBREAKER_HORDE_ICC             = 201811,
+    GO_THE_SKYBREAKER_ALLIANCE_ICC          = 201580,
+    GO_CAPITAN_CHEST_A_10N                  = 201872,
+    GO_CAPITAN_CHEST_A_25N                  = 201873,
+    GO_CAPITAN_CHEST_A_10H                  = 201874,
+    GO_CAPITAN_CHEST_A_25H                  = 201875,
+    GO_CAPITAN_CHEST_H_10N                  = 202177,
+    GO_CAPITAN_CHEST_H_25N                  = 202178,
+    GO_CAPITAN_CHEST_H_10H                  = 202179,
+    GO_CAPITAN_CHEST_H_25H                  = 202180,
+
 };
 
 enum AchievementCriteriaIds
